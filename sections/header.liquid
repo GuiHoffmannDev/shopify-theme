@@ -10,7 +10,7 @@
 
     <a href="{{ routes.root_url }}" class="wordmark">
       {%- if section.settings.logo != blank -%}
-        <img class="site-header__logo" src="{{ section.settings.logo | image_url: width: 600 }}" alt="{{ shop.name }}">
+        <img class="site-header__logo" src="{{ section.settings.logo | image_url: width: 400 }}" alt="{{ shop.name }}">
       {%- else -%}
         <img class="site-header__logo" src="{{ 'logo-limen-club.png' | asset_url }}" alt="{{ shop.name }}">
       {%- endif -%}
