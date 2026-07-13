@@ -1,0 +1,31 @@
+<section class="section" data-screen-label="Busca">
+  <div class="wrap">
+    <div class="center" style="max-width:640px;margin:0 auto;">
+      <p class="eyebrow eyebrow--muted eyebrow--center">Busca</p>
+      <h1 class="display-2 mt-4">O que você procura?</h1>
+      <form action="{{ routes.search_url }}" method="get" class="field mt-7" style="margin:0 auto;max-width:480px;">
+        <label class="field__label" for="q">Buscar</label>
+        <input type="search" id="q" name="q" value="{{ search.terms | escape }}" placeholder="bolsa, grip…">
+      </form>
+    </div>
+
+    {%- if search.performed -%}
+      <p class="center mt-7 eyebrow eyebrow--muted">{{ search.results_count }} resultado(s) para "{{ search.terms }}"</p>
+      <div class="product-grid mt-6">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            {% render 'product-card', product: item %}
+          {%- else -%}
+            <a href="{{ item.url }}" class="pcard"><div class="pcard__name" style="margin-top:0;">{{ item.title }}</div></a>
+          {%- endif -%}
+        {%- else -%}
+          <p class="center" style="grid-column:1/-1;font-style:italic;color:var(--text-muted);">Nada encontrado. Tente outra palavra.</p>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Busca", "settings": [] }
+{% endschema %}

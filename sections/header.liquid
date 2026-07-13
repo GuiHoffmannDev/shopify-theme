@@ -1,0 +1,49 @@
+<header class="site-header">
+  <div class="wrap site-header__bar">
+    <button class="site-header__burger" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav">Menu</button>
+
+    <nav class="site-header__nav" aria-label="{{ 'general.a11y.primary_nav' | t }}">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}" class="site-header__link"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+
+    <a href="{{ routes.root_url }}" class="wordmark">
+      {%- if section.settings.logo != blank -%}
+        <img class="site-header__logo" src="{{ section.settings.logo | image_url: width: 400 }}" alt="{{ shop.name }}">
+      {%- else -%}
+        <img class="site-header__logo" src="{{ 'logo-limen-club.png' | asset_url }}" alt="{{ shop.name }}">
+      {%- endif -%}
+    </a>
+
+    <div class="site-header__meta">
+      {%- if section.settings.show_est -%}
+        <span class="eyebrow">{{ section.settings.est_text }}</span>
+      {%- endif -%}
+      <a href="{{ routes.cart_url }}" class="eyebrow eyebrow--muted">{{ 'general.cart' | t }} ({{ cart.item_count }})</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="mobile-nav" id="mobile-nav">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+      <a href="{{ routes.cart_url }}">{{ 'general.cart' | t }} ({{ cart.item_count }})</a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Cabeçalho",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo (opcional — substitui o wordmark de texto)" },
+    { "type": "text", "id": "wordmark", "label": "Wordmark", "default": "LIMEN" },
+    { "type": "text", "id": "wordmark_sub", "label": "Sublinha do wordmark", "default": "Club" },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "checkbox", "id": "show_est", "label": "Mostrar \"Est.\"", "default": false },
+    { "type": "text", "id": "est_text", "label": "Texto Est.", "default": "Est. 2025" }
+  ]
+}
+{% endschema %}

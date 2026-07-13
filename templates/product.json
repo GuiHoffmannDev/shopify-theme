@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "s1": { "type": "spec", "settings": { "label": "Cabe", "text": "2 raquetes de pickleball + calçado nº 44 no bolso ventilado" } },
+        "s2": { "type": "spec", "settings": { "label": "Compartimento da raquete", "text": "Forrado, isolado. Não encosta em chave, celular ou roupa" } },
+        "s3": { "type": "spec", "settings": { "label": "Bolsos", "text": "5 no total — celular, chave, ventilado, protegido para óculos, interno" } },
+        "s4": { "type": "spec", "settings": { "label": "Base", "text": "Estruturada: fica em pé no chão sem apoio" } },
+        "s5": { "type": "spec", "settings": { "label": "Alça", "text": "Removível, suporta 12 kg. Ferragens presas por dentro, não tilintam" } },
+        "s6": { "type": "spec", "settings": { "label": "Medidas", "text": "52 × 28 × 26 cm · 1,1 kg vazia" } },
+        "s7": { "type": "spec", "settings": { "label": "Material", "text": "Lona encerada resistente a respingo · forro que limpa com pano úmido" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4", "s5", "s6", "s7"],
+      "settings": {}
+    },
+    "arrival": { "type": "arrival-proof", "settings": {} },
+    "guarantees": { "type": "guarantee-strip", "settings": {} }
+  },
+  "order": ["main", "arrival", "guarantees"]
+}

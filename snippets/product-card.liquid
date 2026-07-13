@@ -1,0 +1,40 @@
+{%- comment -%}
+  Renders a product tile.
+  Params:
+    product      — a Shopify product object (optional)
+    ph_category  — placeholder category text (when no product)
+    ph_name      — placeholder name
+    ph_price     — placeholder price string
+    ph_tag       — placeholder tag
+    ph_label     — linen-ground caption
+{%- endcomment -%}
+{%- if product and product != blank -%}
+  <a href="{{ product.url }}" class="pcard">
+    <div class="pcard__media">
+      {%- if product.featured_image -%}
+        <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" loading="lazy">
+      {%- else -%}
+        <div class="pcard__linen"><span>{{ ph_label | default: 'foto de produto' }}</span></div>
+      {%- endif -%}
+      {%- if product.metafields.custom.tag != blank -%}
+        <span class="tag tag--fill pcard__tag">{{ product.metafields.custom.tag }}</span>
+      {%- elsif product.available == false -%}
+        <span class="tag pcard__tag">Esgotado</span>
+      {%- endif -%}
+    </div>
+    {%- assign cat = product.type | default: product.metafields.custom.category -%}
+    {%- if cat != blank -%}<p class="pcard__cat">{{ cat }}</p>{%- endif -%}
+    <div class="pcard__name">{{ product.title }}</div>
+    <div class="pcard__price">{{ product.price | money }}</div>
+  </a>
+{%- else -%}
+  <a href="{{ ph_url | default: '#' }}" class="pcard">
+    <div class="pcard__media">
+      <div class="pcard__linen"><span>{{ ph_label | default: 'foto de produto' }}</span></div>
+      {%- if ph_tag != blank -%}<span class="tag tag--fill pcard__tag">{{ ph_tag }}</span>{%- endif -%}
+    </div>
+    {%- if ph_category != blank -%}<p class="pcard__cat">{{ ph_category }}</p>{%- endif -%}
+    <div class="pcard__name">{{ ph_name }}</div>
+    <div class="pcard__price">{{ ph_price }}</div>
+  </a>
+{%- endif -%}

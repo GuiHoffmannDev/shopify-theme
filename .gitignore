@@ -1,0 +1,11 @@
+# Shopify CLI
+.shopify/
+
+# SO / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Node (caso adicione tooling)
+node_modules/

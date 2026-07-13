@@ -1,0 +1,17 @@
+{
+  "accessibility": {
+    "skip_to_content": "Pular para o conteúdo"
+  },
+  "general": {
+    "cart": "Sacola",
+    "items": "itens",
+    "meta": {
+      "tags": "Marcado com \"{{ tags }}\"",
+      "page": "Página {{ page }}"
+    },
+    "a11y": {
+      "primary_nav": "Navegação principal",
+      "footer_nav": "Navegação do rodapé"
+    }
+  }
+}

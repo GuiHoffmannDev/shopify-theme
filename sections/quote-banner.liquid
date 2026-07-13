@@ -1,0 +1,34 @@
+{%- assign inv = section.settings.inverse -%}
+<section class="section {% if inv %}section--inverse{% else %}section--tint{% endif %}" data-screen-label="Postal">
+  <div class="wrap">
+    <figure class="postal {% if inv %}postal--inverse{% endif %}">
+      <figcaption class="postal__meta">
+        <span>{{ section.settings.number }}</span>
+        <span>{{ section.settings.eyebrow }}</span>
+        <span>Limen Club</span>
+      </figcaption>
+      <blockquote class="postal__quote">
+        <p class="quote__mark">{{ section.settings.quote }}</p>
+        <hr class="rule {% if inv %}rule--inverse{% endif %} mt-5">
+        {%- if section.settings.attribution != blank -%}
+          <p class="quote__attr {% if inv %}quote__attr--inverse{% endif %}">{{ section.settings.attribution }}</p>
+        {%- endif -%}
+      </blockquote>
+    </figure>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Postal (frase da casa)",
+  "settings": [
+    { "type": "paragraph", "content": "Uma frase da casa emoldurada como postal — a linha que alguém printa e manda no grupo do clube." },
+    { "type": "checkbox", "id": "inverse", "label": "Fundo escuro", "default": false },
+    { "type": "text", "id": "number", "label": "Numeração", "default": "Postal · Nº 01" },
+    { "type": "text", "id": "eyebrow", "label": "Sobrelinha", "default": "Como chega" },
+    { "type": "textarea", "id": "quote", "label": "Frase", "default": "A caixa leva seu nome antes de levar nosso logo." },
+    { "type": "text", "id": "attribution", "label": "Atribuição", "default": "Controle de qualidade, assinado à mão" }
+  ],
+  "presets": [{ "name": "Postal (frase da casa)" }]
+}
+{% endschema %}

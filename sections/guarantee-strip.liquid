@@ -1,0 +1,40 @@
+<section class="section section--tint" data-screen-label="Garantias">
+  <div class="wrap">
+    <div class="guarantees">
+      {%- for block in section.blocks -%}
+        <div {{ block.shopify_attributes }}>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.button_label != blank -%}
+      <div class="center mt-7"><a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="btn btn--outline">{{ section.settings.button_label }}</a></div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Faixa de garantias",
+  "settings": [
+    { "type": "text", "id": "button_label", "label": "Botão", "default": "Ver a coleção" },
+    { "type": "url", "id": "button_link", "label": "Link do botão" }
+  ],
+  "blocks": [
+    { "type": "item", "name": "Garantia", "settings": [
+      { "type": "text", "id": "title", "label": "Título", "default": "Trocas em 30 dias" },
+      { "type": "textarea", "id": "text", "label": "Texto", "default": "Etiqueta de devolução já vai na caixa. Você não paga o frete de volta." }
+    ]}
+  ],
+  "max_blocks": 4,
+  "presets": [{
+    "name": "Faixa de garantias",
+    "blocks": [
+      { "type": "item", "settings": { "title": "Trocas em 30 dias", "text": "Etiqueta de devolução já vai na caixa. Você não paga o frete de volta." } },
+      { "type": "item", "settings": { "title": "Envio para todo o Brasil", "text": "Sai em até 2 dias úteis, com código de rastreio no mesmo dia." } },
+      { "type": "item", "settings": { "title": "Reparo de ferragem", "text": "Zíper ou alça com defeito no primeiro ano: consertamos sem custo." } }
+    ]
+  }]
+}
+{% endschema %}

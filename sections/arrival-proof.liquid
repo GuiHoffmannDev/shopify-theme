@@ -1,0 +1,33 @@
+<section class="section section--inverse" data-screen-label="Chegada">
+  <div class="wrap">
+    <div class="split">
+      <div class="split__media">
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="" style="height:360px;width:100%;object-fit:cover;border:1px solid var(--border-hairline-inverse);">
+        {%- else -%}
+          <div class="ph ph--inverse" style="height:360px;"><span>{{ section.settings.placeholder_label }}</span></div>
+        {%- endif -%}
+      </div>
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow eyebrow--inverse" style="opacity:.7;">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        <h2 class="mt-4" style="font-family:var(--font-display);font-weight:500;font-size:36px;line-height:1.12;">{{ section.settings.heading }}</h2>
+        <hr class="rule rule--left rule--inverse mt-5">
+        <div class="mt-4" style="opacity:.85;line-height:1.6;">{{ section.settings.body }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Prova de chegada",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Imagem" },
+    { "type": "text", "id": "placeholder_label", "label": "Legenda do placeholder", "default": "foto · unboxing com dust bag" },
+    { "type": "text", "id": "eyebrow", "label": "Sobrelinha", "default": "Antes de chegar à sua porta" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Conferida, protegida e assinada por quem embalou." },
+    { "type": "richtext", "id": "body", "label": "Texto", "default": "<p>Cada bolsa vai dentro de dust bag, com o grip acondicionado à parte e o cartão do primeiro drop. A caixa leva seu nome antes de levar nosso logo — e uma etiqueta de troca já impressa, caso você mude de ideia em 30 dias.</p>" }
+  ],
+  "presets": [{ "name": "Prova de chegada" }]
+}
+{% endschema %}

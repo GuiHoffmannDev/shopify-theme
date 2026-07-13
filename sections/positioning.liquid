@@ -1,0 +1,44 @@
+<section class="section" data-screen-label="Posicionamento">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow eyebrow--muted">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        <h2 class="title mt-4">{{ section.settings.heading }}</h2>
+        <hr class="rule rule--left mt-5">
+        <div class="mt-5">{{ section.settings.body }}</div>
+        {%- if section.settings.button_label != blank -%}
+          <div class="mt-6"><a href="{{ section.settings.button_link }}" class="btn btn--ghost">{{ section.settings.button_label }} →</a></div>
+        {%- endif -%}
+      </div>
+      <div class="split__media">
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="{{ section.settings.heading | escape }}" style="height:480px;width:100%;object-fit:cover;border:1px solid var(--border-hairline);">
+        {%- else -%}
+          <div class="ph"><span>{{ section.settings.placeholder_label }}</span></div>
+        {%- endif -%}
+        {%- if section.settings.show_seal -%}
+          <div class="seal" aria-hidden="true">
+            <img src="{{ 'limen-seal.png' | asset_url }}" alt="" class="seal__img">
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Posicionamento (split)",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sobrelinha", "default": "O produto" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "A forma da raquete não foi impressa na bolsa. Ela é a bolsa." },
+    { "type": "richtext", "id": "body", "label": "Texto", "default": "<p>A linha frontal no formato da raquete é o próprio compartimento dela — forrado, separado de chaves, celular e roupa. Você guarda a raquete de um lado; o resto do dia fica do outro.</p><p>Nada de estampas nem logo grande. Ela vai do clube ao café sem parecer equipamento esportivo.</p>" },
+    { "type": "text", "id": "button_label", "label": "Botão", "default": "Ver como foi feita" },
+    { "type": "url", "id": "button_link", "label": "Link do botão" },
+    { "type": "image_picker", "id": "image", "label": "Imagem" },
+    { "type": "text", "id": "placeholder_label", "label": "Legenda do placeholder", "default": "foto de produto · a bolsa, de lado" },
+    { "type": "checkbox", "id": "show_seal", "label": "Mostrar selo", "default": true }
+  ],
+  "presets": [{ "name": "Posicionamento (split)" }]
+}
+{% endschema %}

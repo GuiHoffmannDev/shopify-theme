@@ -1,0 +1,55 @@
+<section class="section" data-screen-label="Carrinho">
+  <div class="wrap" style="max-width:960px;">
+    <div class="center">
+      <p class="eyebrow eyebrow--muted eyebrow--center">Sua sacola</p>
+      <h1 class="display-2 mt-4">{% if cart.item_count > 0 %}{{ cart.item_count }} {% if cart.item_count == 1 %}item{% else %}itens{% endif %}{% else %}A sacola está vazia{% endif %}</h1>
+      <hr class="rule mt-5">
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate class="mt-8">
+        {%- for item in cart.items -%}
+          <div class="cart-row">
+            {%- if item.image -%}
+              <img class="cart-row__img" src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}">
+            {%- else -%}
+              <div class="cart-row__img ph"><span></span></div>
+            {%- endif -%}
+            <div>
+              <a href="{{ item.url }}" class="pcard__name" style="font-size:20px;">{{ item.product.title }}</a>
+              {%- unless item.variant.title contains 'Default' -%}
+                <p class="pcard__cat" style="margin-top:6px;">{{ item.variant.title }}</p>
+              {%- endunless -%}
+            </div>
+            <div class="field" style="min-width:90px;">
+              <label class="field__label" for="q{{ item.index | plus: 1 }}">Qtd</label>
+              <input type="number" id="q{{ item.index | plus: 1 }}" name="updates[]" value="{{ item.quantity }}" min="0" style="width:70px;">
+            </div>
+            <div style="font-family:var(--font-body);font-size:18px;text-align:right;min-width:100px;">{{ item.final_line_price | money }}</div>
+          </div>
+        {%- endfor -%}
+
+        <div class="cart-foot">
+          <p style="font-family:var(--font-body);font-style:italic;color:var(--text-muted);max-width:38ch;">Frete e impostos calculados no checkout. Trocas em 30 dias, com a etiqueta que já vai na caixa.</p>
+          <div style="text-align:right;">
+            <div class="eyebrow eyebrow--muted">Subtotal</div>
+            <div style="font-family:var(--font-display);font-size:32px;margin:6px 0 16px;">{{ cart.total_price | money }}</div>
+            <div style="display:flex;gap:12px;justify-content:flex-end;">
+              <button type="submit" name="update" class="btn btn--outline">Atualizar</button>
+              <button type="submit" name="checkout" class="btn">Finalizar compra</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    {%- else -%}
+      <div class="cart-empty">
+        <p class="lead" style="color:var(--text-muted);">Nada aqui ainda. A bolsa que leva a raquete e o resto do seu dia está a um passo.</p>
+        <div class="mt-6"><a href="{{ routes.all_products_collection_url }}" class="btn">Ver a coleção</a></div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Carrinho", "settings": [] }
+{% endschema %}

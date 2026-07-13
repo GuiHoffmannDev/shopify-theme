@@ -1,0 +1,50 @@
+<section class="section section--inverse" data-screen-label="Provas">
+  <div class="wrap">
+    <div class="proof-head">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow eyebrow--inverse eyebrow--center" style="opacity:.7;">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="title mt-4">{{ section.settings.heading }}</h2>
+    </div>
+    <div class="proof-grid">
+      {%- for block in section.blocks -%}
+        <div class="proof-cell" {{ block.shopify_attributes }}>
+          <div class="proof-cell__n">{{ block.settings.number }}</div>
+          <div class="proof-cell__t">{{ block.settings.title }}</div>
+          <p class="proof-cell__d">{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Grade de provas",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sobrelinha", "default": "O que dá para conferir" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Prova, não adjetivo." }
+  ],
+  "blocks": [
+    {
+      "type": "proof",
+      "name": "Prova",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Número", "default": "01" },
+        { "type": "text", "id": "title", "label": "Título", "default": "Fica em pé" },
+        { "type": "textarea", "id": "text", "label": "Texto", "default": "Você coloca no chão e ela permanece de pé. Base estruturada, sem tombar sobre o resto dos objetos." }
+      ]
+    }
+  ],
+  "max_blocks": 9,
+  "presets": [{
+    "name": "Grade de provas",
+    "blocks": [
+      { "type": "proof", "settings": { "number": "01", "title": "Fica em pé", "text": "Você coloca no chão e ela permanece de pé. Base estruturada, sem tombar sobre o resto dos objetos." } },
+      { "type": "proof", "settings": { "number": "02", "title": "A raquete isolada", "text": "Compartimento próprio, forrado. A raquete não encosta em chave, celular nem calçado." } },
+      { "type": "proof", "settings": { "number": "03", "title": "Cinco bolsos decididos", "text": "Celular sem procurar. Chave sem esvaziar a bolsa. Bolso ventilado para o calçado." } },
+      { "type": "proof", "settings": { "number": "04", "title": "Grip que segura o jogo", "text": "Testado em duas horas de partida sem reposicionar a mão — a mesma aderência no primeiro e no último game." } },
+      { "type": "proof", "settings": { "number": "05", "title": "Alça que não bate", "text": "Ferragens presas por dentro. Você anda e nada tilinta contra a bolsa." } },
+      { "type": "proof", "settings": { "number": "06", "title": "Chega conferida", "text": "Cada pedido sai protegido por dust bag e com o cartão do primeiro drop, assinado por quem embalou." } }
+    ]
+  }]
+}
+{% endschema %}

@@ -1,0 +1,43 @@
+<section class="section" data-screen-label="Convite">
+  <div class="wrap">
+    <div class="invite">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow eyebrow--muted eyebrow--center">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="title mt-4">{{ section.settings.heading }}</h2>
+      <hr class="rule mt-5">
+      <p class="invite__body mt-5">{{ section.settings.body }}</p>
+
+      {%- form 'customer', class: 'invite__form mt-6' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        {%- if form.posted_successfully? -%}
+          <p class="invite__ok">{{ section.settings.success }}</p>
+        {%- else -%}
+          <div class="invite__row">
+            <label class="visually-hidden" for="invite-email">E-mail</label>
+            <input id="invite-email" type="email" name="contact[email]" autocomplete="email" required placeholder="{{ section.settings.placeholder }}">
+            <button type="submit" class="btn">{{ section.settings.button_label }}</button>
+          </div>
+          {%- if form.errors -%}<p class="invite__err">Confira o e-mail e tente outra vez.</p>{%- endif -%}
+        {%- endif -%}
+      {%- endform -%}
+
+      {%- if section.settings.fine != blank -%}<p class="invite__fine mt-5">{{ section.settings.fine }}</p>{%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Convite (newsletter)",
+  "settings": [
+    { "type": "paragraph", "content": "Convite de sócio, nunca cupom. A newsletter dá notícia antes — essa é a única promessa." },
+    { "type": "text", "id": "eyebrow", "label": "Sobrelinha", "default": "Correspondência do clube" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "O clube escreve primeiro." },
+    { "type": "textarea", "id": "body", "label": "Texto", "default": "Uma carta por mês: o próximo drop, datas de reposição e o que estamos testando em quadra. Nenhum cupom no assunto." },
+    { "type": "text", "id": "placeholder", "label": "Placeholder do campo", "default": "Seu e-mail" },
+    { "type": "text", "id": "button_label", "label": "Botão", "default": "Deixar meu nome" },
+    { "type": "text", "id": "success", "label": "Mensagem de confirmação", "default": "Recebido. A próxima carta chega antes do próximo drop." },
+    { "type": "text", "id": "fine", "label": "Linha fina", "default": "Uma por mês · Sair leva um clique" }
+  ],
+  "presets": [{ "name": "Convite (newsletter)" }]
+}
+{% endschema %}

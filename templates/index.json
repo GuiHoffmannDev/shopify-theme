@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "hero": { "type": "hero", "settings": {} },
+    "positioning": { "type": "positioning", "settings": {} },
+    "proof": {
+      "type": "proof-grid",
+      "blocks": {
+        "b1": { "type": "proof", "settings": { "number": "01", "title": "Fica em pé", "text": "Você coloca no chão e ela permanece de pé. Base estruturada, sem tombar sobre o resto dos objetos." } },
+        "b2": { "type": "proof", "settings": { "number": "02", "title": "A raquete isolada", "text": "Compartimento próprio, forrado. A raquete não encosta em chave, celular nem calçado." } },
+        "b3": { "type": "proof", "settings": { "number": "03", "title": "Cinco bolsos decididos", "text": "Celular sem procurar. Chave sem esvaziar a bolsa. Bolso ventilado para o calçado." } },
+        "b4": { "type": "proof", "settings": { "number": "04", "title": "Grip que segura o jogo", "text": "Testado em duas horas de partida sem reposicionar a mão — a mesma aderência no primeiro e no último game." } },
+        "b5": { "type": "proof", "settings": { "number": "05", "title": "Alça que não bate", "text": "Ferragens presas por dentro. Você anda e nada tilinta contra a bolsa." } },
+        "b6": { "type": "proof", "settings": { "number": "06", "title": "Chega conferida", "text": "Cada pedido sai protegido por dust bag e com o cartão do primeiro drop, assinado por quem embalou." } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6"],
+      "settings": {}
+    },
+    "quote": { "type": "quote-banner", "settings": {} },
+    "featured": { "type": "featured-collection", "settings": {} },
+    "arrival": { "type": "arrival-proof", "settings": {} },
+    "invite": { "type": "newsletter", "settings": {} }
+  },
+  "order": ["hero", "positioning", "proof", "quote", "featured", "arrival", "invite"]
+}

@@ -1,0 +1,63 @@
+<section class="section section--hairline-bottom" data-screen-label="Coleção banner">
+  <div class="wrap">
+    <div class="coll-banner">
+      <p class="eyebrow eyebrow--muted eyebrow--center">{{ section.settings.eyebrow }}</p>
+      <h1 class="display-2 mt-4">{{ collection.title | default: section.settings.fallback_title }}</h1>
+      <hr class="rule mt-5">
+    </div>
+  </div>
+</section>
+
+<section class="section" data-screen-label="Coleção grade">
+  <div class="wrap">
+    <div class="coll-toolbar">
+      <div class="coll-filters">
+        <a href="{{ collection.url | default: routes.all_products_collection_url }}" class="tag {% unless current_tags %}tag--fill{% endunless %}">Tudo</a>
+        {%- for tag in collection.all_tags limit: 6 -%}
+          <a href="{{ collection.url }}/{{ tag | handle }}" class="tag {% if current_tags contains tag %}tag--fill{% endif %}">{{ tag }}</a>
+        {%- endfor -%}
+      </div>
+      {%- if collection.sort_options.size > 0 -%}
+        <form method="get" class="field">
+          <label class="field__label" for="sort">Ordenar</label>
+          <select name="sort_by" id="sort" onchange="this.form.submit()">
+            {%- for opt in collection.sort_options -%}
+              <option value="{{ opt.value }}" {% if opt.value == collection.sort_by or opt.value == collection.default_sort_by %}selected{% endif %}>{{ opt.name }}</option>
+            {%- endfor -%}
+          </select>
+        </form>
+      {%- endif -%}
+    </div>
+
+    <div class="product-grid">
+      {%- if collection and collection.products_count > 0 -%}
+        {%- paginate collection.products by 12 -%}
+          {%- for product in collection.products -%}
+            {% render 'product-card', product: product %}
+          {%- endfor -%}
+        {%- endpaginate -%}
+      {%- else -%}
+        {% render 'product-card', ph_category: 'Bolsas', ph_name: 'A Diária', ph_price: 'R$ 590', ph_tag: 'Novo', ph_label: 'bolsa · foto de produto', ph_url: routes.all_products_collection_url %}
+        {% render 'product-card', ph_category: 'Bolsas', ph_name: 'A de Duas Raquetes', ph_price: 'R$ 720', ph_label: 'bolsa · foto de produto', ph_url: routes.all_products_collection_url %}
+        {% render 'product-card', ph_category: 'Bolsas', ph_name: 'A de Fim de Semana', ph_price: 'R$ 890', ph_label: 'bolsa · foto de produto', ph_url: routes.all_products_collection_url %}
+        {% render 'product-card', ph_category: 'Bolsas', ph_name: 'A Compacta', ph_price: 'R$ 450', ph_label: 'bolsa · foto de produto', ph_url: routes.all_products_collection_url %}
+        {% render 'product-card', ph_category: 'Grips', ph_name: 'O Grip', ph_price: 'R$ 79', ph_tag: 'Testado', ph_label: 'grip · foto de produto', ph_url: routes.all_products_collection_url %}
+        {% render 'product-card', ph_category: 'Grips', ph_name: 'O Grip · Par', ph_price: 'R$ 140', ph_label: 'grip · foto de produto', ph_url: routes.all_products_collection_url %}
+      {%- endif -%}
+    </div>
+
+    {%- if collection == blank or collection.products_count == 0 -%}
+      <p class="center mt-8" style="font-family:var(--font-body);font-style:italic;font-size:15px;color:var(--text-muted);">Adicione produtos a esta coleção no admin — os quadros sem imagem mostram o fundo de linho até você subir as fotos.</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Coleção",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sobrelinha", "default": "Coleção · Primeiro drop 2026" },
+    { "type": "text", "id": "fallback_title", "label": "Título (sem coleção)", "default": "Nada aqui existe só para preencher a prateleira." }
+  ]
+}
+{% endschema %}

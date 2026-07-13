@@ -1,0 +1,141 @@
+<section class="section" data-screen-label="Produto">
+  <div class="wrap">
+    <div class="pdp">
+      {%- comment -%} Gallery {%- endcomment -%}
+      <div class="pdp__gallery">
+        <div class="pdp__main">
+          {%- if product.featured_image -%}
+            <img class="pdp__main-img" src="{{ product.featured_image | image_url: width: 1400 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}">
+          {%- else -%}
+            <div class="ph"><span>editorial · a bolsa na mesa do café, longe da quadra</span></div>
+          {%- endif -%}
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="pdp__thumbs">
+            {%- for image in product.images limit: 3 -%}
+              <img src="{{ image | image_url: width: 500 }}" alt="{{ image.alt | escape }}">
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          <div class="pdp__thumbs">
+            <div class="ph"><span>detalhe · raquete</span></div>
+            <div class="ph"><span>detalhe · base em pé</span></div>
+            <div class="ph"><span>detalhe · alça</span></div>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Details {%- endcomment -%}
+      <div class="pdp__details">
+        {%- assign cat = product.type | default: section.settings.fallback_category -%}
+        {%- if cat != blank -%}<p class="eyebrow eyebrow--muted">{{ cat }}</p>{%- endif -%}
+        <h1 class="pdp__title">{{ product.title | default: section.settings.fallback_title }}</h1>
+        <div class="pdp__price" data-price>{% if product %}{{ product.price | money }}{% else %}{{ section.settings.fallback_price }}{% endif %}</div>
+        <hr class="rule rule--left mt-5">
+
+        {%- if product.description != blank -%}
+          <div class="pdp__desc mt-5">{{ product.description }}</div>
+        {%- elsif section.settings.fallback_desc != blank -%}
+          <p class="pdp__desc mt-5">{{ section.settings.fallback_desc }}</p>
+        {%- endif -%}
+
+        {%- form 'product', product, data-product-form: true -%}
+          {%- if product and product.options_with_values.size > 0 and product.has_only_default_variant == false -%}
+            {%- for option in product.options_with_values -%}
+              <div class="mt-6">
+                <p class="eyebrow eyebrow--muted pdp__opt-label" style="font-size:10px;">{{ option.name }}</p>
+                <div class="pdp__swatches" role="radiogroup" aria-label="{{ option.name | escape }}">
+                  {%- for value in option.values -%}
+                    <button type="button" class="pdp__swatch" role="radio"
+                            data-swatch data-opt-index="{{ forloop.parent.index0 }}" data-value="{{ value | escape }}"
+                            aria-checked="{% if option.selected_value == value %}true{% else %}false{% endif %}">{{ value }}</button>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- elsif product == blank -%}
+            {%- comment -%} Onboarding demo swatches {%- endcomment -%}
+            <div class="mt-6">
+              <p class="eyebrow eyebrow--muted pdp__opt-label" style="font-size:10px;">Cor</p>
+              <div class="pdp__swatches">
+                <button type="button" class="pdp__swatch" aria-checked="true">Azeitona</button>
+                <button type="button" class="pdp__swatch" aria-checked="false">Navy</button>
+                <button type="button" class="pdp__swatch" aria-checked="false">Creme</button>
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if product -%}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <script type="application/json" data-variants-json>
+              [
+                {%- for v in product.variants -%}
+                  {"id": {{ v.id }}, "options": {{ v.options | json }}, "price": {{ v.price }}, "priceFormatted": {{ v.price | money | json }}, "available": {{ v.available }}}{% unless forloop.last %},{% endunless %}
+                {%- endfor -%}
+              ]
+            </script>
+          {%- endif -%}
+
+          <div class="pdp__buy">
+            {%- if product -%}
+              <button type="submit" name="add" class="btn btn--block" data-add="Adicionar à sacola" {% unless product.available %}disabled{% endunless %}>
+                {% if product.available %}Adicionar à sacola{% else %}Esgotado{% endif %}
+              </button>
+            {%- else -%}
+              <button type="button" class="btn btn--block">Adicionar à sacola</button>
+            {%- endif -%}
+            <span class="tag">Envio em 2 dias úteis</span>
+          </div>
+        {%- endform -%}
+
+        {%- comment -%} Spec list {%- endcomment -%}
+        <div class="mt-6">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'spec' -%}
+              <div class="spec" {{ block.shopify_attributes }}>
+                <div class="spec__t">{{ block.settings.label }}</div>
+                <div class="spec__d">{{ block.settings.text }}</div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Produto",
+  "settings": [
+    { "type": "header", "content": "Ordem das fotos", "info": "A primeira foto é editorial, fora da quadra — o inesperado para o scroll. As provas técnicas (raquete isolada, base em pé, alça) vêm nas miniaturas e nas especificações." },
+    { "type": "header", "content": "Conteúdo de exemplo (usado quando não há produto)" },
+    { "type": "text", "id": "fallback_category", "label": "Categoria", "default": "Bolsas · Primeiro drop" },
+    { "type": "text", "id": "fallback_title", "label": "Título", "default": "A Diária" },
+    { "type": "text", "id": "fallback_price", "label": "Preço", "default": "R$ 590" },
+    { "type": "textarea", "id": "fallback_desc", "label": "Descrição", "default": "A raquete de um lado, num compartimento próprio que ela não divide com nada. O resto do seu dia do outro. Você coloca no chão e ela permanece de pé." }
+  ],
+  "blocks": [
+    {
+      "type": "spec",
+      "name": "Especificação (prova)",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Rótulo", "default": "Cabe" },
+        { "type": "textarea", "id": "text", "label": "Texto", "default": "2 raquetes de pickleball + calçado nº 44 no bolso ventilado" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Produto",
+    "blocks": [
+      { "type": "spec", "settings": { "label": "Cabe", "text": "2 raquetes de pickleball + calçado nº 44 no bolso ventilado" } },
+      { "type": "spec", "settings": { "label": "Compartimento da raquete", "text": "Forrado, isolado. Não encosta em chave, celular ou roupa" } },
+      { "type": "spec", "settings": { "label": "Bolsos", "text": "5 no total — celular, chave, ventilado, protegido para óculos, interno" } },
+      { "type": "spec", "settings": { "label": "Base", "text": "Estruturada: fica em pé no chão sem apoio" } },
+      { "type": "spec", "settings": { "label": "Alça", "text": "Removível, suporta 12 kg. Ferragens presas por dentro, não tilintam" } },
+      { "type": "spec", "settings": { "label": "Medidas", "text": "52 × 28 × 26 cm · 1,1 kg vazia" } },
+      { "type": "spec", "settings": { "label": "Material", "text": "Lona encerada resistente a respingo · forro que limpa com pano úmido" } }
+    ]
+  }]
+}
+{% endschema %}

@@ -1,0 +1,37 @@
+<footer class="site-footer">
+  <div class="wrap">
+    {%- if section.settings.crest != blank -%}
+      <img class="site-footer__crest" src="{{ section.settings.crest | image_url: width: 264 }}" alt="{{ shop.name }}">
+    {%- else -%}
+      <img class="site-footer__crest" src="{{ 'crest-footer.png' | asset_url }}" alt="{{ shop.name }}">
+    {%- endif -%}
+
+    <div class="rule-diamond rule-diamond--inverse" style="max-width:180px;margin:28px auto;"><span></span></div>
+
+    {%- if section.settings.menu != blank -%}
+      <nav class="site-footer__links" aria-label="{{ 'general.a11y.footer_nav' | t }}">
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endfor -%}
+      </nav>
+    {%- endif -%}
+
+    {%- if section.settings.tagline != blank -%}
+      <p class="site-footer__tagline">{{ section.settings.tagline }}</p>
+    {%- endif -%}
+
+    <p class="site-footer__fine">{{ section.settings.fineprint }}</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Rodapé",
+  "settings": [
+    { "type": "image_picker", "id": "crest", "label": "Brasão (opcional — usa o brasão Limen por padrão)" },
+    { "type": "link_list", "id": "menu", "label": "Menu do rodapé", "default": "footer" },
+    { "type": "text", "id": "tagline", "label": "Frase (prova)", "default": "Cada bolsa é conferida e assinada à mão antes de sair daqui." },
+    { "type": "text", "id": "fineprint", "label": "Rodapé fino", "default": "© 2026 Limen · Trocas em 30 dias · Envio para todo o Brasil" }
+  ]
+}
+{% endschema %}
