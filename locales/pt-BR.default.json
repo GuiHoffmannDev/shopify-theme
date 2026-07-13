@@ -4,6 +4,7 @@
   },
   "general": {
     "cart": "Sacola",
+    "account": "Conta",
     "items": "itens",
     "meta": {
       "tags": "Marcado com \"{{ tags }}\"",

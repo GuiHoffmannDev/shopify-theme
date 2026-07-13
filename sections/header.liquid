@@ -20,7 +20,15 @@
       {%- if section.settings.show_est -%}
         <span class="eyebrow">{{ section.settings.est_text }}</span>
       {%- endif -%}
-      <a href="{{ routes.cart_url }}" class="eyebrow eyebrow--muted">{{ 'general.cart' | t }} ({{ cart.item_count }})</a>
+      {%- if section.settings.menu_right != blank -%}
+        {%- for link in section.settings.menu_right.links -%}
+          <a href="{{ link.url }}" class="site-header__link"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+        {%- endfor -%}
+      {%- endif -%}
+      {%- if shop.customer_accounts_enabled and section.settings.show_account -%}
+        <a href="{{ routes.account_url }}" class="site-header__link">{{ 'general.account' | t }}</a>
+      {%- endif -%}
+      <a href="{{ routes.cart_url }}" class="site-header__link">{{ 'general.cart' | t }} ({{ cart.item_count }})</a>
     </div>
   </div>
 
@@ -29,6 +37,14 @@
       {%- for link in section.settings.menu.links -%}
         <a href="{{ link.url }}">{{ link.title }}</a>
       {%- endfor -%}
+      {%- if section.settings.menu_right != blank -%}
+        {%- for link in section.settings.menu_right.links -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endfor -%}
+      {%- endif -%}
+      {%- if shop.customer_accounts_enabled and section.settings.show_account -%}
+        <a href="{{ routes.account_url }}">{{ 'general.account' | t }}</a>
+      {%- endif -%}
       <a href="{{ routes.cart_url }}">{{ 'general.cart' | t }} ({{ cart.item_count }})</a>
     </div>
   </div>
@@ -41,7 +57,9 @@
     { "type": "image_picker", "id": "logo", "label": "Logo (opcional — substitui o wordmark de texto)" },
     { "type": "text", "id": "wordmark", "label": "Wordmark", "default": "LIMEN" },
     { "type": "text", "id": "wordmark_sub", "label": "Sublinha do wordmark", "default": "Club" },
-    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "link_list", "id": "menu", "label": "Menu (esquerda)", "default": "main-menu" },
+    { "type": "link_list", "id": "menu_right", "label": "Menu (direita — links utilitários, antes da sacola)" },
+    { "type": "checkbox", "id": "show_account", "label": "Mostrar link de conta", "default": true },
     { "type": "checkbox", "id": "show_est", "label": "Mostrar \"Est.\"", "default": false },
     { "type": "text", "id": "est_text", "label": "Texto Est.", "default": "Est. 2025" }
   ]
