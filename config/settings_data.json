@@ -18,8 +18,8 @@
           "wordmark_sub": "Club",
           "menu": "main-menu",
           "menu_right": "",
-          "show_account": true,
-          "show_est": false,
+          "show_account": false,
+          "show_est": true,
           "est_text": "Est. 2025"
         }
       },
