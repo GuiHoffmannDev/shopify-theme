@@ -1,3 +1,37 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "current": {}
+  "current": {
+    "favicon": "shopify://shop_images/Design_sem_nome-6.png",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "wordmark": "LIMEN",
+          "wordmark_sub": "Club",
+          "menu": "main-menu",
+          "menu_right": "",
+          "show_account": true,
+          "show_est": false,
+          "est_text": "Est. 2025"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "menu": "footer",
+          "tagline": "Cada bolsa é conferida e assinada à mão antes de sair daqui.",
+          "fineprint": "© 2026 Limen · Trocas em 30 dias · Envio para todo o Brasil"
+        }
+      }
+    },
+    "content_for_index": []
+  }
 }
