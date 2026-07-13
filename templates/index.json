@@ -1,24 +1,152 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "hero": { "type": "hero", "settings": {} },
-    "positioning": { "type": "positioning", "settings": {} },
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "image": "shopify://shop_images/ChatGPT_Image_Jul_9_2026_at_01_39_03_PM.png",
+        "overlay": 50,
+        "eyebrow": "Bolsas · Grips · Pickleball",
+        "heading": "A raquete de um lado. O resto do seu dia do outro.",
+        "text": "Compartimento próprio onde a raquete não toca em mais nada. Base que mantém a bolsa em pé quando você a coloca no chão. Cinco bolsos — nenhum ali só para figurar na ficha técnica.",
+        "button_label": "Ver a bolsa",
+        "button_link": ""
+      }
+    },
+    "positioning": {
+      "type": "positioning",
+      "settings": {
+        "eyebrow": "O produto",
+        "heading": "A forma da raquete não foi impressa na bolsa. Ela é a bolsa.",
+        "body": "<p>A linha frontal no formato da raquete é o próprio compartimento dela — forrado, separado de chaves, celular e roupa. Você guarda a raquete de um lado; o resto do dia fica do outro.</p><p>Nada de estampas nem logo grande. Ela vai do clube ao café sem parecer equipamento esportivo.</p>",
+        "button_label": "Ver como foi feita",
+        "button_link": "",
+        "placeholder_label": "foto de produto · a bolsa, de lado",
+        "show_seal": true
+      }
+    },
     "proof": {
       "type": "proof-grid",
       "blocks": {
-        "b1": { "type": "proof", "settings": { "number": "01", "title": "Fica em pé", "text": "Você coloca no chão e ela permanece de pé. Base estruturada, sem tombar sobre o resto dos objetos." } },
-        "b2": { "type": "proof", "settings": { "number": "02", "title": "A raquete isolada", "text": "Compartimento próprio, forrado. A raquete não encosta em chave, celular nem calçado." } },
-        "b3": { "type": "proof", "settings": { "number": "03", "title": "Cinco bolsos decididos", "text": "Celular sem procurar. Chave sem esvaziar a bolsa. Bolso ventilado para o calçado." } },
-        "b4": { "type": "proof", "settings": { "number": "04", "title": "Grip que segura o jogo", "text": "Testado em duas horas de partida sem reposicionar a mão — a mesma aderência no primeiro e no último game." } },
-        "b5": { "type": "proof", "settings": { "number": "05", "title": "Alça que não bate", "text": "Ferragens presas por dentro. Você anda e nada tilinta contra a bolsa." } },
-        "b6": { "type": "proof", "settings": { "number": "06", "title": "Chega conferida", "text": "Cada pedido sai protegido por dust bag e com o cartão do primeiro drop, assinado por quem embalou." } }
+        "b1": {
+          "type": "proof",
+          "settings": {
+            "number": "01",
+            "title": "Fica em pé",
+            "text": "Você coloca no chão e ela permanece de pé. Base estruturada, sem tombar sobre o resto dos objetos."
+          }
+        },
+        "b2": {
+          "type": "proof",
+          "settings": {
+            "number": "02",
+            "title": "A raquete isolada",
+            "text": "Compartimento próprio, forrado. A raquete não encosta em chave, celular nem calçado."
+          }
+        },
+        "b3": {
+          "type": "proof",
+          "settings": {
+            "number": "03",
+            "title": "Cinco bolsos decididos",
+            "text": "Celular sem procurar. Chave sem esvaziar a bolsa. Bolso ventilado para o calçado."
+          }
+        },
+        "b4": {
+          "type": "proof",
+          "settings": {
+            "number": "04",
+            "title": "Grip que segura o jogo",
+            "text": "Testado em duas horas de partida sem reposicionar a mão — a mesma aderência no primeiro e no último game."
+          }
+        },
+        "b5": {
+          "type": "proof",
+          "settings": {
+            "number": "05",
+            "title": "Alça que não bate",
+            "text": "Ferragens presas por dentro. Você anda e nada tilinta contra a bolsa."
+          }
+        },
+        "b6": {
+          "type": "proof",
+          "settings": {
+            "number": "06",
+            "title": "Chega conferida",
+            "text": "Cada pedido sai protegido por dust bag e com o cartão do primeiro drop, assinado por quem embalou."
+          }
+        }
       },
-      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6"],
-      "settings": {}
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ],
+      "settings": {
+        "eyebrow": "O que dá para conferir",
+        "heading": "Prova, não adjetivo."
+      }
     },
-    "quote": { "type": "quote-banner", "settings": {} },
-    "featured": { "type": "featured-collection", "settings": {} },
-    "arrival": { "type": "arrival-proof", "settings": {} },
-    "invite": { "type": "newsletter", "settings": {} }
+    "quote": {
+      "type": "quote-banner",
+      "settings": {
+        "inverse": false,
+        "number": "Postal · Nº 01",
+        "eyebrow": "Como chega",
+        "quote": "A caixa leva seu nome antes de levar nosso logo.",
+        "attribution": "Controle de qualidade, assinado à mão"
+      }
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "O Vestiário",
+        "heading": "Cinco bolsas. Cada uma para uma forma de chegar à quadra.",
+        "collection": "",
+        "limit": 3,
+        "button_label": "Ver a coleção"
+      }
+    },
+    "arrival": {
+      "type": "arrival-proof",
+      "settings": {
+        "placeholder_label": "foto · unboxing com dust bag",
+        "eyebrow": "Antes de chegar à sua porta",
+        "heading": "Conferida, protegida e assinada por quem embalou.",
+        "body": "<p>Cada bolsa vai dentro de dust bag, com o grip acondicionado à parte e o cartão do primeiro drop. A caixa leva seu nome antes de levar nosso logo — e uma etiqueta de troca já impressa, caso você mude de ideia em 30 dias.</p>"
+      }
+    },
+    "invite": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Correspondência do clube",
+        "heading": "O clube escreve primeiro.",
+        "body": "Uma carta por mês: o próximo drop, datas de reposição e o que estamos testando em quadra. Nenhum cupom no assunto.",
+        "placeholder": "Seu e-mail",
+        "button_label": "Deixar meu nome",
+        "success": "Recebido. A próxima carta chega antes do próximo drop.",
+        "fine": "Uma por mês · Sair leva um clique"
+      }
+    }
   },
-  "order": ["hero", "positioning", "proof", "quote", "featured", "arrival", "invite"]
+  "order": [
+    "hero",
+    "positioning",
+    "proof",
+    "quote",
+    "featured",
+    "arrival",
+    "invite"
+  ]
 }
