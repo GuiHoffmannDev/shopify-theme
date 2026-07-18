@@ -25,7 +25,7 @@
     {%- assign cat = product.type | default: product.metafields.custom.category -%}
     {%- if cat != blank -%}<p class="pcard__cat">{{ cat }}</p>{%- endif -%}
     <div class="pcard__name">{{ product.title }}</div>
-    <div class="pcard__price">{{ product.price | money }}</div>
+    <div class="pcard__price">{{ product.price | money_without_trailing_zeros }}</div>
   </a>
 {%- else -%}
   <a href="{{ ph_url | default: '#' }}" class="pcard">
