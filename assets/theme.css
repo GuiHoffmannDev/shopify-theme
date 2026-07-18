@@ -132,7 +132,7 @@ button{font-family:inherit;}
 .ph--inverse span{color:var(--cream-100);}
 
 /* ---------- Header ---------- */
-.site-header{position:sticky;top:0;z-index:20;background:var(--cream-100);border-bottom:1px solid var(--border-hairline);}
+.site-header{position:sticky;top:0;z-index:20;background:var(--cream-100);}
 .site-header__bar{display:flex;align-items:center;justify-content:space-between;height:80px;}
 .site-header__nav{display:flex;gap:32px;flex:1;}
 .site-header__link{
