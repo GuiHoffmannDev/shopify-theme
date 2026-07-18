@@ -242,6 +242,7 @@ button{font-family:inherit;}
 .pdp{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:start;}
 .pdp__gallery{display:flex;flex-direction:column;gap:12px;}
 .pdp__main .ph,.pdp__main-img{height:520px;width:100%;object-fit:cover;border:1px solid var(--border-hairline);}
+.pdp__main-img,.pdp__thumbs img{cursor:url("cursor-lemon.svg") 11 3, pointer;}
 .pdp__thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
 .pdp__thumbs .ph,.pdp__thumbs img{height:120px;width:100%;object-fit:cover;border:1px solid var(--border-hairline);}
 .pdp__title{font-family:var(--font-display);font-weight:500;font-size:46px;line-height:1.08;margin:14px 0 0;}
