@@ -1,0 +1,42 @@
+<section class="section section--tint section--hairline-top section--hairline-bottom" data-screen-label="Jornal do Clube">
+  <div class="wrap">
+    <div class="split">
+      <div class="split__media journal__media" data-reveal>
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="{{ section.settings.heading | escape }}" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" loading="lazy">
+        {%- elsif section.settings.asset != blank -%}
+          <img src="{{ section.settings.asset | asset_url }}" alt="{{ section.settings.heading | escape }}" width="928" height="1152" loading="lazy">
+        {%- else -%}
+          <div class="ph"><span>página do jornal · edição nº 1</span></div>
+        {%- endif -%}
+      </div>
+      <div data-reveal>
+        <p class="journal__issue"><span class="tag">{{ section.settings.issue_label }}</span></p>
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow eyebrow--muted">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        <h2 class="title mt-4">{{ section.settings.heading }}</h2>
+        <hr class="rule rule--left mt-5">
+        <div class="mt-5" style="color:var(--text-secondary);line-height:1.6;">{{ section.settings.body }}</div>
+        {%- if section.settings.button_label != blank -%}
+          <div class="mt-6"><a href="{{ section.settings.button_link | default: routes.root_url }}" class="btn btn--outline">{{ section.settings.button_label }}</a></div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Jornal do Clube",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Imagem", "info": "Sem imagem escolhida, usa a página de lookbook embutida no tema (campo abaixo)." },
+    { "type": "text", "id": "asset", "label": "Arquivo embutido (assets)", "default": "photo-journal-lookbook.jpg" },
+    { "type": "text", "id": "issue_label", "label": "Etiqueta da edição", "default": "Edição Nº 1" },
+    { "type": "text", "id": "eyebrow", "label": "Sobrelinha", "default": "Jornal do Clube" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "O clube tem um jornal. Ele conta como cada peça foi testada." },
+    { "type": "richtext", "id": "body", "label": "Texto", "default": "<p>Bastidor dos testes em quadra, o caminho de cada material e o que vem no próximo drop — contado como um jornal de clube, não como catálogo. Guarde com o café da manhã.</p>" },
+    { "type": "text", "id": "button_label", "label": "Botão", "default": "Ler a edição" },
+    { "type": "url", "id": "button_link", "label": "Link do botão" }
+  ],
+  "presets": [{ "name": "Jornal do Clube" }]
+}
+{% endschema %}

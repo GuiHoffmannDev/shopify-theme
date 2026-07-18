@@ -57,4 +57,37 @@
 
     refresh();
   });
+
+  // Reveal on scroll — hidden state only applied when JS runs, so no-JS keeps content visible
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var revealEls = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window && !reduceMotion && revealEls.length) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -10% 0px' });
+    revealEls.forEach(function (el) {
+      el.classList.add('reveal-pending');
+      io.observe(el);
+    });
+  }
+
+  // Ambient video: only plays while on screen; stays on its poster under reduced motion
+  var videos = document.querySelectorAll('[data-ambient-video], .club-media video');
+  if (reduceMotion) {
+    videos.forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
+  } else if ('IntersectionObserver' in window && videos.length) {
+    var vio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var v = entry.target;
+        if (entry.isIntersecting) { v.play().catch(function () {}); }
+        else { v.pause(); }
+      });
+    }, { threshold: 0.25 });
+    videos.forEach(function (v) { vio.observe(v); });
+  }
 })();

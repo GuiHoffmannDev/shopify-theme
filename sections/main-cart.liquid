@@ -11,7 +11,7 @@
         {%- for item in cart.items -%}
           <div class="cart-row">
             {%- if item.image -%}
-              <img class="cart-row__img" src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}">
+              <img class="cart-row__img" src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" width="{{ item.image.width }}" height="{{ item.image.height }}">
             {%- else -%}
               <div class="cart-row__img ph"><span></span></div>
             {%- endif -%}

@@ -1,28 +1,59 @@
 {%- assign bg = section.settings.image -%}
-<section class="hero" data-screen-label="Hero">
-  {%- if bg != blank -%}
-    <img class="hero__img" src="{{ bg | image_url: width: 2400 }}" alt="" loading="eager">
-  {%- else -%}
-    <img class="hero__img" src="{{ 'photo-umbrellas.png' | asset_url }}" alt="" loading="eager">
-  {%- endif -%}
-  <div class="hero__scrim" style="background:rgba(20,31,68,{{ section.settings.overlay | divided_by: 100.0 }});"></div>
-  <div class="hero__inner">
-    {%- if section.settings.eyebrow != blank -%}<p class="eyebrow eyebrow--inverse">{{ section.settings.eyebrow }}</p>{%- endif -%}
-    <h1 class="hero__title">{{ section.settings.heading }}</h1>
-    <hr class="rule rule--inverse">
-    {%- if section.settings.text != blank -%}<p class="hero__lead">{{ section.settings.text }}</p>{%- endif -%}
-    {%- if section.settings.button_label != blank -%}
-      <div class="mt-6"><a href="{{ section.settings.button_link }}" class="btn btn--inverse">{{ section.settings.button_label }}</a></div>
+{%- if section.settings.layout == 'full' -%}
+  <section class="hero" data-screen-label="Hero">
+    {%- if bg != blank -%}
+      <img class="hero__img kenburns" src="{{ bg | image_url: width: 2400 }}" alt="" width="{{ bg.width }}" height="{{ bg.height }}" loading="eager">
+    {%- else -%}
+      <img class="hero__img kenburns" src="{{ 'photo-hero-tiles.jpg' | asset_url }}" alt="" width="928" height="1152" loading="eager">
     {%- endif -%}
-  </div>
-</section>
+    <div class="hero__scrim" style="background:rgba(20,31,68,{{ section.settings.overlay | divided_by: 100.0 }});"></div>
+    <div class="hero__inner">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow eyebrow--inverse">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h1 class="hero__title">{{ section.settings.heading }}</h1>
+      <hr class="rule rule--inverse">
+      {%- if section.settings.text != blank -%}<p class="hero__lead">{{ section.settings.text }}</p>{%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <div class="mt-6"><a href="{{ section.settings.button_link }}" class="btn btn--inverse">{{ section.settings.button_label }}</a></div>
+      {%- endif -%}
+    </div>
+  </section>
+{%- else -%}
+  <section class="hero hero--split" data-screen-label="Hero">
+    <div class="hero__copy" data-reveal>
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow eyebrow--muted">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h1 class="hero__title">{{ section.settings.heading }}</h1>
+      <hr class="rule rule--left">
+      {%- if section.settings.text != blank -%}<p class="hero__lead">{{ section.settings.text }}</p>{%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <div class="mt-6"><a href="{{ section.settings.button_link }}" class="btn">{{ section.settings.button_label }}</a></div>
+      {%- endif -%}
+    </div>
+    <div class="hero__media">
+      {%- if bg != blank -%}
+        <img class="kenburns" src="{{ bg | image_url: width: 1400 }}" alt="" width="{{ bg.width }}" height="{{ bg.height }}" loading="eager">
+      {%- else -%}
+        <img class="kenburns" src="{{ 'photo-hero-tiles.jpg' | asset_url }}" alt="" width="928" height="1152" loading="eager">
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Hero",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Imagem de fundo", "info": "Regra da casa: nunca a quadra. A bolsa na mesa do café da manhã, no banco do clube ao lado do jornal, na banca de frutas entre limões reais." },
-    { "type": "range", "id": "overlay", "min": 0, "max": 80, "step": 5, "unit": "%", "label": "Escurecer imagem", "default": 50 },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Formato",
+      "options": [
+        { "value": "split", "label": "Editorial (texto ao lado da foto)" },
+        { "value": "full", "label": "Foto inteira com texto por cima" }
+      ],
+      "default": "split"
+    },
+    { "type": "image_picker", "id": "image", "label": "Imagem", "info": "Regra da casa: nunca a quadra. A bolsa na mesa do café da manhã, no banco do clube ao lado do jornal, na banca de frutas entre limões reais." },
+    { "type": "range", "id": "overlay", "min": 0, "max": 80, "step": 5, "unit": "%", "label": "Escurecer imagem (só no formato foto inteira)", "default": 50 },
     { "type": "text", "id": "eyebrow", "label": "Sobrelinha", "default": "Bolsas · Grips · Pickleball" },
     { "type": "text", "id": "heading", "label": "Título", "default": "A raquete de um lado. O resto do seu dia do outro." },
     { "type": "textarea", "id": "text", "label": "Texto", "default": "Compartimento próprio onde a raquete não toca em mais nada. Base que mantém a bolsa em pé quando você a coloca no chão. Cinco bolsos — nenhum ali só para figurar na ficha técnica." },

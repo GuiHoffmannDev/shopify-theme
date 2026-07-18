@@ -5,15 +5,16 @@
       <div class="pdp__gallery">
         <div class="pdp__main">
           {%- if product.featured_image -%}
-            <img class="pdp__main-img" src="{{ product.featured_image | image_url: width: 1400 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}">
+            <img class="pdp__main-img" src="{{ product.featured_image | image_url: width: 1400 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}">
           {%- else -%}
             <div class="ph"><span>editorial · a bolsa na mesa do café, longe da quadra</span></div>
           {%- endif -%}
         </div>
         {%- if product.images.size > 1 -%}
-          <div class="pdp__thumbs">
-            {%- for image in product.images limit: 3 -%}
-              <img src="{{ image | image_url: width: 500 }}" alt="{{ image.alt | escape }}">
+          {%- comment -%} Ordem editorial: a primeira foto é a cena; as provas descem em página inteira, como um lookbook {%- endcomment -%}
+          <div class="pdp__stack">
+            {%- for image in product.images offset: 1 -%}
+              <img src="{{ image | image_url: width: 1400 }}" alt="{{ image.alt | escape }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy">
             {%- endfor -%}
           </div>
         {%- else -%}
@@ -98,6 +99,12 @@
               </div>
             {%- endif -%}
           {%- endfor -%}
+          {%- if section.settings.arrival_note != blank -%}
+            <div class="spec">
+              <div class="spec__t">Como chega</div>
+              <div class="spec__d">{{ section.settings.arrival_note }}</div>
+            </div>
+          {%- endif -%}
         </div>
       </div>
     </div>
@@ -109,6 +116,7 @@
   "name": "Produto",
   "settings": [
     { "type": "header", "content": "Ordem das fotos", "info": "A primeira foto é editorial, fora da quadra — o inesperado para o scroll. As provas técnicas (raquete isolada, base em pé, alça) vêm nas miniaturas e nas especificações." },
+    { "type": "text", "id": "arrival_note", "label": "Como chega (linha fixa nas especificações)", "default": "Dust bag, cartão do drop assinado à mão e etiqueta de troca já impressa na caixa" },
     { "type": "header", "content": "Conteúdo de exemplo (usado quando não há produto)" },
     { "type": "text", "id": "fallback_category", "label": "Categoria", "default": "Bolsas · Primeiro drop" },
     { "type": "text", "id": "fallback_title", "label": "Título", "default": "A Diária" },

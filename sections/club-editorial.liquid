@@ -1,0 +1,81 @@
+<section class="section" data-screen-label="O Clube">
+  <div class="wrap">
+    <div class="grid-head" data-reveal>
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow eyebrow--muted eyebrow--center">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="title mt-4 mx-auto" style="max-width:24ch;">{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="club-strip">
+      {%- for block in section.blocks -%}
+        <figure data-reveal {{ block.shopify_attributes }}>
+          <div class="club-media">
+            {%- if block.type == 'video' -%}
+              {%- if block.settings.video != blank -%}
+                {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, controls: false }}
+              {%- elsif block.settings.asset != blank -%}
+                <video data-ambient-video autoplay muted loop playsinline preload="metadata"
+                       poster="{{ block.settings.poster_asset | asset_url }}"
+                       aria-label="{{ block.settings.caption | escape }}">
+                  <source src="{{ block.settings.asset | asset_url }}" type="video/mp4">
+                </video>
+              {%- else -%}
+                <div class="ph" style="position:absolute;inset:0;"><span>vídeo · o clube em movimento</span></div>
+              {%- endif -%}
+            {%- else -%}
+              {%- if block.settings.image != blank -%}
+                <img src="{{ block.settings.image | image_url: width: 1000 }}" alt="{{ block.settings.caption | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="lazy">
+              {%- elsif block.settings.asset != blank -%}
+                <img src="{{ block.settings.asset | asset_url }}" alt="{{ block.settings.caption | escape }}" width="928" height="1152" loading="lazy">
+              {%- else -%}
+                <div class="ph" style="position:absolute;inset:0;"><span>foto · cena do clube</span></div>
+              {%- endif -%}
+            {%- endif -%}
+          </div>
+          {%- if block.settings.caption != blank -%}
+            <figcaption>{{ block.settings.caption }}</figcaption>
+          {%- endif -%}
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "O Clube (tríptico)",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sobrelinha", "default": "O Clube" },
+    { "type": "text", "id": "heading", "label": "Título", "info": "A linha que alguém printa e manda no grupo do clube.", "default": "Toda a elegância do country club. Nenhuma das portas." }
+  ],
+  "blocks": [
+    {
+      "type": "photo",
+      "name": "Cena (foto)",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Foto", "info": "Sem foto escolhida, a cena usa a imagem de campanha embutida no tema (campo abaixo)." },
+        { "type": "text", "id": "asset", "label": "Arquivo embutido (assets)", "default": "photo-club-bench.jpg" },
+        { "type": "text", "id": "caption", "label": "Legenda", "default": "O vestiário · antes do primeiro saque" }
+      ]
+    },
+    {
+      "type": "video",
+      "name": "Cena (vídeo)",
+      "settings": [
+        { "type": "video", "id": "video", "label": "Vídeo (Shopify)", "info": "Sem vídeo escolhido, a cena usa o vídeo de campanha embutido no tema (campo abaixo)." },
+        { "type": "text", "id": "asset", "label": "Arquivo embutido (assets)", "default": "video-club-pool.mp4" },
+        { "type": "text", "id": "poster_asset", "label": "Pôster embutido (assets)", "default": "photo-club-pool-poster.jpg" },
+        { "type": "text", "id": "caption", "label": "Legenda", "default": "A piscina · fora do expediente" }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [{
+    "name": "O Clube (tríptico)",
+    "blocks": [
+      { "type": "photo", "settings": { "asset": "photo-club-bench.jpg", "caption": "O vestiário · antes do primeiro saque" } },
+      { "type": "video", "settings": { "asset": "video-club-pool.mp4", "poster_asset": "photo-club-pool-poster.jpg", "caption": "A piscina · fora do expediente" } },
+      { "type": "photo", "settings": { "asset": "photo-club-elevator.jpg", "caption": "O elevador · depois do último game" } }
+    ]
+  }]
+}
+{% endschema %}

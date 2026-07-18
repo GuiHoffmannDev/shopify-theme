@@ -12,7 +12,10 @@
   <a href="{{ product.url }}" class="pcard">
     <div class="pcard__media">
       {%- if product.featured_image -%}
-        <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" loading="lazy">
+        <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}" loading="lazy">
+        {%- if product.images[1] -%}
+          <img class="pcard__img--alt" src="{{ product.images[1] | image_url: width: 800 }}" alt="" width="{{ product.images[1].width }}" height="{{ product.images[1].height }}" loading="lazy" aria-hidden="true">
+        {%- endif -%}
       {%- else -%}
         <div class="pcard__linen"><span>{{ ph_label | default: 'foto de produto' }}</span></div>
       {%- endif -%}

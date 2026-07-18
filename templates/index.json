@@ -12,13 +12,46 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "image": "shopify://shop_images/ChatGPT_Image_Jul_9_2026_at_01_39_03_PM.png",
+        "layout": "split",
+        "image": "shopify://shop_images/hf_20260710_045321_2c89d6c1-9c17-4709-8516-e8babb781f88.png",
         "overlay": 50,
         "eyebrow": "Bolsas · Grips · Pickleball",
         "heading": "A raquete de um lado. O resto do seu dia do outro.",
         "text": "Compartimento próprio onde a raquete não toca em mais nada. Base que mantém a bolsa em pé quando você a coloca no chão. Cinco bolsos — nenhum ali só para figurar na ficha técnica.",
         "button_label": "Ver a bolsa",
         "button_link": ""
+      }
+    },
+    "club": {
+      "type": "club-editorial",
+      "blocks": {
+        "c1": {
+          "type": "photo",
+          "settings": {
+            "asset": "photo-club-bench.jpg",
+            "caption": "O vestiário · antes do primeiro saque"
+          }
+        },
+        "c2": {
+          "type": "video",
+          "settings": {
+            "asset": "video-club-pool.mp4",
+            "poster_asset": "photo-club-pool-poster.jpg",
+            "caption": "A piscina · fora do expediente"
+          }
+        },
+        "c3": {
+          "type": "photo",
+          "settings": {
+            "asset": "photo-club-elevator.jpg",
+            "caption": "O elevador · depois do último game"
+          }
+        }
+      },
+      "block_order": ["c1", "c2", "c3"],
+      "settings": {
+        "eyebrow": "O Clube",
+        "heading": "Toda a elegância do country club. Nenhuma das portas."
       }
     },
     "positioning": {
@@ -29,7 +62,7 @@
         "body": "<p>A linha frontal no formato da raquete é o próprio compartimento dela — forrado, separado de chaves, celular e roupa. Você guarda a raquete de um lado; o resto do dia fica do outro.</p><p>Nada de estampas nem logo grande. Ela vai do clube ao café sem parecer equipamento esportivo.</p>",
         "button_label": "Ver como foi feita",
         "button_link": "",
-        "image": "shopify://shop_images/hf_20260710_045321_2c89d6c1-9c17-4709-8516-e8babb781f88.png",
+        "asset": "photo-positioning-navy.jpg",
         "placeholder_label": "foto de produto · a bolsa, de lado",
         "show_seal": true
       }
@@ -86,17 +119,22 @@
           }
         }
       },
-      "block_order": [
-        "b1",
-        "b2",
-        "b3",
-        "b4",
-        "b5",
-        "b6"
-      ],
+      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6"],
       "settings": {
         "eyebrow": "O que dá para conferir",
         "heading": "Prova, não adjetivo."
+      }
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "drop_label": "Drop Nº 01 · Aberto",
+        "eyebrow": "O Vestiário",
+        "heading": "Cinco bolsas. Cada uma para uma forma de chegar à quadra.",
+        "collection": "",
+        "limit": 3,
+        "button_label": "Ver a coleção",
+        "note": "Cada caixa do drop leva o número da série no cartão, escrito à mão."
       }
     },
     "quote": {
@@ -109,23 +147,48 @@
         "attribution": "Controle de qualidade, assinado à mão"
       }
     },
-    "featured": {
-      "type": "featured-collection",
-      "settings": {
-        "eyebrow": "O Vestiário",
-        "heading": "Cinco bolsas. Cada uma para uma forma de chegar à quadra.",
-        "collection": "",
-        "limit": 3,
-        "button_label": "Ver a coleção"
-      }
-    },
     "arrival": {
       "type": "arrival-proof",
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "text": "A bolsa entra na dust bag; o grip viaja à parte"
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "text": "O cartão do drop leva o número da série e a assinatura de quem embalou"
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "text": "A etiqueta de troca já vai impressa — 30 dias, sem perguntas"
+          }
+        }
+      },
+      "block_order": ["s1", "s2", "s3"],
       "settings": {
+        "asset": "photo-arrival-card.jpg",
+        "caption": "A conferência antes da caixa fechar",
         "placeholder_label": "foto · unboxing com dust bag",
         "eyebrow": "Antes de chegar à sua porta",
         "heading": "Conferida, protegida e assinada por quem embalou.",
         "body": "<p>Cada bolsa vai dentro de dust bag, com o grip acondicionado à parte e o cartão do primeiro drop. A caixa leva seu nome antes de levar nosso logo — e uma etiqueta de troca já impressa, caso você mude de ideia em 30 dias.</p>"
+      }
+    },
+    "journal": {
+      "type": "journal-teaser",
+      "settings": {
+        "asset": "photo-journal-lookbook.jpg",
+        "issue_label": "Edição Nº 1",
+        "eyebrow": "Jornal do Clube",
+        "heading": "O clube tem um jornal. Ele conta como cada peça foi testada.",
+        "body": "<p>Bastidor dos testes em quadra, o caminho de cada material e o que vem no próximo drop — contado como um jornal de clube, não como catálogo. Guarde com o café da manhã.</p>",
+        "button_label": "Ler a edição",
+        "button_link": ""
       }
     },
     "invite": {
@@ -143,11 +206,13 @@
   },
   "order": [
     "hero",
+    "club",
     "positioning",
     "proof",
-    "quote",
     "featured",
+    "quote",
     "arrival",
+    "journal",
     "invite"
   ]
 }

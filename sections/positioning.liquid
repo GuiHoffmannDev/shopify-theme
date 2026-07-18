@@ -1,7 +1,7 @@
 <section class="section" data-screen-label="Posicionamento">
   <div class="wrap">
     <div class="split">
-      <div>
+      <div data-reveal>
         {%- if section.settings.eyebrow != blank -%}<p class="eyebrow eyebrow--muted">{{ section.settings.eyebrow }}</p>{%- endif -%}
         <h2 class="title mt-4">{{ section.settings.heading }}</h2>
         <hr class="rule rule--left mt-5">
@@ -10,15 +10,17 @@
           <div class="mt-6"><a href="{{ section.settings.button_link }}" class="btn btn--ghost">{{ section.settings.button_label }} →</a></div>
         {%- endif -%}
       </div>
-      <div class="split__media">
+      <div class="split__media" data-reveal>
         {%- if section.settings.image != blank -%}
-          <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="{{ section.settings.heading | escape }}" style="height:480px;width:100%;object-fit:cover;border:1px solid var(--border-hairline);">
+          <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="{{ section.settings.heading | escape }}" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" style="height:480px;width:100%;object-fit:cover;border:1px solid var(--border-hairline);">
+        {%- elsif section.settings.asset != blank -%}
+          <img src="{{ section.settings.asset | asset_url }}" alt="{{ section.settings.heading | escape }}" width="928" height="1152" style="height:480px;width:100%;object-fit:cover;border:1px solid var(--border-hairline);">
         {%- else -%}
           <div class="ph"><span>{{ section.settings.placeholder_label }}</span></div>
         {%- endif -%}
         {%- if section.settings.show_seal -%}
           <div class="seal" aria-hidden="true">
-            <img src="{{ 'limen-seal.png' | asset_url }}" alt="" class="seal__img">
+            <img src="{{ 'limen-seal.png' | asset_url }}" alt="" class="seal__img" width="1254" height="1254">
           </div>
         {%- endif -%}
       </div>
@@ -35,7 +37,8 @@
     { "type": "richtext", "id": "body", "label": "Texto", "default": "<p>A linha frontal no formato da raquete é o próprio compartimento dela — forrado, separado de chaves, celular e roupa. Você guarda a raquete de um lado; o resto do dia fica do outro.</p><p>Nada de estampas nem logo grande. Ela vai do clube ao café sem parecer equipamento esportivo.</p>" },
     { "type": "text", "id": "button_label", "label": "Botão", "default": "Ver como foi feita" },
     { "type": "url", "id": "button_link", "label": "Link do botão" },
-    { "type": "image_picker", "id": "image", "label": "Imagem" },
+    { "type": "image_picker", "id": "image", "label": "Imagem", "info": "Sem imagem escolhida, usa a foto de campanha embutida no tema (campo abaixo)." },
+    { "type": "text", "id": "asset", "label": "Arquivo embutido (assets)", "default": "photo-positioning-navy.jpg" },
     { "type": "text", "id": "placeholder_label", "label": "Legenda do placeholder", "default": "foto de produto · a bolsa, de lado" },
     { "type": "checkbox", "id": "show_seal", "label": "Mostrar selo", "default": true }
   ],

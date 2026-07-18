@@ -10,7 +10,7 @@
           <a href="{{ collection.url }}" class="pcard">
             <div class="pcard__media">
               {%- if collection.featured_image -%}
-                <img src="{{ collection.featured_image | image_url: width: 800 }}" alt="{{ collection.title | escape }}" loading="lazy">
+                <img src="{{ collection.featured_image | image_url: width: 800 }}" alt="{{ collection.title | escape }}" width="{{ collection.featured_image.width }}" height="{{ collection.featured_image.height }}" loading="lazy">
               {%- else -%}
                 <div class="pcard__linen"><span>sala · foto fora de contexto</span></div>
               {%- endif -%}

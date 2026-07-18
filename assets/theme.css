@@ -320,3 +320,69 @@ button{font-family:inherit;}
 .mobile-nav{display:none;padding:16px 0 24px;border-top:1px solid var(--border-hairline);}
 .mobile-nav.is-open{display:block;}
 .mobile-nav a{display:block;font-family:var(--font-sans);font-size:12px;letter-spacing:0.2em;text-transform:uppercase;padding:12px 0;}
+
+/* ---------- Hero (split editorial) ---------- */
+.hero--split{display:grid;grid-template-columns:1fr 1fr;height:auto;min-height:660px;background:var(--surface-page);}
+.hero__copy{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:88px min(7vw,96px);}
+.hero__copy .hero__title{color:var(--text-primary);font-size:56px;margin:22px 0 0;}
+.hero__copy .hero__lead{color:var(--text-secondary);margin:0;}
+.hero__copy .rule{margin:28px 0;}
+.hero__media{position:relative;overflow:hidden;border-left:1px solid var(--border-hairline);}
+.hero__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.kenburns{animation:kenburns 26s var(--ease-standard) infinite alternate;will-change:transform;}
+@keyframes kenburns{from{transform:scale(1);}to{transform:scale(1.07);}}
+
+/* ---------- Club strip (tríptico editorial) ---------- */
+.club-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:start;}
+.club-strip figure{margin:0;}
+.club-strip figure:nth-child(2){transform:translateY(40px);}
+.club-media{position:relative;aspect-ratio:4/5;overflow:hidden;border:1px solid var(--border-hairline);background:var(--sand-200);}
+.club-media img,.club-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform var(--duration-slow) var(--ease-standard);}
+.club-strip figure:hover .club-media img{transform:scale(1.03);}
+.club-strip figcaption{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;font-family:var(--font-sans);font-size:10px;letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-muted);}
+.club-strip figcaption::after{content:"";width:5px;height:5px;background:var(--border-strong);transform:rotate(45deg);flex-shrink:0;opacity:0.55;}
+.club-foot{margin-top:88px;}
+
+/* ---------- Arrival (Como chega) ---------- */
+.arrival-media{position:relative;}
+.arrival-media img{height:520px;width:100%;object-fit:cover;border:1px solid var(--border-hairline-inverse);display:block;}
+.arrival-caption{font-family:var(--font-sans);font-size:10px;letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--cream-100);opacity:0.6;margin-top:14px;}
+.arrival-steps{margin:28px 0 0;padding:0;list-style:none;}
+.arrival-steps li{display:flex;gap:16px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--border-hairline-inverse);font-size:15px;line-height:1.5;opacity:0.9;}
+.arrival-steps li:last-child{border-bottom:0;}
+.arrival-steps .n{font-family:var(--font-sans);font-size:10px;letter-spacing:0.2em;opacity:0.55;flex-shrink:0;}
+
+/* ---------- Journal teaser ---------- */
+.journal__media img{width:100%;height:auto;display:block;border:1px solid var(--border-strong);outline:1px solid var(--border-hairline);outline-offset:6px;}
+.journal__issue{margin-bottom:20px;}
+
+/* ---------- Product card hover swap ---------- */
+.pcard__img--alt{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity var(--duration-slow) var(--ease-standard);}
+.pcard:hover .pcard__img--alt{opacity:1;}
+
+/* ---------- PDP editorial stack ---------- */
+.pdp__stack{display:flex;flex-direction:column;gap:12px;}
+.pdp__stack img{width:100%;height:auto;border:1px solid var(--border-hairline);cursor:url("cursor-lemon.svg") 11 3, pointer;}
+
+/* ---------- Reveal on scroll ---------- */
+.reveal-pending{opacity:0;transform:translateY(22px);}
+.is-in{opacity:1;transform:none;transition:opacity 700ms var(--ease-standard),transform 700ms var(--ease-standard);}
+
+@media (prefers-reduced-motion: reduce){
+  .kenburns{animation:none;}
+  .reveal-pending{opacity:1;transform:none;}
+  .is-in{transition:none;}
+  .club-media img,.pcard__media img,.pcard__img--alt{transition:none;}
+}
+
+@media (max-width:900px){
+  .hero--split{grid-template-columns:1fr;min-height:0;}
+  .hero__media{order:-1;border-left:0;border-bottom:1px solid var(--border-hairline);height:440px;}
+  .hero__media img{position:absolute;}
+  .hero__copy{padding:56px var(--page-pad) 64px;}
+  .hero__copy .hero__title{font-size:40px;}
+  .club-strip{grid-template-columns:1fr;gap:40px;}
+  .club-strip figure:nth-child(2){transform:none;}
+  .club-foot{margin-top:48px;}
+  .arrival-media img{height:400px;}
+}
