@@ -1,0 +1,24 @@
+{%- comment -%}
+  Renders any editorial interlude blocks positioned after the grid item `index`.
+  Params:
+    blocks — section.blocks (type "interlude")
+    index  — 1-based position of the grid item just rendered
+{%- endcomment -%}
+{%- for block in blocks -%}
+  {%- if block.type == 'interlude' and block.settings.position == index -%}
+    <figure class="interlude" data-reveal {{ block.shopify_attributes }}>
+      <div class="interlude__media">
+        {%- if block.settings.image != blank -%}
+          <img src="{{ block.settings.image | image_url: width: 1000 }}" alt="{{ block.settings.caption | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="lazy">
+        {%- elsif block.settings.asset != blank -%}
+          <img src="{{ block.settings.asset | asset_url }}" alt="{{ block.settings.caption | escape }}" width="928" height="1152" loading="lazy">
+        {%- else -%}
+          <div class="ph" style="position:absolute;inset:0;"><span>cena do clube</span></div>
+        {%- endif -%}
+      </div>
+      {%- if block.settings.caption != blank -%}
+        <figcaption>{{ block.settings.caption }}</figcaption>
+      {%- endif -%}
+    </figure>
+  {%- endif -%}
+{%- endfor -%}

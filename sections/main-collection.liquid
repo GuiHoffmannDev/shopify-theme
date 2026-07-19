@@ -1,17 +1,32 @@
 <section class="section" data-screen-label="Coleção banner">
   <div class="wrap">
-    <div class="coll-banner">
+    <div class="coll-banner" data-reveal>
       <p class="eyebrow eyebrow--muted eyebrow--center">{{ section.settings.eyebrow }}</p>
       <h1 class="display-2 mt-4">{{ collection.title | default: section.settings.fallback_title }}</h1>
       {%- assign scene = collection.description | default: section.settings.scene_line -%}
       {%- if scene != blank -%}
         <p class="mt-5 mx-auto maxw-54" style="font-family:var(--font-body);font-style:italic;font-size:18px;color:var(--text-muted);">{{ scene | strip_html }}</p>
       {%- endif -%}
+      {%- if collection != blank and collection.products_count > 0 -%}
+        <p class="coll-count mt-5">{{ collection.products_count }} {% if collection.products_count == 1 %}peça nesta sala{% else %}peças nesta sala{% endif %}</p>
+      {%- endif -%}
     </div>
+
+    {%- if section.settings.show_banner -%}
+      <div class="coll-hero" data-reveal>
+        {%- if section.settings.banner_image != blank -%}
+          <img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="" width="{{ section.settings.banner_image.width }}" height="{{ section.settings.banner_image.height }}" loading="lazy">
+        {%- elsif section.settings.banner_asset != blank -%}
+          <img src="{{ section.settings.banner_asset | asset_url }}" alt="" width="928" height="1152" loading="lazy">
+        {%- else -%}
+          <div class="ph" style="position:absolute;inset:0;"><span>a sala · foto fora de contexto</span></div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
   </div>
 </section>
 
-<section class="section" data-screen-label="Coleção grade">
+<section class="section section--hairline-top" data-screen-label="Coleção grade">
   <div class="wrap">
     <div class="coll-toolbar">
       <div class="coll-filters">
@@ -32,24 +47,42 @@
       {%- endif -%}
     </div>
 
-    <div class="product-grid">
-      {%- if collection and collection.products_count > 0 -%}
-        {%- paginate collection.products by 12 -%}
+    {%- if collection and collection.products_count > 0 -%}
+      {%- paginate collection.products by 12 -%}
+        <div class="product-grid" data-reveal>
           {%- for product in collection.products -%}
             {% render 'product-card', product: product %}
+            {% render 'collection-interlude', blocks: section.blocks, index: forloop.index %}
           {%- endfor -%}
-        {%- endpaginate -%}
-      {%- else -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="pagination" aria-label="Páginas da coleção">
+            {%- if paginate.previous -%}
+              <a href="{{ paginate.previous.url }}">‹ Anterior</a>
+            {%- else -%}
+              <span class="is-off">‹ Anterior</span>
+            {%- endif -%}
+            <span>{{ paginate.current_page }} / {{ paginate.pages }}</span>
+            {%- if paginate.next -%}
+              <a href="{{ paginate.next.url }}">Próxima ›</a>
+            {%- else -%}
+              <span class="is-off">Próxima ›</span>
+            {%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- endpaginate -%}
+    {%- else -%}
+      <div class="product-grid" data-reveal>
         {% render 'product-card', ph_category: 'Bolsas', ph_name: 'A Diária', ph_price: 'R$ 590', ph_tag: 'Novo', ph_label: 'bolsa · foto de produto', ph_url: routes.all_products_collection_url %}
         {% render 'product-card', ph_category: 'Bolsas', ph_name: 'A de Duas Raquetes', ph_price: 'R$ 720', ph_label: 'bolsa · foto de produto', ph_url: routes.all_products_collection_url %}
+        {% render 'collection-interlude', blocks: section.blocks, index: 2 %}
         {% render 'product-card', ph_category: 'Bolsas', ph_name: 'A de Fim de Semana', ph_price: 'R$ 890', ph_label: 'bolsa · foto de produto', ph_url: routes.all_products_collection_url %}
         {% render 'product-card', ph_category: 'Bolsas', ph_name: 'A Compacta', ph_price: 'R$ 450', ph_label: 'bolsa · foto de produto', ph_url: routes.all_products_collection_url %}
         {% render 'product-card', ph_category: 'Grips', ph_name: 'O Grip', ph_price: 'R$ 79', ph_tag: 'Testado', ph_label: 'grip · foto de produto', ph_url: routes.all_products_collection_url %}
+        {% render 'collection-interlude', blocks: section.blocks, index: 6 %}
         {% render 'product-card', ph_category: 'Grips', ph_name: 'O Grip · Par', ph_price: 'R$ 140', ph_label: 'grip · foto de produto', ph_url: routes.all_products_collection_url %}
-      {%- endif -%}
-    </div>
-
-    {%- if collection == blank or collection.products_count == 0 -%}
+      </div>
       <p class="center mt-8" style="font-family:var(--font-body);font-style:italic;font-size:15px;color:var(--text-muted);">Adicione produtos a esta coleção no admin — os quadros sem imagem mostram o fundo de linho até você subir as fotos.</p>
     {%- endif -%}
   </div>
@@ -59,8 +92,32 @@
 {
   "name": "Coleção",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Sobrelinha", "default": "Coleção · Primeiro drop 2026" },
-    { "type": "text", "id": "fallback_title", "label": "Título (sem coleção)", "default": "Nada aqui existe só para preencher a prateleira." }
-  ]
+    { "type": "text", "id": "eyebrow", "label": "Sobrelinha", "default": "Sala · Primeiro drop 2026" },
+    { "type": "text", "id": "fallback_title", "label": "Título (sem coleção)", "default": "Nada aqui existe só para preencher a prateleira." },
+    { "type": "text", "id": "scene_line", "label": "Linha de cena (sem descrição da coleção)", "info": "A descrição da coleção no admin tem prioridade sobre este campo.", "default": "Onde o dia começa: a bolsa pronta ao lado da toalha, antes do primeiro saque." },
+    { "type": "header", "content": "Banner da sala" },
+    { "type": "checkbox", "id": "show_banner", "label": "Mostrar banner", "default": true },
+    { "type": "image_picker", "id": "banner_image", "label": "Imagem do banner", "info": "Sem imagem escolhida, usa a foto de campanha embutida no tema (campo abaixo)." },
+    { "type": "text", "id": "banner_asset", "label": "Arquivo embutido (assets)", "default": "photo-club-court.jpg" }
+  ],
+  "blocks": [
+    {
+      "type": "interlude",
+      "name": "Cena entre produtos",
+      "settings": [
+        { "type": "range", "id": "position", "min": 1, "max": 24, "step": 1, "label": "Depois de qual produto", "default": 2 },
+        { "type": "image_picker", "id": "image", "label": "Foto", "info": "Sem foto escolhida, usa a imagem de campanha embutida no tema (campo abaixo)." },
+        { "type": "text", "id": "asset", "label": "Arquivo embutido (assets)", "default": "photo-interlude-gravel.jpg" },
+        { "type": "text", "id": "caption", "label": "Legenda", "default": "Entre um jogo e outro" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Coleção",
+    "blocks": [
+      { "type": "interlude", "settings": { "position": 2, "asset": "photo-interlude-gravel.jpg", "caption": "Entre um jogo e outro" } },
+      { "type": "interlude", "settings": { "position": 6, "asset": "photo-interlude-chair.jpg", "caption": "A cadeira do juiz · fim de tarde" } }
+    ]
+  }]
 }
 {% endschema %}

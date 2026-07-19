@@ -1,10 +1,11 @@
 <section class="section" data-screen-label="Lista de coleções">
   <div class="wrap">
-    <div class="grid-head">
+    <div class="grid-head" data-reveal>
       <p class="eyebrow eyebrow--muted eyebrow--center">{{ section.settings.eyebrow }}</p>
       <h1 class="display-2 mt-4">{{ section.settings.heading }}</h1>
     </div>
-    <div class="product-grid">
+    {%- assign romans = "I,II,III,IV,V,VI,VII,VIII,IX,X,XI,XII" | split: "," -%}
+    <div class="product-grid" data-reveal>
       {%- if collections.size > 0 -%}
         {%- for collection in collections -%}
           <a href="{{ collection.url }}" class="pcard">
@@ -15,15 +16,19 @@
                 <div class="pcard__linen"><span>sala · foto fora de contexto</span></div>
               {%- endif -%}
             </div>
-            <div class="pcard__name" style="margin-top:16px;">{{ collection.title }}</div>
-            <div class="pcard__price">{{ collection.products_count }} {{ 'general.items' | t }}</div>
+            <p class="pcard__cat">Sala {{ romans[forloop.index0] | default: forloop.index }}</p>
+            <div class="pcard__name">{{ collection.title }}</div>
+            {%- if collection.description != blank -%}
+              <p class="mt-4" style="font-family:var(--font-body);font-style:italic;font-size:14px;line-height:1.5;color:var(--text-muted);">{{ collection.description | strip_html | truncate: 90 }}</p>
+            {%- endif -%}
+            <div class="pcard__price">{{ collection.products_count }} {% if collection.products_count == 1 %}peça{% else %}peças{% endif %}</div>
           </a>
         {%- endfor -%}
       {%- else -%}
         {%- comment -%} Onboarding — salas do clube (Regra #1) {%- endcomment -%}
-        {% render 'product-card', ph_category: 'Bolsas', ph_name: 'O Vestiário', ph_price: '5 itens', ph_label: 'sala · foto fora de contexto', ph_url: routes.all_products_collection_url %}
-        {% render 'product-card', ph_category: 'Grips e pequenos', ph_name: 'O Salão', ph_price: '3 itens', ph_label: 'sala · foto fora de contexto', ph_url: routes.all_products_collection_url %}
-        {% render 'product-card', ph_category: 'Para presentear', ph_name: 'A Recepção', ph_price: 'Em breve', ph_label: 'sala · foto fora de contexto', ph_url: routes.all_products_collection_url %}
+        {% render 'product-card', ph_category: 'Sala I', ph_name: 'O Vestiário', ph_price: '5 peças', ph_label: 'sala · foto fora de contexto', ph_url: routes.all_products_collection_url %}
+        {% render 'product-card', ph_category: 'Sala II', ph_name: 'O Salão', ph_price: '3 peças', ph_label: 'sala · foto fora de contexto', ph_url: routes.all_products_collection_url %}
+        {% render 'product-card', ph_category: 'Sala III', ph_name: 'A Recepção', ph_price: 'Em breve', ph_label: 'sala · foto fora de contexto', ph_url: routes.all_products_collection_url %}
       {%- endif -%}
     </div>
   </div>
@@ -33,7 +38,7 @@
 {
   "name": "Lista de coleções",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Sobrelinha", "info": "Nomeie as coleções como salas do clube: O Vestiário, O Salão, A Recepção — nunca como categoria de e-commerce.", "default": "As salas do clube" },
+    { "type": "text", "id": "eyebrow", "label": "Sobrelinha", "info": "Nomeie as coleções como salas do clube: O Vestiário, O Salão, A Recepção — nunca como categoria de e-commerce.", "default": "A planta do clube" },
     { "type": "text", "id": "heading", "label": "Título", "default": "Cada coisa guardada na sua sala." }
   ]
 }

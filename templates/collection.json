@@ -1,6 +1,28 @@
 {
   "sections": {
-    "main": { "type": "main-collection", "settings": {} }
+    "main": {
+      "type": "main-collection",
+      "blocks": {
+        "i1": {
+          "type": "interlude",
+          "settings": {
+            "position": 2,
+            "asset": "photo-interlude-gravel.jpg",
+            "caption": "Entre um jogo e outro"
+          }
+        },
+        "i2": {
+          "type": "interlude",
+          "settings": {
+            "position": 6,
+            "asset": "photo-interlude-chair.jpg",
+            "caption": "A cadeira do juiz · fim de tarde"
+          }
+        }
+      },
+      "block_order": ["i1", "i2"],
+      "settings": {}
+    }
   },
   "order": ["main"]
 }
