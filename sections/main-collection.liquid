@@ -47,14 +47,50 @@
       {%- endif -%}
     </div>
 
+    {%- assign editorials = section.blocks | where: 'type', 'editorial' -%}
+
     {%- if collection and collection.products_count > 0 -%}
       {%- paginate collection.products by 12 -%}
-        <div class="product-grid" data-reveal>
-          {%- for product in collection.products -%}
-            {% render 'product-card', product: product %}
-            {% render 'collection-interlude', blocks: section.blocks, index: forloop.index %}
-          {%- endfor -%}
-        </div>
+        {%- if editorials.size > 0 -%}
+          {%- comment -%} Bandas: 4 produtos em 2 colunas + foto editorial grande, lados alternados {%- endcomment -%}
+          <div class="coll-bands">
+            {%- assign band = 0 -%}
+            {%- for product in collection.products -%}
+              {%- assign slot = forloop.index0 | modulo: 4 -%}
+              {%- if slot == 0 -%}
+                {%- assign band = forloop.index0 | divided_by: 4 -%}
+                {%- assign flip = band | modulo: 2 -%}
+                <div class="coll-band{% if flip == 1 %} coll-band--flip{% endif %}">
+                  <div class="coll-band__products">
+              {%- endif -%}
+              {% render 'product-card', product: product %}
+              {%- if slot == 3 or forloop.last -%}
+                  </div>
+                  {%- assign eidx = band | modulo: editorials.size -%}
+                  {%- assign e = editorials[eidx] -%}
+                  <div class="coll-band__editorial" data-reveal {{ e.shopify_attributes }}>
+                    {%- if e.settings.image != blank -%}
+                      <img src="{{ e.settings.image | image_url: width: 1400 }}" alt="{{ e.settings.caption | escape }}" width="{{ e.settings.image.width }}" height="{{ e.settings.image.height }}" loading="lazy">
+                    {%- elsif e.settings.asset != blank -%}
+                      <img src="{{ e.settings.asset | asset_url }}" alt="{{ e.settings.caption | escape }}" width="928" height="1152" loading="lazy">
+                    {%- else -%}
+                      <div class="ph" style="position:absolute;inset:0;"><span>cena do clube</span></div>
+                    {%- endif -%}
+                    {%- if e.settings.caption != blank -%}
+                      <span class="coll-band__label">{{ e.settings.caption }}</span>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          <div class="product-grid" data-reveal>
+            {%- for product in collection.products -%}
+              {% render 'product-card', product: product %}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
 
         {%- if paginate.pages > 1 -%}
           <nav class="pagination" aria-label="Páginas da coleção">
@@ -73,15 +109,30 @@
         {%- endif -%}
       {%- endpaginate -%}
     {%- else -%}
-      <div class="product-grid" data-reveal>
-        {% render 'product-card', ph_category: 'Bolsas', ph_name: 'A Diária', ph_price: 'R$ 590', ph_tag: 'Novo', ph_label: 'bolsa · foto de produto', ph_url: routes.all_products_collection_url %}
-        {% render 'product-card', ph_category: 'Bolsas', ph_name: 'A de Duas Raquetes', ph_price: 'R$ 720', ph_label: 'bolsa · foto de produto', ph_url: routes.all_products_collection_url %}
-        {% render 'collection-interlude', blocks: section.blocks, index: 2 %}
-        {% render 'product-card', ph_category: 'Bolsas', ph_name: 'A de Fim de Semana', ph_price: 'R$ 890', ph_label: 'bolsa · foto de produto', ph_url: routes.all_products_collection_url %}
-        {% render 'product-card', ph_category: 'Bolsas', ph_name: 'A Compacta', ph_price: 'R$ 450', ph_label: 'bolsa · foto de produto', ph_url: routes.all_products_collection_url %}
-        {% render 'product-card', ph_category: 'Grips', ph_name: 'O Grip', ph_price: 'R$ 79', ph_tag: 'Testado', ph_label: 'grip · foto de produto', ph_url: routes.all_products_collection_url %}
-        {% render 'collection-interlude', blocks: section.blocks, index: 6 %}
-        {% render 'product-card', ph_category: 'Grips', ph_name: 'O Grip · Par', ph_price: 'R$ 140', ph_label: 'grip · foto de produto', ph_url: routes.all_products_collection_url %}
+      {%- comment -%} Onboarding — bandas de demonstração {%- endcomment -%}
+      <div class="coll-bands">
+        <div class="coll-band">
+          <div class="coll-band__products">
+            {% render 'product-card', ph_category: 'Bolsas', ph_name: 'A Diária', ph_price: 'R$ 590', ph_tag: 'Novo', ph_label: 'bolsa · foto de produto', ph_url: routes.all_products_collection_url %}
+            {% render 'product-card', ph_category: 'Bolsas', ph_name: 'A de Duas Raquetes', ph_price: 'R$ 720', ph_label: 'bolsa · foto de produto', ph_url: routes.all_products_collection_url %}
+            {% render 'product-card', ph_category: 'Bolsas', ph_name: 'A de Fim de Semana', ph_price: 'R$ 890', ph_label: 'bolsa · foto de produto', ph_url: routes.all_products_collection_url %}
+            {% render 'product-card', ph_category: 'Bolsas', ph_name: 'A Compacta', ph_price: 'R$ 450', ph_label: 'bolsa · foto de produto', ph_url: routes.all_products_collection_url %}
+          </div>
+          <div class="coll-band__editorial">
+            <img src="{{ 'photo-interlude-gravel.jpg' | asset_url }}" alt="" width="928" height="1152" loading="lazy">
+            <span class="coll-band__label">Entre um jogo e outro</span>
+          </div>
+        </div>
+        <div class="coll-band coll-band--flip">
+          <div class="coll-band__products">
+            {% render 'product-card', ph_category: 'Grips', ph_name: 'O Grip', ph_price: 'R$ 79', ph_tag: 'Testado', ph_label: 'grip · foto de produto', ph_url: routes.all_products_collection_url %}
+            {% render 'product-card', ph_category: 'Grips', ph_name: 'O Grip · Par', ph_price: 'R$ 140', ph_label: 'grip · foto de produto', ph_url: routes.all_products_collection_url %}
+          </div>
+          <div class="coll-band__editorial">
+            <img src="{{ 'photo-interlude-chair.jpg' | asset_url }}" alt="" width="928" height="1152" loading="lazy">
+            <span class="coll-band__label">A cadeira do juiz · fim de tarde</span>
+          </div>
+        </div>
       </div>
       <p class="center mt-8" style="font-family:var(--font-body);font-style:italic;font-size:15px;color:var(--text-muted);">Adicione produtos a esta coleção no admin — os quadros sem imagem mostram o fundo de linho até você subir as fotos.</p>
     {%- endif -%}
@@ -96,17 +147,16 @@
     { "type": "text", "id": "fallback_title", "label": "Título (sem coleção)", "default": "Nada aqui existe só para preencher a prateleira." },
     { "type": "text", "id": "scene_line", "label": "Linha de cena (sem descrição da coleção)", "info": "A descrição da coleção no admin tem prioridade sobre este campo.", "default": "Onde o dia começa: a bolsa pronta ao lado da toalha, antes do primeiro saque." },
     { "type": "header", "content": "Banner da sala" },
-    { "type": "checkbox", "id": "show_banner", "label": "Mostrar banner", "default": true },
+    { "type": "checkbox", "id": "show_banner", "label": "Mostrar banner", "default": false },
     { "type": "image_picker", "id": "banner_image", "label": "Imagem do banner", "info": "Sem imagem escolhida, usa a foto de campanha embutida no tema (campo abaixo)." },
     { "type": "text", "id": "banner_asset", "label": "Arquivo embutido (assets)", "default": "photo-club-court.jpg" }
   ],
   "blocks": [
     {
-      "type": "interlude",
-      "name": "Cena entre produtos",
+      "type": "editorial",
+      "name": "Foto editorial da banda",
       "settings": [
-        { "type": "range", "id": "position", "min": 1, "max": 24, "step": 1, "label": "Depois de qual produto", "default": 2 },
-        { "type": "image_picker", "id": "image", "label": "Foto", "info": "Sem foto escolhida, usa a imagem de campanha embutida no tema (campo abaixo)." },
+        { "type": "image_picker", "id": "image", "label": "Foto", "info": "Cada banda de 4 produtos ganha uma foto grande ao lado, alternando o lado. As fotos seguem a ordem dos blocos e repetem se houver mais bandas que fotos. Sem foto escolhida, usa a imagem de campanha embutida (campo abaixo)." },
         { "type": "text", "id": "asset", "label": "Arquivo embutido (assets)", "default": "photo-interlude-gravel.jpg" },
         { "type": "text", "id": "caption", "label": "Legenda", "default": "Entre um jogo e outro" }
       ]
@@ -115,8 +165,9 @@
   "presets": [{
     "name": "Coleção",
     "blocks": [
-      { "type": "interlude", "settings": { "position": 2, "asset": "photo-interlude-gravel.jpg", "caption": "Entre um jogo e outro" } },
-      { "type": "interlude", "settings": { "position": 6, "asset": "photo-interlude-chair.jpg", "caption": "A cadeira do juiz · fim de tarde" } }
+      { "type": "editorial", "settings": { "asset": "photo-interlude-gravel.jpg", "caption": "Entre um jogo e outro" } },
+      { "type": "editorial", "settings": { "asset": "photo-editorial-wall.jpg", "caption": "Do clube ao café" } },
+      { "type": "editorial", "settings": { "asset": "photo-interlude-chair.jpg", "caption": "A cadeira do juiz · fim de tarde" } }
     ]
   }]
 }

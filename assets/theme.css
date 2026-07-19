@@ -369,13 +369,15 @@ button{font-family:inherit;}
 .coll-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 62%;}
 .coll-count{font-family:var(--font-sans);font-size:10px;letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-muted);}
 
-/* ---------- Interlude (cena entre produtos) ---------- */
-.interlude{margin:0;display:flex;flex-direction:column;}
-.interlude__media{position:relative;aspect-ratio:4/5;overflow:hidden;border:1px solid var(--border-hairline);background:var(--sand-200);}
-.interlude__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform var(--duration-slow) var(--ease-standard);}
-.interlude:hover .interlude__media img{transform:scale(1.03);}
-.interlude figcaption{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;font-family:var(--font-sans);font-size:10px;letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-muted);}
-.interlude figcaption::after{content:"";width:5px;height:5px;background:var(--border-strong);transform:rotate(45deg);flex-shrink:0;opacity:0.55;}
+/* ---------- Catalog bands (produtos + editorial lado a lado) ---------- */
+.coll-bands{display:flex;flex-direction:column;gap:72px;}
+.coll-band{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch;}
+.coll-band--flip .coll-band__editorial{order:-1;}
+.coll-band__products{display:grid;grid-template-columns:1fr 1fr;gap:32px 28px;align-content:start;}
+.coll-band__editorial{position:relative;overflow:hidden;border:1px solid var(--border-hairline);background:var(--sand-200);min-height:520px;}
+.coll-band__editorial img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform var(--duration-slow) var(--ease-standard);}
+.coll-band__editorial:hover img{transform:scale(1.02);}
+.coll-band__label{position:absolute;left:16px;bottom:16px;background:var(--cream-100);color:var(--navy-700);font-family:var(--font-sans);font-size:10px;letter-spacing:var(--tracking-label);text-transform:uppercase;padding:7px 14px;border:1px solid var(--border-hairline);}
 
 /* ---------- Pagination ---------- */
 .pagination{display:flex;align-items:center;justify-content:center;gap:28px;margin-top:72px;font-family:var(--font-sans);font-size:11px;letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-muted);}
@@ -406,4 +408,8 @@ button{font-family:inherit;}
   .arrival-media img{height:400px;}
   .coll-hero{height:280px;margin-top:40px;}
   .pagination{margin-top:48px;}
+  .coll-bands{gap:48px;}
+  .coll-band{grid-template-columns:1fr;}
+  .coll-band--flip .coll-band__editorial{order:0;}
+  .coll-band__editorial{min-height:0;height:440px;}
 }

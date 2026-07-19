@@ -3,25 +3,32 @@
     "main": {
       "type": "main-collection",
       "blocks": {
-        "i1": {
-          "type": "interlude",
+        "e1": {
+          "type": "editorial",
           "settings": {
-            "position": 2,
             "asset": "photo-interlude-gravel.jpg",
             "caption": "Entre um jogo e outro"
           }
         },
-        "i2": {
-          "type": "interlude",
+        "e2": {
+          "type": "editorial",
           "settings": {
-            "position": 6,
+            "asset": "photo-editorial-wall.jpg",
+            "caption": "Do clube ao café"
+          }
+        },
+        "e3": {
+          "type": "editorial",
+          "settings": {
             "asset": "photo-interlude-chair.jpg",
             "caption": "A cadeira do juiz · fim de tarde"
           }
         }
       },
-      "block_order": ["i1", "i2"],
-      "settings": {}
+      "block_order": ["e1", "e2", "e3"],
+      "settings": {
+        "show_banner": false
+      }
     }
   },
   "order": ["main"]
