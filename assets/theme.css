@@ -364,11 +364,6 @@ button{font-family:inherit;}
 .pdp__stack{display:flex;flex-direction:column;gap:12px;}
 .pdp__stack img{width:100%;height:auto;border:1px solid var(--border-hairline);cursor:url("cursor-lemon.svg") 11 3, pointer;}
 
-/* ---------- Collection: sala do clube ---------- */
-.coll-hero{position:relative;height:420px;overflow:hidden;border:1px solid var(--border-hairline);margin-top:56px;}
-.coll-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 62%;}
-.coll-count{font-family:var(--font-sans);font-size:10px;letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-muted);}
-
 /* ---------- Catalog bands (produtos + editorial lado a lado) ---------- */
 .coll-bands{display:flex;flex-direction:column;gap:72px;}
 .coll-band{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch;}
@@ -406,7 +401,6 @@ button{font-family:inherit;}
   .club-strip figure:nth-child(2){transform:none;}
   .club-foot{margin-top:48px;}
   .arrival-media img{height:400px;}
-  .coll-hero{height:280px;margin-top:40px;}
   .pagination{margin-top:48px;}
   .coll-bands{gap:48px;}
   .coll-band{grid-template-columns:1fr;}

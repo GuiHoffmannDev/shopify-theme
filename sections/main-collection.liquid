@@ -1,33 +1,6 @@
-<section class="section" data-screen-label="Coleção banner">
+<section class="section" data-screen-label="Coleção grade">
   <div class="wrap">
-    <div class="coll-banner" data-reveal>
-      <p class="eyebrow eyebrow--muted eyebrow--center">{{ section.settings.eyebrow }}</p>
-      <h1 class="display-2 mt-4">{{ collection.title | default: section.settings.fallback_title }}</h1>
-      {%- assign scene = collection.description | default: section.settings.scene_line -%}
-      {%- if scene != blank -%}
-        <p class="mt-5 mx-auto maxw-54" style="font-family:var(--font-body);font-style:italic;font-size:18px;color:var(--text-muted);">{{ scene | strip_html }}</p>
-      {%- endif -%}
-      {%- if collection != blank and collection.products_count > 0 -%}
-        <p class="coll-count mt-5">{{ collection.products_count }} {% if collection.products_count == 1 %}peça nesta sala{% else %}peças nesta sala{% endif %}</p>
-      {%- endif -%}
-    </div>
-
-    {%- if section.settings.show_banner -%}
-      <div class="coll-hero" data-reveal>
-        {%- if section.settings.banner_image != blank -%}
-          <img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="" width="{{ section.settings.banner_image.width }}" height="{{ section.settings.banner_image.height }}" loading="lazy">
-        {%- elsif section.settings.banner_asset != blank -%}
-          <img src="{{ section.settings.banner_asset | asset_url }}" alt="" width="928" height="1152" loading="lazy">
-        {%- else -%}
-          <div class="ph" style="position:absolute;inset:0;"><span>a sala · foto fora de contexto</span></div>
-        {%- endif -%}
-      </div>
-    {%- endif -%}
-  </div>
-</section>
-
-<section class="section section--hairline-top" data-screen-label="Coleção grade">
-  <div class="wrap">
+    <h1 class="visually-hidden">{{ collection.title | default: 'Produtos' }}</h1>
     <div class="coll-toolbar">
       <div class="coll-filters">
         <a href="{{ collection.url | default: routes.all_products_collection_url }}" class="tag {% unless current_tags %}tag--fill{% endunless %}">Tudo</a>
@@ -142,15 +115,7 @@
 {% schema %}
 {
   "name": "Coleção",
-  "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Sobrelinha", "default": "Sala · Primeiro drop 2026" },
-    { "type": "text", "id": "fallback_title", "label": "Título (sem coleção)", "default": "Nada aqui existe só para preencher a prateleira." },
-    { "type": "text", "id": "scene_line", "label": "Linha de cena (sem descrição da coleção)", "info": "A descrição da coleção no admin tem prioridade sobre este campo.", "default": "Onde o dia começa: a bolsa pronta ao lado da toalha, antes do primeiro saque." },
-    { "type": "header", "content": "Banner da sala" },
-    { "type": "checkbox", "id": "show_banner", "label": "Mostrar banner", "default": false },
-    { "type": "image_picker", "id": "banner_image", "label": "Imagem do banner", "info": "Sem imagem escolhida, usa a foto de campanha embutida no tema (campo abaixo)." },
-    { "type": "text", "id": "banner_asset", "label": "Arquivo embutido (assets)", "default": "photo-club-court.jpg" }
-  ],
+  "settings": [],
   "blocks": [
     {
       "type": "editorial",

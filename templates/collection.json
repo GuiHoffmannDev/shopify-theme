@@ -35,9 +35,7 @@
         }
       },
       "block_order": ["e1", "e2", "e3"],
-      "settings": {
-        "show_banner": false
-      }
+      "settings": {}
     }
   },
   "order": ["main"]
