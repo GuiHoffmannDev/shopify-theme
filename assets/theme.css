@@ -142,7 +142,7 @@ button{font-family:inherit;}
 .site-header__link:hover{color:var(--olive-700);}
 .site-header__link[aria-current="page"]{color:var(--olive-700);border-bottom-color:var(--olive-700);}
 .wordmark{text-align:center;color:var(--navy-700);}
-.site-header__logo{height:60px;width:auto;display:block;}
+.site-header__logo{height:44px;width:auto;display:block;}
 .wordmark__name{font-family:var(--font-display);font-weight:500;font-size:30px;letter-spacing:var(--tracking-wordmark);line-height:1;}
 .wordmark__sub{font-family:var(--font-sans);font-size:8px;letter-spacing:0.34em;text-transform:uppercase;margin-top:3px;}
 .site-header__meta{display:flex;gap:32px;flex:1;justify-content:flex-end;align-items:center;}
