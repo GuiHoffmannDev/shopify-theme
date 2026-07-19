@@ -13,8 +13,11 @@
               {%- if block.settings.video != blank -%}
                 {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, controls: false }}
               {%- elsif block.settings.asset != blank -%}
+                {%- comment -%} Pôster como camada de fundo: o atributo poster letterboxa no Safari {%- endcomment -%}
+                {%- if block.settings.poster_asset != blank -%}
+                  <img src="{{ block.settings.poster_asset | asset_url }}" alt="" width="720" height="1280" loading="lazy" aria-hidden="true">
+                {%- endif -%}
                 <video data-ambient-video autoplay muted loop playsinline preload="metadata"
-                       poster="{{ block.settings.poster_asset | asset_url }}"
                        aria-label="{{ block.settings.caption | escape }}">
                   <source src="{{ block.settings.asset | asset_url }}" type="video/mp4">
                 </video>
