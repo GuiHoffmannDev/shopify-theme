@@ -269,7 +269,13 @@ button{font-family:inherit;}
 /* ---------- Collection banner ---------- */
 .coll-banner{text-align:center;}
 .coll-toolbar{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:44px;gap:24px;flex-wrap:wrap;}
-.coll-filters{display:flex;gap:10px;flex-wrap:wrap;}
+.coll-filters{display:flex;gap:32px;flex-wrap:wrap;}
+.coll-filter{
+  font-family:var(--font-sans);font-size:11px;letter-spacing:var(--tracking-label);text-transform:uppercase;
+  color:var(--text-muted);padding-bottom:5px;border-bottom:1px solid transparent;
+}
+.coll-filter:hover{color:var(--olive-700);}
+.coll-filter.is-active{color:var(--navy-700);border-bottom-color:var(--navy-700);}
 .field{display:flex;flex-direction:column;gap:6px;min-width:200px;}
 .field__label{font-family:var(--font-sans);font-size:10px;letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-muted);}
 .field select,.field input{
