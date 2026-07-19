@@ -1,10 +1,10 @@
 # Limen Club — Tema Shopify
 
-Tema da Limen Club (acessórios para pickleball). Estética racquet club: navy `#1F2D5C`, limão `#E5C63F`, oliva `#75803E`, creme `#F7F1E4`. Tipografia: Cormorant Garamond (display), EB Garamond (texto), Jost (labels).
+Tema da Limen Club (acessórios para pickleball). Estética racquet club: navy `#1F2D5C`, limão `#E5C63F`, oliva `#75803E`, creme `#F7F1E4`. Tipografia: Satoshi via Fontshare (400/500/700) em tudo — headlines em Medium com tracking -0.02em, labels caixa alta 0.22em; o script fica só no logo.
 
 ## Estrutura
 
-```
+```text
 assets/     CSS, JS e imagens (theme.css, limen-seal.png)
 config/     settings do tema
 layout/     theme.liquid

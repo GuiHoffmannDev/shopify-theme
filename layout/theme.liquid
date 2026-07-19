@@ -19,10 +19,10 @@
       <meta name="description" content="{{ page_description | escape }}">
     {%- endif -%}
 
-    {%- comment -%} Limen webfonts (identical to the design system) {%- endcomment -%}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    {%- comment -%} Limen webfont — Satoshi (Fontshare): script só no logo, grotesca em todo o resto {%- endcomment -%}
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1,2,400,500,700&display=swap" rel="stylesheet">
 
     {{ 'theme.css' | asset_url | stylesheet_tag }}
 
