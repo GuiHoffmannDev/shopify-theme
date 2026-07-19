@@ -12,8 +12,8 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "layout": "split",
-        "image": "shopify://shop_images/hf_20260710_045321_2c89d6c1-9c17-4709-8516-e8babb781f88.png",
+        "layout": "full",
+        "image": "shopify://shop_images/ChatGPT_Image_Jul_9_2026_at_01_39_03_PM.png",
         "overlay": 50,
         "eyebrow": "Bolsas · Grips · Pickleball",
         "heading": "A raquete de um lado. O resto do seu dia do outro.",
