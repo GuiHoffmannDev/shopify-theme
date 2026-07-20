@@ -25,7 +25,7 @@
               <label class="field__label" for="q{{ item.index | plus: 1 }}">Qtd</label>
               <input type="number" id="q{{ item.index | plus: 1 }}" name="updates[]" value="{{ item.quantity }}" min="0" style="width:70px;">
             </div>
-            <div style="font-family:var(--font-body);font-weight:500;font-size:18px;text-align:right;min-width:100px;">{{ item.final_line_price | money }}</div>
+            <div style="font-family:var(--font-body);font-weight:var(--weight-display);font-size:18px;text-align:right;min-width:100px;">{{ item.final_line_price | money }}</div>
           </div>
         {%- endfor -%}
 
@@ -33,7 +33,7 @@
           <p style="font-family:var(--font-body);font-style:italic;color:var(--text-muted);max-width:38ch;">Frete e impostos calculados no checkout. Trocas em 30 dias, com a etiqueta que já vai na caixa.</p>
           <div style="text-align:right;">
             <div class="eyebrow eyebrow--muted">Subtotal</div>
-            <div style="font-family:var(--font-display);font-weight:500;font-size:28px;letter-spacing:var(--tracking-headline);margin:6px 0 16px;">{{ cart.total_price | money }}</div>
+            <div style="font-family:var(--font-display);font-weight:var(--weight-display);font-size:28px;letter-spacing:var(--tracking-headline);margin:6px 0 16px;">{{ cart.total_price | money }}</div>
             <div style="display:flex;gap:12px;justify-content:flex-end;">
               <button type="submit" name="update" class="btn btn--outline">Atualizar</button>
               <button type="submit" name="checkout" class="btn">Finalizar compra</button>
