@@ -249,8 +249,9 @@ button{font-family:inherit;}
 .pdp__main-img,.pdp__thumbs img{cursor:url("cursor-lemon.svg") 11 3, pointer;}
 .pdp__thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
 .pdp__thumbs .ph,.pdp__thumbs img{height:120px;width:100%;object-fit:cover;border:1px solid var(--border-hairline);}
-.pdp__title{font-family:var(--font-display);font-weight:var(--weight-display);font-size:40px;line-height:1.1;letter-spacing:var(--tracking-headline);margin:14px 0 0;}
-.pdp__price{font-family:var(--font-body);font-weight:var(--weight-display);font-size:22px;margin-top:14px;}
+/* O preço não grita: pequeno e discreto, a foto é que vende */
+.pdp__title{font-family:var(--font-display);font-weight:var(--weight-display);font-size:28px;line-height:1.15;letter-spacing:var(--tracking-headline);margin:14px 0 0;}
+.pdp__price{font-family:var(--font-body);font-weight:var(--weight-display);font-size:15px;color:var(--text-muted);margin-top:10px;}
 .pdp__desc{font-size:17px;line-height:1.6;}
 .pdp__opt-label{margin-bottom:12px;}
 .pdp__swatches{display:flex;gap:10px;flex-wrap:wrap;}
