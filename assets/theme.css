@@ -37,7 +37,8 @@
   --space-4:16px; --space-5:24px; --space-6:32px; --space-7:48px; --space-8:64px; --space-9:96px;
   --ease-standard:cubic-bezier(0.4,0,0.2,1); --duration-fast:150ms; --duration-slow:400ms;
 
-  --page-max:1200px; --page-pad:40px;
+  /* Full bleed: o conteúdo acompanha a viewport, só a calha lateral segura */
+  --page-max:100%; --page-pad:40px;
 }
 
 /* ---------- Reset ---------- */
@@ -513,4 +514,21 @@ button{font-family:inherit;}
 }
 @media (max-width:560px){
   .product-grid--4{grid-template-columns:1fr;}
+}
+
+/* ---------- Telas largas (full bleed) ----------
+   Sem o cap de 1200px o conteúdo vai até a borda; acima de 1600px as grades
+   ganham uma coluna para os cards não incharem, e os blocos de texto corrido
+   guardam a medida de leitura. */
+@media (min-width:1600px){
+  :root{--page-pad:56px;}
+  .product-grid{grid-template-columns:repeat(4,1fr);}
+  .coll-band__products{grid-template-columns:repeat(3,1fr);}
+  .split{gap:min(9vw,140px);}
+  .split > div:first-child{max-width:64ch;}
+  .proof-cell__d,.guarantees p{max-width:48ch;}
+  .guarantees p{margin-inline:auto;}
+}
+@media (min-width:2000px){
+  .product-grid,.product-grid--4{grid-template-columns:repeat(5,1fr);}
 }
