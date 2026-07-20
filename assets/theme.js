@@ -90,4 +90,48 @@
     }, { threshold: 0.25 });
     videos.forEach(function (v) { vio.observe(v); });
   }
+
+  // Vitrine: setas e dots são âncoras, então a seção navega sem JS. Aqui só evitamos
+  // o pulo vertical do #hash e marcamos qual peça está à vista.
+  document.querySelectorAll('[data-showcase]').forEach(function (root) {
+    var track = root.querySelector('[data-showcase-track]');
+    if (!track) return;
+    var slides = Array.prototype.slice.call(track.querySelectorAll('.showcase__slide'));
+    var dots = Array.prototype.slice.call(root.querySelectorAll('[data-showcase-dot]'));
+    var prev = root.querySelector('[data-showcase-prev]');
+    var next = root.querySelector('[data-showcase-next]');
+    if (slides.length < 2) return;
+    var index = 0;
+
+    function go(i) {
+      index = (i + slides.length) % slides.length;
+      track.scrollTo({
+        left: slides[index].offsetLeft - track.offsetLeft,
+        behavior: reduceMotion ? 'auto' : 'smooth'
+      });
+    }
+
+    root.addEventListener('click', function (e) {
+      var hit = e.target.closest('[data-showcase-dot],[data-showcase-prev],[data-showcase-next]');
+      if (!hit) return;
+      e.preventDefault();
+      if (hit === prev) go(index - 1);
+      else if (hit === next) go(index + 1);
+      else go(dots.indexOf(hit));
+    });
+
+    if ('IntersectionObserver' in window) {
+      var sio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          index = slides.indexOf(entry.target);
+          dots.forEach(function (dot, i) {
+            if (i === index) dot.setAttribute('aria-current', 'true');
+            else dot.removeAttribute('aria-current');
+          });
+        });
+      }, { root: track, threshold: 0.6 });
+      slides.forEach(function (slide) { sio.observe(slide); });
+    }
+  });
 })();

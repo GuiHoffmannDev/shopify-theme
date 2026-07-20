@@ -25,6 +25,14 @@
             {%- endfor -%}
           </ol>
         {%- endif -%}
+        {%- if section.settings.quote != blank -%}
+          <figure class="arrival-quote">
+            <blockquote><p>{{ section.settings.quote }}</p></blockquote>
+            {%- if section.settings.quote_attr != blank -%}
+              <figcaption>{{ section.settings.quote_attr }}</figcaption>
+            {%- endif -%}
+          </figure>
+        {%- endif -%}
       </div>
     </div>
   </div>
@@ -40,7 +48,11 @@
     { "type": "text", "id": "placeholder_label", "label": "Legenda do placeholder", "default": "foto · unboxing com dust bag" },
     { "type": "text", "id": "eyebrow", "label": "Sobrelinha", "default": "Antes de chegar à sua porta" },
     { "type": "text", "id": "heading", "label": "Título", "default": "Conferida, protegida e assinada por quem embalou." },
-    { "type": "richtext", "id": "body", "label": "Texto", "default": "<p>Cada bolsa vai dentro de dust bag, com o grip acondicionado à parte e o cartão do primeiro drop. A caixa leva seu nome antes de levar nosso logo — e uma etiqueta de troca já impressa, caso você mude de ideia em 30 dias.</p>" }
+    { "type": "richtext", "id": "body", "label": "Texto", "default": "<p>Cada bolsa vai dentro de dust bag, com o grip acondicionado à parte e o cartão do primeiro drop. A caixa leva seu nome antes de levar nosso logo — e uma etiqueta de troca já impressa, caso você mude de ideia em 30 dias.</p>" },
+    { "type": "header", "content": "Frase da casa" },
+    { "type": "paragraph", "content": "A linha que fecha a seção. Deixe em branco para não mostrar." },
+    { "type": "textarea", "id": "quote", "label": "Frase", "default": "A caixa leva seu nome antes de levar nosso logo." },
+    { "type": "text", "id": "quote_attr", "label": "Atribuição", "default": "Controle de qualidade, assinado à mão" }
   ],
   "blocks": [
     {

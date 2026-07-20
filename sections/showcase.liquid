@@ -1,0 +1,111 @@
+{%- assign sid = section.id -%}
+<section class="section section--hairline-top" data-screen-label="Vitrine">
+  <div class="wrap">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="grid-head" data-reveal>
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow eyebrow--muted eyebrow--center">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2 class="title mt-4">{{ section.settings.heading }}</h2>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="showcase" data-showcase data-reveal>
+      <div class="showcase__track" data-showcase-track>
+        {%- for block in section.blocks -%}
+          {%- assign product = block.settings.product -%}
+          <article class="showcase__slide" id="slide-{{ sid }}-{{ forloop.index }}" {{ block.shopify_attributes }}>
+
+            <div class="showcase__media">
+              {%- if block.settings.image != blank -%}
+                <img src="{{ block.settings.image | image_url: width: 1400 }}" alt="{{ block.settings.image.alt | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="lazy">
+              {%- elsif block.settings.asset != blank -%}
+                <img src="{{ block.settings.asset | asset_url }}" alt="" width="928" height="1152" loading="lazy">
+              {%- else -%}
+                <div class="ph"><span>{{ block.settings.placeholder_label }}</span></div>
+              {%- endif -%}
+            </div>
+
+            <div class="showcase__panel">
+              {%- if block.settings.tag != blank -%}
+                <p><span class="tag">{{ block.settings.tag }}</span></p>
+              {%- endif -%}
+
+              <div class="showcase__shot">
+                {%- if product != blank and product.featured_image -%}
+                  <img src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}" loading="lazy">
+                {%- else -%}
+                  <div class="pcard__linen"><span>{{ block.settings.shot_label }}</span></div>
+                {%- endif -%}
+              </div>
+
+              {%- if product != blank -%}
+                <h3 class="showcase__name">{{ product.title }}</h3>
+                <p class="showcase__price">{{ product.price | money_without_trailing_zeros }}</p>
+                <div class="mt-5"><a href="{{ product.url }}" class="btn btn--outline">{{ block.settings.button_label }}</a></div>
+              {%- else -%}
+                <h3 class="showcase__name">{{ block.settings.ph_name }}</h3>
+                {%- if block.settings.ph_price != blank -%}<p class="showcase__price">{{ block.settings.ph_price }}</p>{%- endif -%}
+                <div class="mt-5"><a href="{{ block.settings.button_link | default: routes.all_products_collection_url }}" class="btn btn--outline">{{ block.settings.button_label }}</a></div>
+              {%- endif -%}
+            </div>
+
+          </article>
+        {%- endfor -%}
+      </div>
+
+      {%- if section.blocks.size > 1 -%}
+        {%- assign last = section.blocks.size -%}
+        <a class="showcase__arrow showcase__arrow--prev" href="#slide-{{ sid }}-{{ last }}" data-showcase-prev aria-label="{{ 'general.a11y.previous' | t }}">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 4 7 12l8 8" fill="none" stroke="currentColor" stroke-width="1.25"/></svg>
+        </a>
+        <a class="showcase__arrow showcase__arrow--next" href="#slide-{{ sid }}-2" data-showcase-next aria-label="{{ 'general.a11y.next' | t }}">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="1.25"/></svg>
+        </a>
+
+        <div class="showcase__dots" data-showcase-dots>
+          {%- for block in section.blocks -%}
+            <a class="showcase__dot" href="#slide-{{ sid }}-{{ forloop.index }}" data-showcase-dot{% if forloop.first %} aria-current="true"{% endif %}>
+              <span class="visually-hidden">{{ 'general.a11y.go_to_slide' | t: index: forloop.index }}</span>
+            </a>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Vitrine",
+  "settings": [
+    { "type": "paragraph", "content": "Foto de cena à esquerda, a peça à direita. A foto segue a Regra #1: a bolsa fora da quadra." },
+    { "type": "text", "id": "eyebrow", "label": "Sobrelinha", "default": "Em destaque" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "A bolsa do primeiro drop." }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Peça",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Produto", "info": "Sem produto escolhido, o quadro usa os campos de espera abaixo." },
+        { "type": "image_picker", "id": "image", "label": "Foto de cena" },
+        { "type": "text", "id": "asset", "label": "Arquivo embutido (assets)", "info": "Usado quando não há foto escolhida acima. Regra #1: nunca a quadra.", "default": "photo-editorial-wall.jpg" },
+        { "type": "text", "id": "placeholder_label", "label": "Legenda do placeholder da cena", "default": "foto · a bolsa fora da quadra" },
+        { "type": "text", "id": "tag", "label": "Etiqueta", "default": "Novo" },
+        { "type": "text", "id": "shot_label", "label": "Legenda do packshot em espera", "default": "packshot · fundo liso" },
+        { "type": "text", "id": "ph_name", "label": "Nome (em espera)", "default": "A Diária" },
+        { "type": "text", "id": "ph_price", "label": "Preço (em espera)", "default": "R$ 590" },
+        { "type": "text", "id": "button_label", "label": "Botão", "default": "Ver a bolsa" },
+        { "type": "url", "id": "button_link", "label": "Link do botão (em espera)" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [{
+    "name": "Vitrine",
+    "blocks": [
+      { "type": "slide", "settings": { "asset": "photo-editorial-wall.jpg", "tag": "Novo", "ph_name": "A Diária", "ph_price": "R$ 590" } },
+      { "type": "slide", "settings": { "asset": "photo-lemons-towel.png", "tag": "Drop Nº 01", "ph_name": "A de Duas Raquetes", "ph_price": "R$ 720" } }
+    ]
+  }]
+}
+{% endschema %}

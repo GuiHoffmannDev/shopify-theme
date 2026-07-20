@@ -22,6 +22,40 @@
         "button_link": ""
       }
     },
+    "showcase": {
+      "type": "showcase",
+      "blocks": {
+        "v1": {
+          "type": "slide",
+          "settings": {
+            "asset": "photo-editorial-wall.jpg",
+            "placeholder_label": "foto · a bolsa fora da quadra",
+            "tag": "Novo",
+            "shot_label": "packshot · fundo liso",
+            "ph_name": "A Diária",
+            "ph_price": "R$ 590",
+            "button_label": "Ver a bolsa"
+          }
+        },
+        "v2": {
+          "type": "slide",
+          "settings": {
+            "asset": "photo-lemons-towel.png",
+            "placeholder_label": "foto · a bolsa na feira",
+            "tag": "Drop Nº 01",
+            "shot_label": "packshot · fundo liso",
+            "ph_name": "A de Duas Raquetes",
+            "ph_price": "R$ 720",
+            "button_label": "Ver a bolsa"
+          }
+        }
+      },
+      "block_order": ["v1", "v2"],
+      "settings": {
+        "eyebrow": "Em destaque",
+        "heading": "A bolsa do primeiro drop."
+      }
+    },
     "club": {
       "type": "club-editorial",
       "blocks": {
@@ -65,6 +99,21 @@
         "asset": "photo-positioning-navy.jpg",
         "placeholder_label": "foto de produto · a bolsa, de lado",
         "show_seal": true
+      }
+    },
+    "marquee": {
+      "type": "marquee",
+      "blocks": {
+        "f1": { "type": "fact", "settings": { "text": "Fica em pé" } },
+        "f2": { "type": "fact", "settings": { "text": "Troca em 30 dias" } },
+        "f3": { "type": "fact", "settings": { "text": "Drop Nº 01 aberto" } },
+        "f4": { "type": "fact", "settings": { "text": "Sai em 2 dias úteis" } },
+        "f5": { "type": "fact", "settings": { "text": "Reparo de ferragem no primeiro ano" } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4", "f5"],
+      "settings": {
+        "inverse": false,
+        "speed": 45
       }
     },
     "proof": {
@@ -132,19 +181,46 @@
         "eyebrow": "O Vestiário",
         "heading": "Cinco bolsas. Cada uma para uma forma de chegar à quadra.",
         "collection": "",
-        "limit": 3,
+        "limit": 4,
         "button_label": "Ver a coleção",
         "note": "Cada caixa do drop leva o número da série no cartão, escrito à mão."
       }
     },
-    "quote": {
-      "type": "quote-banner",
+    "mosaic": {
+      "type": "category-mosaic",
+      "blocks": {
+        "m1": {
+          "type": "tile",
+          "settings": {
+            "label": "O Vestiário",
+            "link": "",
+            "asset": "photo-club-elevator.jpg",
+            "placeholder_label": "foto · as bolsas"
+          }
+        },
+        "m2": {
+          "type": "tile",
+          "settings": {
+            "label": "O Grip",
+            "link": "",
+            "asset": "photo-interlude-gravel.jpg",
+            "placeholder_label": "foto · o grip"
+          }
+        },
+        "m3": {
+          "type": "tile",
+          "settings": {
+            "label": "O Jornal",
+            "link": "",
+            "asset": "photo-journal-lookbook.jpg",
+            "placeholder_label": "foto · o jornal"
+          }
+        }
+      },
+      "block_order": ["m1", "m2", "m3"],
       "settings": {
-        "inverse": false,
-        "number": "Postal · Nº 01",
-        "eyebrow": "Como chega",
-        "quote": "A caixa leva seu nome antes de levar nosso logo.",
-        "attribution": "Controle de qualidade, assinado à mão"
+        "eyebrow": "As salas",
+        "heading": "Por onde você quer entrar."
       }
     },
     "arrival": {
@@ -176,7 +252,9 @@
         "placeholder_label": "foto · unboxing com dust bag",
         "eyebrow": "Antes de chegar à sua porta",
         "heading": "Conferida, protegida e assinada por quem embalou.",
-        "body": "<p>Cada bolsa vai dentro de dust bag, com o grip acondicionado à parte e o cartão do primeiro drop. A caixa leva seu nome antes de levar nosso logo — e uma etiqueta de troca já impressa, caso você mude de ideia em 30 dias.</p>"
+        "body": "<p>Cada bolsa vai dentro de dust bag, com o grip acondicionado à parte e o cartão do primeiro drop. A caixa leva seu nome antes de levar nosso logo — e uma etiqueta de troca já impressa, caso você mude de ideia em 30 dias.</p>",
+        "quote": "A caixa leva seu nome antes de levar nosso logo.",
+        "quote_attr": "Controle de qualidade, assinado à mão"
       }
     },
     "journal": {
@@ -206,11 +284,13 @@
   },
   "order": [
     "hero",
+    "showcase",
     "club",
     "positioning",
+    "marquee",
     "proof",
     "featured",
-    "quote",
+    "mosaic",
     "arrival",
     "journal",
     "invite"

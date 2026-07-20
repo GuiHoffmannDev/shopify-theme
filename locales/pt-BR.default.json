@@ -21,7 +21,10 @@
     },
     "a11y": {
       "primary_nav": "Navegação principal",
-      "footer_nav": "Navegação do rodapé"
+      "footer_nav": "Navegação do rodapé",
+      "previous": "Peça anterior",
+      "next": "Próxima peça",
+      "go_to_slide": "Ir para a peça {{ index }}"
     }
   }
 }

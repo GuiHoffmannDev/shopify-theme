@@ -356,6 +356,10 @@ button{font-family:inherit;}
 .arrival-steps li{display:flex;gap:16px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--border-hairline-inverse);font-size:15px;line-height:1.5;opacity:0.9;}
 .arrival-steps li:last-child{border-bottom:0;}
 .arrival-steps .n{font-family:var(--font-sans);font-size:10px;letter-spacing:0.2em;opacity:0.55;flex-shrink:0;}
+.arrival-quote{margin:36px 0 0;padding-top:32px;border-top:1px solid var(--border-hairline-inverse);}
+.arrival-quote blockquote{margin:0;}
+.arrival-quote p{font-family:var(--font-display);font-weight:500;font-size:26px;line-height:1.25;letter-spacing:var(--tracking-headline);max-width:26ch;}
+.arrival-quote figcaption{font-family:var(--font-sans);font-size:10px;letter-spacing:var(--tracking-label);text-transform:uppercase;opacity:0.6;margin-top:18px;}
 
 /* ---------- Journal teaser ---------- */
 .journal__media img{width:100%;height:auto;display:block;border:1px solid var(--border-strong);outline:1px solid var(--border-hairline);outline-offset:6px;}
@@ -410,4 +414,103 @@ button{font-family:inherit;}
   .coll-band{grid-template-columns:1fr;}
   .coll-band--flip .coll-band__editorial{order:0;}
   .coll-band__editorial{min-height:0;height:440px;}
+}
+
+/* ---------- Vitrine (foto de cena + a peça) ---------- */
+.showcase{position:relative;}
+.showcase__track{
+  display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+  scrollbar-width:none;-ms-overflow-style:none;
+}
+.showcase__track::-webkit-scrollbar{display:none;}
+.showcase__slide{
+  flex:0 0 100%;scroll-snap-align:start;
+  display:grid;grid-template-columns:1.15fr 1fr;gap:56px;align-items:center;
+}
+.showcase__media{position:relative;aspect-ratio:1/1;overflow:hidden;border:1px solid var(--border-hairline);background:var(--sand-200);}
+.showcase__media img{width:100%;height:100%;object-fit:cover;}
+.showcase__media .ph{height:100%;border:0;}
+.showcase__panel{text-align:center;padding:0 clamp(8px,3vw,48px);}
+.showcase__shot{position:relative;aspect-ratio:4/3;margin:28px 0 24px;background:var(--surface-card);}
+.showcase__shot img{width:100%;height:100%;object-fit:contain;}
+.showcase__name{font-family:var(--font-display);font-weight:500;font-size:26px;line-height:1.15;letter-spacing:var(--tracking-headline);}
+.showcase__price{font-family:var(--font-body);font-weight:500;font-size:13px;color:var(--text-muted);margin-top:8px;}
+.showcase__arrow{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:2;
+  width:52px;height:52px;border-radius:999px;display:flex;align-items:center;justify-content:center;
+  background:var(--cream-50);border:1px solid var(--border-hairline);color:var(--text-primary);
+}
+.showcase__arrow:hover{background:var(--navy-700);border-color:var(--navy-700);color:var(--cream-100);}
+.showcase__arrow svg{width:20px;height:20px;}
+.showcase__arrow--prev{left:-26px;}
+.showcase__arrow--next{right:-26px;}
+.showcase__dots{display:flex;justify-content:center;gap:12px;margin-top:36px;}
+.showcase__dot{
+  width:7px;height:7px;border-radius:999px;display:block;
+  border:1px solid var(--border-strong);background:transparent;
+}
+.showcase__dot[aria-current="true"]{background:var(--border-strong);}
+
+/* ---------- Fita de fatos ---------- */
+.marquee{padding:20px 0;overflow:hidden;background:var(--surface-page);}
+.marquee--inverse{background:var(--surface-inverse);}
+.marquee__viewport{display:flex;width:max-content;}
+.marquee__track{
+  display:flex;align-items:center;flex:0 0 auto;color:var(--text-muted);
+  animation-name:marquee;animation-timing-function:linear;animation-iteration-count:infinite;
+}
+.marquee--inverse .marquee__track{color:var(--cream-100);opacity:0.75;}
+.marquee__item{
+  font-family:var(--font-sans);font-size:13px;font-weight:500;letter-spacing:var(--tracking-label);
+  text-transform:uppercase;white-space:nowrap;
+}
+.marquee__diamond{width:5px;height:5px;background:currentColor;transform:rotate(45deg);opacity:0.5;margin:0 30px;flex:0 0 auto;}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-100%);}}
+
+/* ---------- Mosaico de salas ---------- */
+.mosaic{display:grid;grid-template-columns:1.55fr 1fr;grid-template-rows:1fr 1fr;gap:12px;min-height:620px;}
+.mosaic__tile{position:relative;overflow:hidden;display:block;background:var(--sand-200);}
+.mosaic__tile--lead{grid-row:span 2;}
+.mosaic__tile img{width:100%;height:100%;object-fit:cover;transition:transform var(--duration-slow) var(--ease-standard);}
+.mosaic__tile:hover img{transform:scale(1.03);}
+.mosaic__tile .ph{height:100%;border:0;}
+.mosaic__scrim{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(20,31,68,0.14) 0%,rgba(20,31,68,0.06) 45%,rgba(20,31,68,0.24) 100%);
+}
+/* Placa de porta: creme sobre a foto. Texto claro direto na imagem não passa de
+   ~2.6:1 nas fotos mais claras, então o label vira chip — mesmo padrão de .coll-band__label. */
+.mosaic__label{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  background:var(--cream-100);color:var(--navy-700);border:1px solid var(--border-hairline);
+  padding:11px 22px;text-align:center;white-space:nowrap;
+  font-family:var(--font-sans);font-size:11px;font-weight:500;letter-spacing:var(--tracking-label);
+  text-transform:uppercase;
+  transition:background var(--duration-fast) var(--ease-standard),color var(--duration-fast) var(--ease-standard);
+}
+.mosaic__tile:hover .mosaic__label{background:var(--navy-700);color:var(--cream-100);border-color:var(--navy-700);}
+
+/* Grade de 4 (coleção em destaque) */
+.product-grid--4{grid-template-columns:repeat(4,1fr);}
+
+@media (prefers-reduced-motion: no-preference){
+  .showcase__track{scroll-behavior:smooth;}
+}
+@media (prefers-reduced-motion: reduce){
+  .marquee__track{animation:none;}
+  .mosaic__tile img{transition:none;}
+}
+
+@media (max-width:900px){
+  .showcase__slide{grid-template-columns:1fr;gap:32px;}
+  .showcase__media{aspect-ratio:4/5;}
+  .showcase__panel{padding:0;}
+  .showcase__arrow{display:none;}
+  .mosaic{grid-template-columns:1fr;grid-template-rows:none;min-height:0;}
+  .mosaic__tile{height:320px;}
+  .mosaic__tile--lead{grid-row:auto;height:420px;}
+  .product-grid--4{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:560px){
+  .product-grid--4{grid-template-columns:1fr;}
 }

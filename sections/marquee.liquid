@@ -1,0 +1,47 @@
+{%- comment -%}
+  Fita de fatos. Movimento sem grito: só o que dá para conferir, separado pelo losango
+  da casa. O segundo trilho é clone visual — fica fora do leitor de tela.
+{%- endcomment -%}
+<section class="marquee {% if section.settings.inverse %}marquee--inverse{% endif %} section--hairline-top section--hairline-bottom" data-screen-label="Fita">
+  <div class="marquee__viewport">
+    {%- for i in (1..2) -%}
+      <div class="marquee__track" {% if forloop.last %}aria-hidden="true"{% endif %} style="animation-duration:{{ section.settings.speed }}s;">
+        {%- for block in section.blocks -%}
+          <span class="marquee__item" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+          <span class="marquee__diamond" aria-hidden="true"></span>
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Fita de fatos",
+  "settings": [
+    { "type": "paragraph", "content": "Regra #3: só entra aqui o que dá para conferir. Nada de \"frete grátis\" sem lastro nem contagem regressiva." },
+    { "type": "checkbox", "id": "inverse", "label": "Fundo escuro", "default": false },
+    { "type": "range", "id": "speed", "min": 20, "max": 90, "step": 5, "unit": "s", "label": "Tempo de uma volta", "info": "Quanto maior, mais lenta. A fita para sozinha para quem pediu menos movimento no sistema.", "default": 45 }
+  ],
+  "blocks": [
+    {
+      "type": "fact",
+      "name": "Fato",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Texto", "default": "Fica em pé" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [{
+    "name": "Fita de fatos",
+    "blocks": [
+      { "type": "fact", "settings": { "text": "Fica em pé" } },
+      { "type": "fact", "settings": { "text": "Troca em 30 dias" } },
+      { "type": "fact", "settings": { "text": "Drop Nº 01 aberto" } },
+      { "type": "fact", "settings": { "text": "Sai em 2 dias úteis" } },
+      { "type": "fact", "settings": { "text": "Reparo de ferragem no primeiro ano" } }
+    ]
+  }]
+}
+{% endschema %}

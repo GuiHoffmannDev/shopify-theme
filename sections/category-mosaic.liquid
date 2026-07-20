@@ -1,0 +1,65 @@
+{%- comment -%}
+  Mosaico de salas. Blocos livres (imagem + label + link) em vez de objeto coleção:
+  o clube tem salas, não categorias, e o número delas muda a cada drop.
+{%- endcomment -%}
+<section class="section" data-screen-label="Mosaico">
+  <div class="wrap">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="grid-head" data-reveal>
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow eyebrow--muted eyebrow--center">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2 class="title mt-4">{{ section.settings.heading }}</h2>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="mosaic" data-reveal>
+      {%- for block in section.blocks -%}
+        <a href="{{ block.settings.link | default: routes.all_products_collection_url }}"
+           class="mosaic__tile {% if forloop.first %}mosaic__tile--lead{% endif %}"
+           {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 1400 }}" alt="" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="lazy">
+          {%- elsif block.settings.asset != blank -%}
+            <img src="{{ block.settings.asset | asset_url }}" alt="" width="928" height="1152" loading="lazy">
+          {%- else -%}
+            <div class="ph"><span>{{ block.settings.placeholder_label }}</span></div>
+          {%- endif -%}
+          <span class="mosaic__scrim" aria-hidden="true"></span>
+          <span class="mosaic__label">{{ block.settings.label }}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Mosaico de salas",
+  "settings": [
+    { "type": "paragraph", "content": "O primeiro bloco ocupa o quadro grande. Salas do clube — nunca \"categorias\"." },
+    { "type": "text", "id": "eyebrow", "label": "Sobrelinha", "default": "As salas" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Por onde você quer entrar." }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Sala",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Nome da sala", "default": "O Vestiário" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "image_picker", "id": "image", "label": "Imagem" },
+        { "type": "text", "id": "asset", "label": "Arquivo embutido (assets)", "info": "Usado quando não há imagem escolhida acima.", "default": "photo-club-elevator.jpg" },
+        { "type": "text", "id": "placeholder_label", "label": "Legenda do placeholder", "default": "foto · a sala" }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [{
+    "name": "Mosaico de salas",
+    "blocks": [
+      { "type": "tile", "settings": { "label": "O Vestiário", "asset": "photo-club-elevator.jpg", "placeholder_label": "foto · as bolsas" } },
+      { "type": "tile", "settings": { "label": "O Grip", "asset": "photo-interlude-gravel.jpg", "placeholder_label": "foto · o grip" } },
+      { "type": "tile", "settings": { "label": "O Jornal", "asset": "photo-journal-lookbook.jpg", "placeholder_label": "foto · o jornal" } }
+    ]
+  }]
+}
+{% endschema %}

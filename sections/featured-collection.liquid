@@ -9,7 +9,9 @@
     </div>
 
     {%- assign coll = collections[section.settings.collection] -%}
-    <div class="product-grid" data-reveal>
+    {%- comment -%} Múltiplos de 4 ganham a grade de quatro; o resto segue em três. {%- endcomment -%}
+    {%- assign rest4 = section.settings.limit | modulo: 4 -%}
+    <div class="product-grid{% if rest4 == 0 %} product-grid--4{% endif %}" data-reveal>
       {%- if coll != blank and coll.products_count > 0 -%}
         {%- for product in coll.products limit: section.settings.limit -%}
           {% render 'product-card', product: product %}
@@ -18,6 +20,7 @@
         {%- comment -%} Onboarding fallback — identical demo tiles {%- endcomment -%}
         {% render 'product-card', ph_category: 'Bolsas', ph_name: 'A Diária', ph_price: 'R$ 590', ph_tag: 'Novo', ph_label: 'bolsa · foto de produto', ph_url: routes.all_products_collection_url %}
         {% render 'product-card', ph_category: 'Bolsas', ph_name: 'A de Duas Raquetes', ph_price: 'R$ 720', ph_label: 'bolsa · foto de produto', ph_url: routes.all_products_collection_url %}
+        {% render 'product-card', ph_category: 'Bolsas', ph_name: 'A de Fim de Tarde', ph_price: 'R$ 540', ph_label: 'bolsa · foto de produto', ph_url: routes.all_products_collection_url %}
         {% render 'product-card', ph_category: 'Grips', ph_name: 'O Grip', ph_price: 'R$ 79', ph_label: 'grip · foto de produto', ph_url: routes.all_products_collection_url %}
       {%- endif -%}
     </div>
@@ -41,7 +44,7 @@
     { "type": "text", "id": "eyebrow", "label": "Sobrelinha", "info": "Coleções levam nome de sala do clube, não de categoria.", "default": "O Vestiário" },
     { "type": "text", "id": "heading", "label": "Título", "default": "Cinco bolsas. Cada uma para uma forma de chegar à quadra." },
     { "type": "collection", "id": "collection", "label": "Coleção" },
-    { "type": "range", "id": "limit", "min": 3, "max": 12, "step": 3, "label": "Quantos produtos", "default": 3 },
+    { "type": "range", "id": "limit", "min": 2, "max": 12, "step": 1, "label": "Quantos produtos", "info": "Múltiplos de 4 abrem a grade de quatro colunas; o resto fica em três.", "default": 4 },
     { "type": "text", "id": "button_label", "label": "Botão", "default": "Ver a coleção" },
     { "type": "text", "id": "note", "label": "Nota sob o botão", "default": "Cada caixa do drop leva o número da série no cartão, escrito à mão." }
   ],
