@@ -19,7 +19,7 @@
         "heading": "A raquete de um lado. O resto do seu dia do outro.",
         "text": "Compartimento próprio onde a raquete não toca em mais nada. Base que mantém a bolsa em pé quando você a coloca no chão. Cinco bolsos — nenhum ali só para figurar na ficha técnica.",
         "button_label": "Ver a bolsa",
-        "button_link": ""
+        "button_link": "/collections/charter-ss2026-01"
       }
     },
     "showcase": {
@@ -34,7 +34,8 @@
             "shot_label": "packshot · fundo liso",
             "ph_name": "A Diária",
             "ph_price": "R$ 590",
-            "button_label": "Ver a bolsa"
+            "button_label": "Ver a bolsa",
+            "button_link": "/collections/charter-ss2026-01"
           }
         },
         "v2": {
@@ -46,7 +47,8 @@
             "shot_label": "packshot · fundo liso",
             "ph_name": "A de Duas Raquetes",
             "ph_price": "R$ 720",
-            "button_label": "Ver a bolsa"
+            "button_label": "Ver a bolsa",
+            "button_link": "/collections/charter-ss2026-01"
           }
         }
       },
@@ -107,7 +109,7 @@
         "drop_label": "CHARTER — SS2026 01",
         "eyebrow": "O Vestiário",
         "heading": "Cinco bolsas. Cada uma para uma forma de chegar à quadra.",
-        "collection": "",
+        "collection": "charter-ss2026-01",
         "limit": 4,
         "button_label": "Ver a coleção",
         "note": "Cada caixa do drop leva o número da série no cartão, escrito à mão."
@@ -120,7 +122,7 @@
           "type": "tile",
           "settings": {
             "label": "O Vestiário",
-            "link": "",
+            "link": "/collections/charter-ss2026-01",
             "asset": "photo-club-elevator.jpg",
             "placeholder_label": "foto · as bolsas"
           }
