@@ -14,8 +14,7 @@
       "block_order": ["s1", "s2", "s3", "s4", "s5", "s6", "s7"],
       "settings": {}
     },
-    "arrival": { "type": "arrival-proof", "settings": {} },
     "guarantees": { "type": "guarantee-strip", "settings": {} }
   },
-  "order": ["main", "arrival", "guarantees"]
+  "order": ["main", "guarantees"]
 }

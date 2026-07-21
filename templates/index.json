@@ -116,64 +116,6 @@
         "speed": 45
       }
     },
-    "proof": {
-      "type": "proof-grid",
-      "blocks": {
-        "b1": {
-          "type": "proof",
-          "settings": {
-            "number": "01",
-            "title": "Fica em pé",
-            "text": "Você coloca no chão e ela permanece de pé. Base estruturada, sem tombar sobre o resto dos objetos."
-          }
-        },
-        "b2": {
-          "type": "proof",
-          "settings": {
-            "number": "02",
-            "title": "A raquete isolada",
-            "text": "Compartimento próprio, forrado. A raquete não encosta em chave, celular nem calçado."
-          }
-        },
-        "b3": {
-          "type": "proof",
-          "settings": {
-            "number": "03",
-            "title": "Cinco bolsos decididos",
-            "text": "Celular sem procurar. Chave sem esvaziar a bolsa. Bolso ventilado para o calçado."
-          }
-        },
-        "b4": {
-          "type": "proof",
-          "settings": {
-            "number": "04",
-            "title": "Grip que segura o jogo",
-            "text": "Testado em duas horas de partida sem reposicionar a mão — a mesma aderência no primeiro e no último game."
-          }
-        },
-        "b5": {
-          "type": "proof",
-          "settings": {
-            "number": "05",
-            "title": "Alça que não bate",
-            "text": "Ferragens presas por dentro. Você anda e nada tilinta contra a bolsa."
-          }
-        },
-        "b6": {
-          "type": "proof",
-          "settings": {
-            "number": "06",
-            "title": "Chega conferida",
-            "text": "Cada pedido sai protegido por dust bag e com o cartão do primeiro drop, assinado por quem embalou."
-          }
-        }
-      },
-      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6"],
-      "settings": {
-        "eyebrow": "O que dá para conferir",
-        "heading": "Prova, não adjetivo."
-      }
-    },
     "featured": {
       "type": "featured-collection",
       "settings": {
@@ -223,40 +165,6 @@
         "heading": "Por onde você quer entrar."
       }
     },
-    "arrival": {
-      "type": "arrival-proof",
-      "blocks": {
-        "s1": {
-          "type": "step",
-          "settings": {
-            "text": "A bolsa entra na dust bag; o grip viaja à parte"
-          }
-        },
-        "s2": {
-          "type": "step",
-          "settings": {
-            "text": "O cartão do drop leva o número da série e a assinatura de quem embalou"
-          }
-        },
-        "s3": {
-          "type": "step",
-          "settings": {
-            "text": "A etiqueta de troca já vai impressa — 30 dias, sem perguntas"
-          }
-        }
-      },
-      "block_order": ["s1", "s2", "s3"],
-      "settings": {
-        "asset": "photo-arrival-card.jpg",
-        "caption": "A conferência antes da caixa fechar",
-        "placeholder_label": "foto · unboxing com dust bag",
-        "eyebrow": "Antes de chegar à sua porta",
-        "heading": "Conferida, protegida e assinada por quem embalou.",
-        "body": "<p>Cada bolsa vai dentro de dust bag, com o grip acondicionado à parte e o cartão do primeiro drop. A caixa leva seu nome antes de levar nosso logo — e uma etiqueta de troca já impressa, caso você mude de ideia em 30 dias.</p>",
-        "quote": "A caixa leva seu nome antes de levar nosso logo.",
-        "quote_attr": "Controle de qualidade, assinado à mão"
-      }
-    },
     "journal": {
       "type": "journal-teaser",
       "settings": {
@@ -288,10 +196,8 @@
     "club",
     "positioning",
     "marquee",
-    "proof",
     "featured",
     "mosaic",
-    "arrival",
     "journal",
     "invite"
   ]

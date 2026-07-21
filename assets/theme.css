@@ -183,14 +183,6 @@ button{font-family:inherit;}
 .seal__letter{font-family:var(--font-display);font-weight:var(--weight-display);font-size:52px;fill:var(--navy-700);}
 .seal__ring{font-family:var(--font-sans);font-size:7px;letter-spacing:0.28em;text-transform:uppercase;fill:var(--navy-700);}
 
-/* ---------- Proof grid ---------- */
-.proof-head{text-align:center;margin-bottom:56px;}
-.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border-hairline-inverse);}
-.proof-cell{background:var(--surface-inverse);padding:36px 32px;}
-.proof-cell__n{font-family:var(--font-sans);font-size:11px;letter-spacing:0.2em;color:var(--cream-100);opacity:0.5;}
-.proof-cell__t{font-family:var(--font-display);font-weight:var(--weight-display);font-size:21px;letter-spacing:var(--tracking-headline);margin:12px 0 10px;}
-.proof-cell__d{font-family:var(--font-body);font-size:15px;line-height:1.55;opacity:0.82;}
-
 /* ---------- Quote ---------- */
 .quote{text-align:center;}
 .quote__mark{font-family:var(--font-display);font-weight:var(--weight-display);font-size:34px;line-height:1.25;letter-spacing:var(--tracking-headline);margin:0 auto;max-width:24ch;}
@@ -306,7 +298,6 @@ button{font-family:inherit;}
   .split{grid-template-columns:1fr;gap:40px;}
   .split__media .ph{height:360px;}
   .seal{left:auto;right:16px;bottom:-28px;width:96px;height:96px;}
-  .proof-grid{grid-template-columns:1fr 1fr;}
   .pdp{grid-template-columns:1fr;gap:40px;}
   .product-grid{grid-template-columns:1fr 1fr;}
   .guarantees{grid-template-columns:1fr;gap:28px;}
@@ -321,7 +312,6 @@ button{font-family:inherit;}
   .invite__row input{max-width:none;}
 }
 @media (max-width:560px){
-  .proof-grid{grid-template-columns:1fr;}
   .product-grid{grid-template-columns:1fr;}
   .hero__title{font-size:32px;}
 }
@@ -351,19 +341,6 @@ button{font-family:inherit;}
 .club-strip figcaption{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;font-family:var(--font-sans);font-size:10px;letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-muted);}
 .club-strip figcaption::after{content:"";width:5px;height:5px;background:var(--border-strong);transform:rotate(45deg);flex-shrink:0;opacity:0.55;}
 .club-foot{margin-top:88px;}
-
-/* ---------- Arrival (Como chega) ---------- */
-.arrival-media{position:relative;}
-.arrival-media img{height:520px;width:100%;object-fit:cover;border:1px solid var(--border-hairline-inverse);display:block;}
-.arrival-caption{font-family:var(--font-sans);font-size:10px;letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--cream-100);opacity:0.6;margin-top:14px;}
-.arrival-steps{margin:28px 0 0;padding:0;list-style:none;}
-.arrival-steps li{display:flex;gap:16px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--border-hairline-inverse);font-size:15px;line-height:1.5;opacity:0.9;}
-.arrival-steps li:last-child{border-bottom:0;}
-.arrival-steps .n{font-family:var(--font-sans);font-size:10px;letter-spacing:0.2em;opacity:0.55;flex-shrink:0;}
-.arrival-quote{margin:36px 0 0;padding-top:32px;border-top:1px solid var(--border-hairline-inverse);}
-.arrival-quote blockquote{margin:0;}
-.arrival-quote p{font-family:var(--font-display);font-weight:var(--weight-display);font-size:26px;line-height:1.25;letter-spacing:var(--tracking-headline);max-width:26ch;}
-.arrival-quote figcaption{font-family:var(--font-sans);font-size:10px;letter-spacing:var(--tracking-label);text-transform:uppercase;opacity:0.6;margin-top:18px;}
 
 /* ---------- Journal teaser ---------- */
 .journal__media img{width:100%;height:auto;display:block;border:1px solid var(--border-strong);outline:1px solid var(--border-hairline);outline-offset:6px;}
@@ -412,7 +389,6 @@ button{font-family:inherit;}
   .hero__copy .hero__title{font-size:36px;}
   .club-strip{grid-template-columns:1fr;gap:40px;}
   .club-foot{margin-top:48px;}
-  .arrival-media img{height:400px;}
   .pagination{margin-top:48px;}
   .coll-bands{gap:48px;}
   .coll-band{grid-template-columns:1fr;}
@@ -529,7 +505,7 @@ button{font-family:inherit;}
   .coll-band__products{grid-template-columns:repeat(3,1fr);}
   .split{gap:min(9vw,140px);}
   .split > div:first-child{max-width:64ch;}
-  .proof-cell__d,.guarantees p{max-width:48ch;}
+  .guarantees p{max-width:48ch;}
   .guarantees p{margin-inline:auto;}
 }
 @media (min-width:2000px){
