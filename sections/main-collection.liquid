@@ -4,9 +4,9 @@
     <div class="coll-toolbar">
       <div class="coll-filters">
         <a href="{{ collection.url | default: routes.all_products_collection_url }}" class="coll-filter {% unless current_tags %}is-active{% endunless %}">Tudo</a>
-        {%- for tag in collection.all_tags limit: 6 -%}
-          <a href="{{ collection.url }}/{{ tag | handle }}" class="coll-filter {% if current_tags contains tag %}is-active{% endif %}">{{ tag }}</a>
-        {%- endfor -%}
+        {%- if collection.title != blank -%}
+          <span class="coll-filter">{{ collection.title }}</span>
+        {%- endif -%}
       </div>
       {%- if collection.sort_options.size > 0 -%}
         <form method="get" class="field">
