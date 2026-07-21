@@ -42,7 +42,7 @@
           "settings": {
             "asset": "photo-lemons-towel.png",
             "placeholder_label": "foto · a bolsa na feira",
-            "tag": "Drop Nº 01",
+            "tag": "CHARTER — SS2026 01",
             "shot_label": "packshot · fundo liso",
             "ph_name": "A de Duas Raquetes",
             "ph_price": "R$ 720",
@@ -104,7 +104,7 @@
     "featured": {
       "type": "featured-collection",
       "settings": {
-        "drop_label": "Drop Nº 01 · Aberto",
+        "drop_label": "CHARTER — SS2026 01",
         "eyebrow": "O Vestiário",
         "heading": "Cinco bolsas. Cada uma para uma forma de chegar à quadra.",
         "collection": "",
