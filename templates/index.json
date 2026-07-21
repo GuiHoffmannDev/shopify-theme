@@ -101,21 +101,6 @@
         "show_seal": true
       }
     },
-    "marquee": {
-      "type": "marquee",
-      "blocks": {
-        "f1": { "type": "fact", "settings": { "text": "Fica em pé" } },
-        "f2": { "type": "fact", "settings": { "text": "Troca em 30 dias" } },
-        "f3": { "type": "fact", "settings": { "text": "Drop Nº 01 aberto" } },
-        "f4": { "type": "fact", "settings": { "text": "Sai em 2 dias úteis" } },
-        "f5": { "type": "fact", "settings": { "text": "Reparo de ferragem no primeiro ano" } }
-      },
-      "block_order": ["f1", "f2", "f3", "f4", "f5"],
-      "settings": {
-        "inverse": false,
-        "speed": 45
-      }
-    },
     "featured": {
       "type": "featured-collection",
       "settings": {
@@ -195,7 +180,6 @@
     "showcase",
     "club",
     "positioning",
-    "marquee",
     "featured",
     "mosaic",
     "journal",
