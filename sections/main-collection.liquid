@@ -2,10 +2,12 @@
   <div class="wrap">
     <h1 class="visually-hidden">{{ collection.title | default: 'Produtos' }}</h1>
     <div class="coll-toolbar">
+      {%- assign is_named_collection = false -%}
+      {%- if collection.handle and collection.handle != 'all' -%}{%- assign is_named_collection = true -%}{%- endif -%}
       <div class="coll-filters">
-        <a href="{{ collection.url | default: routes.all_products_collection_url }}" class="coll-filter {% unless current_tags %}is-active{% endunless %}">Tudo</a>
-        {%- if collection.title != blank -%}
-          <span class="coll-filter">{{ collection.title }}</span>
+        <a href="{{ routes.all_products_collection_url }}" class="coll-filter{% unless is_named_collection %} is-active{% endunless %}">Tudo</a>
+        {%- if is_named_collection and collection.title != blank -%}
+          <a href="{{ collection.url }}" class="coll-filter is-active">{{ collection.title }}</a>
         {%- endif -%}
       </div>
       {%- if collection.sort_options.size > 0 -%}
