@@ -1,12 +1,14 @@
 <section class="gallery" data-screen-label="Galeria" data-gallery>
   <div class="gallery__track" data-gallery-track>
     {%- for block in section.blocks -%}
+      {%- comment -%} 1º quadro é o topo da página (LCP): carrega eager e com prioridade. {%- endcomment -%}
+      {%- if forloop.first -%}{%- assign frame_loading = 'eager' -%}{%- else -%}{%- assign frame_loading = 'lazy' -%}{%- endif -%}
       <article class="gallery__frame" {{ block.shopify_attributes }}>
         <div class="gallery__media">
           {%- if block.settings.image != blank -%}
-            <img src="{{ block.settings.image | image_url: width: 1200 }}" alt="{{ block.settings.image.alt | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="lazy">
+            <img src="{{ block.settings.image | image_url: width: 1200 }}" alt="{{ block.settings.image.alt | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="{{ frame_loading }}"{% if forloop.first %} fetchpriority="high"{% endif %}>
           {%- elsif block.settings.asset != blank -%}
-            <img src="{{ block.settings.asset | asset_url }}" alt="" width="928" height="1152" loading="lazy">
+            <img src="{{ block.settings.asset | asset_url }}" alt="" width="928" height="1152" loading="{{ frame_loading }}"{% if forloop.first %} fetchpriority="high"{% endif %}>
           {%- else -%}
             <div class="ph"><span>{{ block.settings.placeholder_label }}</span></div>
           {%- endif -%}
