@@ -494,3 +494,55 @@ button{font-family:inherit;}
 @media (min-width:2000px){
   .product-grid,.product-grid--4{grid-template-columns:repeat(5,1fr);}
 }
+
+/* ---------- Galeria editorial (carrossel full-bleed, estilo lookbook) ----------
+   Faixa de fotos verticais lado a lado que rola na horizontal. Rolagem nativa +
+   arrastar-para-rolar; setas são enhancement de desktop. O bloco de label vive
+   dentro do primeiro quadro, sobre um degradê navy — mesmo recurso de contraste
+   do hero, para o texto creme não reprovar sobre foto clara. */
+.gallery{position:relative;}
+.gallery__track{
+  display:flex;gap:2px;
+  overflow-x:auto;scroll-snap-type:x proximity;
+  scrollbar-width:none;-ms-overflow-style:none;
+}
+.gallery__track::-webkit-scrollbar{display:none;}
+.gallery.is-dragging{cursor:grabbing;}
+.gallery.is-dragging .gallery__track{scroll-snap-type:none;scroll-behavior:auto;}
+.gallery__frame{
+  position:relative;flex:0 0 clamp(300px,42vw,600px);
+  aspect-ratio:4/5;scroll-snap-align:start;overflow:hidden;background:var(--sand-200);
+}
+.gallery__media{position:absolute;inset:0;}
+.gallery__media img{width:100%;height:100%;object-fit:cover;display:block;}
+.gallery__media .ph{height:100%;border:0;}
+.gallery__overlay{
+  position:absolute;inset:0;display:flex;align-items:flex-end;
+  padding:clamp(24px,3vw,44px);
+  background:linear-gradient(180deg,rgba(20,31,68,0) 38%,rgba(20,31,68,0.55) 100%);
+  pointer-events:none;
+}
+.gallery__caption{max-width:22ch;color:var(--cream-100);}
+.gallery__caption .btn{pointer-events:auto;}
+.gallery__title{
+  font-family:var(--font-display);font-weight:var(--weight-display);
+  font-size:clamp(30px,3.4vw,46px);line-height:1.05;letter-spacing:var(--tracking-headline);
+  color:var(--cream-100);margin:14px 0 0;
+}
+.gallery__arrow{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:2;
+  width:52px;height:52px;border-radius:999px;display:flex;align-items:center;justify-content:center;
+  background:var(--cream-50);border:1px solid var(--border-hairline);color:var(--text-primary);cursor:pointer;
+}
+.gallery__arrow:hover{background:var(--navy-700);border-color:var(--navy-700);color:var(--cream-100);}
+.gallery__arrow svg{width:20px;height:20px;}
+.gallery__arrow--prev{left:16px;}
+.gallery__arrow--next{right:16px;}
+
+@media (prefers-reduced-motion: no-preference){
+  .gallery__track{scroll-behavior:smooth;}
+}
+@media (max-width:900px){
+  .gallery__frame{flex:0 0 78vw;}
+  .gallery__arrow{display:none;}
+}

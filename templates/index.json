@@ -22,6 +22,23 @@
         "button_link": "/collections/charter-ss2026-01"
       }
     },
+    "gallery": {
+      "type": "gallery",
+      "blocks": {
+        "g1": { "type": "frame", "settings": { "asset": "photo-editorial-wall.jpg" } },
+        "g2": { "type": "frame", "settings": { "asset": "photo-lemons-towel.png" } },
+        "g3": { "type": "frame", "settings": { "asset": "photo-oranges-pool.png" } },
+        "g4": { "type": "frame", "settings": { "asset": "photo-interlude-chair.jpg" } },
+        "g5": { "type": "frame", "settings": { "asset": "photo-club-bench.jpg" } }
+      },
+      "block_order": ["g1", "g2", "g3", "g4", "g5"],
+      "settings": {
+        "eyebrow": "CHARTER — SS2026 01",
+        "heading": "A coleção do primeiro drop.",
+        "button_label": "Ver a coleção",
+        "button_link": "/collections/charter-ss2026-01"
+      }
+    },
     "showcase": {
       "type": "showcase",
       "blocks": {
@@ -179,6 +196,7 @@
   },
   "order": [
     "hero",
+    "gallery",
     "showcase",
     "club",
     "positioning",

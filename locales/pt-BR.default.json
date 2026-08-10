@@ -24,7 +24,9 @@
       "footer_nav": "Navegação do rodapé",
       "previous": "Peça anterior",
       "next": "Próxima peça",
-      "go_to_slide": "Ir para a peça {{ index }}"
+      "go_to_slide": "Ir para a peça {{ index }}",
+      "previous_photo": "Foto anterior",
+      "next_photo": "Próxima foto"
     }
   }
 }

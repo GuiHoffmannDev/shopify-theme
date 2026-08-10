@@ -134,4 +134,55 @@
       slides.forEach(function (slide) { sio.observe(slide); });
     }
   });
+
+  // Galeria: faixa de rolagem nativa. As setas rolam ~um quadro; arrastar rola no
+  // desktop. No toque, deixamos a rolagem nativa com inércia.
+  document.querySelectorAll('[data-gallery]').forEach(function (root) {
+    var track = root.querySelector('[data-gallery-track]');
+    if (!track) return;
+    var prev = root.querySelector('[data-gallery-prev]');
+    var next = root.querySelector('[data-gallery-next]');
+
+    function step() {
+      var frame = track.querySelector('.gallery__frame');
+      var cs = getComputedStyle(track);
+      var gap = parseFloat(cs.columnGap || cs.gap) || 0;
+      return frame ? frame.getBoundingClientRect().width + gap : track.clientWidth * 0.8;
+    }
+    function nudge(dir) {
+      track.scrollBy({ left: dir * step(), behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
+    if (prev) prev.addEventListener('click', function () { nudge(-1); });
+    if (next) next.addEventListener('click', function () { nudge(1); });
+
+    // Arrastar-para-rolar (só mouse).
+    var down = false, startX = 0, startLeft = 0, moved = 0;
+    track.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      down = true; moved = 0; startX = e.clientX; startLeft = track.scrollLeft;
+    });
+    track.addEventListener('pointermove', function (e) {
+      if (!down) return;
+      var dx = e.clientX - startX;
+      if (!root.classList.contains('is-dragging') && Math.abs(dx) > 4) {
+        root.classList.add('is-dragging');
+        try { track.setPointerCapture(e.pointerId); } catch (err) {}
+      }
+      if (root.classList.contains('is-dragging')) { moved = dx; track.scrollLeft = startLeft - dx; }
+    });
+    function endDrag(e) {
+      if (!down) return;
+      down = false;
+      if (root.classList.contains('is-dragging')) {
+        root.classList.remove('is-dragging');
+        try { track.releasePointerCapture(e.pointerId); } catch (err) {}
+      }
+    }
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointercancel', endDrag);
+    // Evita que o arrasto vire clique no botão sob o cursor.
+    track.addEventListener('click', function (e) {
+      if (Math.abs(moved) > 4) { e.preventDefault(); e.stopPropagation(); moved = 0; }
+    }, true);
+  });
 })();
