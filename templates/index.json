@@ -12,13 +12,51 @@
     "gallery": {
       "type": "gallery",
       "blocks": {
-        "g1": { "type": "frame", "settings": { "asset": "photo-editorial-wall.jpg" } },
-        "g2": { "type": "frame", "settings": { "asset": "photo-lemons-towel.png" } },
-        "g3": { "type": "frame", "settings": { "asset": "photo-oranges-pool.png" } },
-        "g4": { "type": "frame", "settings": { "asset": "photo-interlude-chair.jpg" } },
-        "g5": { "type": "frame", "settings": { "asset": "photo-club-bench.jpg" } }
+        "g1": {
+          "type": "frame",
+          "settings": {
+            "asset": "photo-editorial-wall.jpg",
+            "placeholder_label": "foto · a bolsa fora da quadra"
+          }
+        },
+        "g2": {
+          "type": "frame",
+          "settings": {
+            "asset": "photo-lemons-towel.png",
+            "placeholder_label": "foto · a bolsa fora da quadra"
+          }
+        },
+        "g4": {
+          "type": "frame",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260722_000711_5fee125e-e44f-43b0-85eb-2c61b9a1dc2a.png",
+            "asset": "photo-interlude-chair.jpg",
+            "placeholder_label": "foto · a bolsa fora da quadra"
+          }
+        },
+        "g3": {
+          "type": "frame",
+          "settings": {
+            "asset": "photo-oranges-pool.png",
+            "placeholder_label": "foto · a bolsa fora da quadra"
+          }
+        },
+        "g5": {
+          "type": "frame",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260716_044119_64625292-7af3-48b0-8090-ec51cf3e76a0.png",
+            "asset": "photo-club-bench.jpg",
+            "placeholder_label": "foto · a bolsa fora da quadra"
+          }
+        }
       },
-      "block_order": ["g1", "g2", "g3", "g4", "g5"],
+      "block_order": [
+        "g1",
+        "g2",
+        "g4",
+        "g3",
+        "g5"
+      ],
       "settings": {
         "eyebrow": "CHARTER — SS2026 01",
         "heading": "A coleção do primeiro drop.",
@@ -32,6 +70,7 @@
         "v1": {
           "type": "slide",
           "settings": {
+            "product": "",
             "asset": "photo-editorial-wall.jpg",
             "placeholder_label": "foto · a bolsa fora da quadra",
             "tag": "Novo",
@@ -45,6 +84,7 @@
         "v2": {
           "type": "slide",
           "settings": {
+            "product": "",
             "asset": "photo-lemons-towel.png",
             "placeholder_label": "foto · a bolsa na feira",
             "tag": "CHARTER — SS2026 01",
@@ -56,7 +96,10 @@
           }
         }
       },
-      "block_order": ["v1", "v2"],
+      "block_order": [
+        "v1",
+        "v2"
+      ],
       "settings": {
         "eyebrow": "Em destaque",
         "heading": "A bolsa do primeiro drop."
@@ -88,7 +131,11 @@
           }
         }
       },
-      "block_order": ["c1", "c2", "c3"],
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
       "settings": {
         "eyebrow": "O Clube",
         "heading": "Toda a elegância do country club. Nenhuma das portas."
@@ -150,7 +197,11 @@
           }
         }
       },
-      "block_order": ["m1", "m2", "m3"],
+      "block_order": [
+        "m1",
+        "m2",
+        "m3"
+      ],
       "settings": {
         "eyebrow": "As salas",
         "heading": "Por onde você quer entrar."
