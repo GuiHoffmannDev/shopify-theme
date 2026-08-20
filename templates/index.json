@@ -112,6 +112,7 @@
         "c1": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/hf_20260710_045250_db3fc595-751d-42c5-ac48-0bb6ebca28c7.png",
             "asset": "photo-club-bench.jpg",
             "caption": "O vestiário · antes do primeiro saque"
           }
@@ -127,6 +128,7 @@
         "c3": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/hf_20260713_210923_68963acc-4482-4c38-8fe8-6c56dc39e77a.png",
             "asset": "photo-club-elevator.jpg",
             "caption": "O elevador · depois do último game"
           }
