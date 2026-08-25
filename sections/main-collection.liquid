@@ -98,16 +98,6 @@
             <span class="coll-band__label">Entre um jogo e outro</span>
           </div>
         </div>
-        <div class="coll-band coll-band--flip">
-          <div class="coll-band__products">
-            {% render 'product-card', ph_category: 'Grips', ph_name: 'O Grip', ph_price: 'R$ 79', ph_tag: 'Testado', ph_label: 'grip · foto de produto', ph_url: routes.all_products_collection_url %}
-            {% render 'product-card', ph_category: 'Grips', ph_name: 'O Grip · Par', ph_price: 'R$ 140', ph_label: 'grip · foto de produto', ph_url: routes.all_products_collection_url %}
-          </div>
-          <div class="coll-band__editorial">
-            <img src="{{ 'photo-interlude-chair.jpg' | asset_url }}" alt="" width="928" height="1152" loading="lazy">
-            <span class="coll-band__label">A cadeira do juiz · fim de tarde</span>
-          </div>
-        </div>
       </div>
       <p class="center mt-8" style="font-family:var(--font-body);font-style:italic;font-size:15px;color:var(--text-muted);">Adicione produtos a esta coleção no admin — os quadros sem imagem mostram o fundo de linho até você subir as fotos.</p>
     {%- endif -%}

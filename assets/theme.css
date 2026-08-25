@@ -137,6 +137,8 @@ button{font-family:inherit;}
 /* ---------- Header ---------- */
 .site-header{position:sticky;top:0;z-index:20;background:var(--cream-100);}
 .site-header__bar{display:flex;align-items:center;justify-content:space-between;height:80px;}
+/* Seção com id é alvo de âncora: o header sticky de 80px comeria a sobrelinha. */
+.section[id]{scroll-margin-top:104px;}
 .site-header__nav{display:flex;gap:32px;flex:1;}
 .site-header__link{
   font-family:var(--font-sans);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;

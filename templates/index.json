@@ -185,10 +185,10 @@
         "m2": {
           "type": "tile",
           "settings": {
-            "label": "O Grip",
-            "link": "",
+            "label": "O Clube",
+            "link": "/#clube",
             "asset": "photo-interlude-gravel.jpg",
-            "placeholder_label": "foto · o grip"
+            "placeholder_label": "foto · o clube"
           }
         },
         "m3": {
