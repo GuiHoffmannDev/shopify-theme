@@ -437,6 +437,10 @@ button{font-family:inherit;}
 .mosaic{display:grid;grid-template-columns:1.55fr 1fr;grid-template-rows:1fr 1fr;gap:12px;min-height:620px;}
 .mosaic__tile{position:relative;overflow:hidden;display:block;background:var(--sand-200);}
 .mosaic__tile--lead{grid-row:span 2;}
+/* Dupla: sem o terceiro quadro não há o que empilhar à direita, então a grade vira
+   uma linha só e os dois tiles ficam lado a lado, de altura cheia. */
+.mosaic--pair{grid-template-rows:1fr;}
+.mosaic--pair .mosaic__tile--lead{grid-row:auto;}
 .mosaic__tile img{width:100%;height:100%;object-fit:cover;transition:transform var(--duration-slow) var(--ease-standard);}
 .mosaic__tile:hover img{transform:scale(1.03);}
 .mosaic__tile .ph{height:100%;border:0;}
@@ -471,7 +475,8 @@ button{font-family:inherit;}
   .showcase__media{aspect-ratio:4/5;}
   .showcase__panel{padding:0;}
   .showcase__arrow{display:none;}
-  .mosaic{grid-template-columns:1fr;grid-template-rows:none;min-height:0;}
+  .mosaic,
+  .mosaic--pair{grid-template-columns:1fr;grid-template-rows:none;min-height:0;}
   .mosaic__tile{height:320px;}
   .mosaic__tile--lead{grid-row:auto;height:420px;}
   .product-grid--4{grid-template-columns:1fr 1fr;}

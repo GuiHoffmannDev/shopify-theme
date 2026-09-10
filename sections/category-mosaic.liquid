@@ -11,7 +11,7 @@
       </div>
     {%- endif -%}
 
-    <div class="mosaic" data-reveal>
+    <div class="mosaic{% if section.blocks.size == 2 %} mosaic--pair{% endif %}" data-reveal>
       {%- for block in section.blocks -%}
         <a href="{{ block.settings.link | default: routes.all_products_collection_url }}"
            class="mosaic__tile {% if forloop.first %}mosaic__tile--lead{% endif %}"
@@ -35,7 +35,7 @@
 {
   "name": "Mosaico de salas",
   "settings": [
-    { "type": "paragraph", "content": "O primeiro bloco ocupa o quadro grande. Salas do clube — nunca \"categorias\"." },
+    { "type": "paragraph", "content": "O primeiro bloco ocupa o quadro grande. Com dois blocos eles ficam lado a lado; com três, o segundo e o terceiro empilham à direita. Salas do clube — nunca \"categorias\"." },
     { "type": "text", "id": "eyebrow", "label": "Sobrelinha", "default": "As salas" },
     { "type": "text", "id": "heading", "label": "Título", "default": "Por onde você quer entrar." }
   ],
@@ -57,8 +57,7 @@
     "name": "Mosaico de salas",
     "blocks": [
       { "type": "tile", "settings": { "label": "O Vestiário", "asset": "photo-club-elevator.jpg", "placeholder_label": "foto · as bolsas" } },
-      { "type": "tile", "settings": { "label": "O Clube", "link": "/#clube", "asset": "photo-interlude-gravel.jpg", "placeholder_label": "foto · o clube" } },
-      { "type": "tile", "settings": { "label": "O Jornal", "asset": "photo-journal-lookbook.jpg", "placeholder_label": "foto · o jornal" } }
+      { "type": "tile", "settings": { "label": "Acessórios", "link": "/collections/acessorios", "asset": "photo-interlude-gravel.jpg", "placeholder_label": "foto · os acessórios" } }
     ]
   }]
 }

@@ -185,26 +185,16 @@
         "m2": {
           "type": "tile",
           "settings": {
-            "label": "O Clube",
-            "link": "/#clube",
+            "label": "Acessórios",
+            "link": "/collections/acessorios",
             "asset": "photo-interlude-gravel.jpg",
-            "placeholder_label": "foto · o clube"
-          }
-        },
-        "m3": {
-          "type": "tile",
-          "settings": {
-            "label": "O Jornal",
-            "link": "",
-            "asset": "photo-journal-lookbook.jpg",
-            "placeholder_label": "foto · o jornal"
+            "placeholder_label": "foto · os acessórios"
           }
         }
       },
       "block_order": [
         "m1",
-        "m2",
-        "m3"
+        "m2"
       ],
       "settings": {
         "eyebrow": "As salas",
