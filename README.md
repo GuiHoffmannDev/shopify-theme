@@ -1,6 +1,6 @@
 # Limen Club — Tema Shopify
 
-Tema da Limen Club (bolsas para pickleball). Estética racquet club: navy `#1F2D5C`, limão `#E5C63F`, oliva `#75803E`, creme `#F7F1E4`. Tipografia: Satoshi via Fontshare (400/500/700) em tudo — headlines em Medium com tracking -0.02em, labels caixa alta 0.22em; o script fica só no logo.
+Tema da Limen Club (bolsas para pickleball). Estética racquet club: navy `#1F2D5C`, limão `#E5C63F`, oliva `#75803E`, fundo off-white `#FAF9F6`. Tipografia: Satoshi via Fontshare (400/500/700) em tudo — headlines em Medium com tracking -0.02em, labels caixa alta 0.22em; o script fica só no logo.
 
 ## Estrutura
 
