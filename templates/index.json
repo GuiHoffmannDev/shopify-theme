@@ -201,18 +201,6 @@
         "heading": "Por onde você quer entrar."
       }
     },
-    "journal": {
-      "type": "journal-teaser",
-      "settings": {
-        "asset": "photo-journal-lookbook.jpg",
-        "issue_label": "Edição Nº 1",
-        "eyebrow": "Jornal do Clube",
-        "heading": "O clube tem um jornal. Ele conta como cada peça foi testada.",
-        "body": "<p>Bastidor dos testes em quadra, o caminho de cada material e o que vem no próximo drop — contado como um jornal de clube, não como catálogo. Guarde com o café da manhã.</p>",
-        "button_label": "Ler a edição",
-        "button_link": ""
-      }
-    },
     "invite": {
       "type": "newsletter",
       "settings": {
@@ -233,7 +221,6 @@
     "positioning",
     "featured",
     "mosaic",
-    "journal",
     "invite"
   ]
 }
