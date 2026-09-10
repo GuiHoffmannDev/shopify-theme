@@ -438,8 +438,10 @@ button{font-family:inherit;}
 .mosaic__tile{position:relative;overflow:hidden;display:block;background:var(--sand-200);}
 .mosaic__tile--lead{grid-row:span 2;}
 /* Dupla: sem o terceiro quadro não há o que empilhar à direita, então a grade vira
-   uma linha só e os dois tiles ficam lado a lado, de altura cheia. */
-.mosaic--pair{grid-template-rows:1fr;}
+   uma linha só e os dois tiles ficam lado a lado, de altura cheia. Colunas iguais —
+   com dois quadros a assimetria 1.55/1 não tem o que hierarquizar, e a emenda
+   cai fora do centro. Três quadros voltam a usar o 1.55fr da regra base. */
+.mosaic--pair{grid-template-columns:1fr 1fr;grid-template-rows:1fr;}
 .mosaic--pair .mosaic__tile--lead{grid-row:auto;}
 .mosaic__tile img{width:100%;height:100%;object-fit:cover;transition:transform var(--duration-slow) var(--ease-standard);}
 .mosaic__tile:hover img{transform:scale(1.03);}
