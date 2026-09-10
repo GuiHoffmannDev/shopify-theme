@@ -5,10 +5,10 @@
       {%- assign is_named_collection = false -%}
       {%- if collection.handle and collection.handle != 'all' -%}{%- assign is_named_collection = true -%}{%- endif -%}
       <div class="coll-filters">
-        <a href="{{ routes.all_products_collection_url }}" class="coll-filter{% unless is_named_collection %} is-active{% endunless %}">Tudo</a>
-        {%- if is_named_collection and collection.title != blank -%}
-          <a href="{{ collection.url }}" class="coll-filter is-active">{{ collection.title }}</a>
-        {%- endif -%}
+        <a href="{{ routes.all_products_collection_url }}" class="coll-filter{% unless is_named_collection %} is-active{% endunless %}"{% unless is_named_collection %} aria-current="page"{% endunless %}>Tudo</a>
+        {%- for c in collections -%}
+          <a href="{{ c.url }}" class="coll-filter{% if c.handle == collection.handle %} is-active{% endif %}"{% if c.handle == collection.handle %} aria-current="page"{% endif %}>{{ c.title }}</a>
+        {%- endfor -%}
       </div>
       {%- if collection.sort_options.size > 0 -%}
         <form method="get" class="field">
