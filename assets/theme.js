@@ -14,6 +14,14 @@
     }
   });
 
+  // Seletor de país/moeda: envia ao mudar. Sem JS, o <noscript> mostra o botão.
+  document.querySelectorAll('.site-header__loc select').forEach(function (select) {
+    select.addEventListener('change', function () {
+      var form = select.closest('form');
+      if (form) form.submit();
+    });
+  });
+
   // Product: variant swatches -> hidden id input + price + button state
   document.querySelectorAll('[data-product-form]').forEach(function (form) {
     var data = form.querySelector('[data-variants-json]');

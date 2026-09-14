@@ -653,3 +653,22 @@ button{font-family:inherit;}
   .rail__item{flex:0 0 66vw;}
   .rail__arrow{display:none;}
 }
+
+/* ---------- Busca e moeda no header ---------- */
+.site-header__icon{display:inline-flex;align-items:center;color:var(--navy-700);}
+.site-header__icon svg{width:18px;height:18px;}
+.site-header__icon:hover{color:var(--olive-700);}
+.site-header__loc{display:inline-flex;align-items:center;margin:0;}
+/* Select sem chrome de sistema: o header é uma linha de labels, não um formulário.
+   A seta é desenhada com dois degradês para não depender de imagem. */
+.site-header__select{
+  appearance:none;-webkit-appearance:none;
+  border:0;cursor:pointer;padding:0 18px 0 0;
+  font-family:var(--font-sans);font-size:11px;font-weight:var(--weight-label);
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--navy-700);
+  background-color:transparent;
+  background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);
+  background-position:calc(100% - 8px) center,calc(100% - 4px) center;
+  background-size:4px 4px,4px 4px;background-repeat:no-repeat;
+}
+.site-header__select:hover{color:var(--olive-700);}

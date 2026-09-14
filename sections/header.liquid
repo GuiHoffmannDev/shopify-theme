@@ -20,6 +20,25 @@
       {%- if section.settings.show_est -%}
         <span class="eyebrow">{{ section.settings.est_text }}</span>
       {%- endif -%}
+
+      {%- if section.settings.show_search -%}
+        <a href="{{ routes.search_url }}" class="site-header__icon" aria-label="{{ 'general.a11y.search' | t }}">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M16 16l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.25"/></svg>
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.show_currency and localization.available_countries.size > 1 -%}
+        {%- form 'localization', class: 'site-header__loc' -%}
+          <label class="visually-hidden" for="header-country">{{ 'general.a11y.country' | t }}</label>
+          <select id="header-country" name="country_code" class="site-header__select">
+            {%- for country in localization.available_countries -%}
+              <option value="{{ country.iso_code }}"{% if country.iso_code == localization.country.iso_code %} selected{% endif %}>{{ country.currency.iso_code }}</option>
+            {%- endfor -%}
+          </select>
+          <noscript><button type="submit" class="site-header__link">OK</button></noscript>
+        {%- endform -%}
+      {%- endif -%}
+
       {%- if section.settings.menu_right != blank -%}
         {%- for link in section.settings.menu_right.links -%}
           <a href="{{ link.url }}" class="site-header__link"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
@@ -60,6 +79,8 @@
     { "type": "link_list", "id": "menu", "label": "Menu (esquerda)", "default": "main-menu" },
     { "type": "link_list", "id": "menu_right", "label": "Menu (direita — links utilitários, antes da sacola)" },
     { "type": "checkbox", "id": "show_account", "label": "Mostrar link de conta", "default": true },
+    { "type": "checkbox", "id": "show_search", "label": "Mostrar busca", "default": true },
+    { "type": "checkbox", "id": "show_currency", "label": "Mostrar seletor de moeda", "info": "Só aparece quando a loja vende para mais de um país.", "default": true },
     { "type": "checkbox", "id": "show_est", "label": "Mostrar \"Est.\"", "default": false },
     { "type": "text", "id": "est_text", "label": "Texto Est.", "default": "Est. 2025" }
   ]
