@@ -139,16 +139,22 @@
         "show_seal": true
       }
     },
-    "featured": {
+    "rail_drop": {
       "type": "featured-collection",
       "settings": {
-        "drop_label": "CHARTER — SS2026 01",
-        "eyebrow": "O Vestiário",
-        "heading": "Cinco bolsas. Cada uma para uma forma de chegar à quadra.",
+        "heading": "O DROP",
         "collection": "charter-ss2026-01",
-        "limit": 4,
-        "button_label": "Ver a coleção",
-        "note": "Cada caixa do drop leva o número da série no cartão, escrito à mão."
+        "limit": 8,
+        "button_label": "Ver tudo"
+      }
+    },
+    "rail_salao": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "O SALÃO",
+        "collection": "acessorios",
+        "limit": 8,
+        "button_label": "Ver tudo"
       }
     },
     "mosaic": {
@@ -195,13 +201,5 @@
       }
     }
   },
-  "order": [
-    "hero",
-    "showcase",
-    "club",
-    "positioning",
-    "featured",
-    "mosaic",
-    "invite"
-  ]
+  "order": ["hero", "rail_drop", "mosaic", "rail_salao", "showcase", "club", "positioning", "invite"]
 }

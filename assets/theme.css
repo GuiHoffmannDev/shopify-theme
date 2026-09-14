@@ -534,13 +534,13 @@ button{font-family:inherit;}
   font-size:clamp(30px,3.4vw,46px);line-height:1.05;letter-spacing:var(--tracking-headline);
   color:var(--paper-100);margin:14px 0 0;
 }
-.gallery__arrow{
+.gallery__arrow,.rail__arrow{
   position:absolute;top:50%;transform:translateY(-50%);z-index:2;
   width:52px;height:52px;border-radius:999px;display:flex;align-items:center;justify-content:center;
   background:var(--paper-50);border:1px solid var(--border-hairline);color:var(--text-primary);cursor:pointer;
 }
-.gallery__arrow:hover{background:var(--navy-700);border-color:var(--navy-700);color:var(--paper-100);}
-.gallery__arrow svg{width:20px;height:20px;}
+.gallery__arrow:hover,.rail__arrow:hover{background:var(--navy-700);border-color:var(--navy-700);color:var(--paper-100);}
+.gallery__arrow svg,.rail__arrow svg{width:20px;height:20px;}
 .gallery__arrow--prev{left:16px;}
 .gallery__arrow--next{right:16px;}
 
@@ -549,7 +549,7 @@ button{font-family:inherit;}
 }
 @media (max-width:900px){
   .gallery__frame{flex:0 0 78vw;}
-  .gallery__arrow{display:none;}
+  .gallery__arrow,.rail__arrow{display:none;}
 }
 
 /* ---------- Swatches do card ---------- */
@@ -608,4 +608,35 @@ button{font-family:inherit;}
   .hero-carousel__slide{height:min(84svh,680px);}
   .hero-carousel__copy{bottom:72px;}
   .hero-carousel__lead{font-size:15px;}
+}
+
+/* ---------- Prateleira de produtos ---------- */
+.rail-section{padding:var(--space-8) 0;}
+/* Cabeçalho à esquerda com a pílula colada: o par título+destino da Malbon. */
+.rail__head{
+  display:flex;align-items:center;gap:var(--space-4);
+  padding:0 var(--page-pad);margin-bottom:var(--space-5);
+}
+.rail__title{
+  font-family:var(--font-sans);font-size:13px;font-weight:var(--weight-label);
+  letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-primary);
+}
+.rail{position:relative;}
+/* O padding lateral alinha o 1º card à calha da página; o último fica cortado na
+   borda, convidando a rolar. */
+.rail__track{
+  display:flex;gap:20px;padding:0 var(--page-pad);
+  overflow-x:auto;scroll-snap-type:x proximity;scroll-padding-left:var(--page-pad);
+  scrollbar-width:none;-ms-overflow-style:none;
+}
+.rail__track::-webkit-scrollbar{display:none;}
+.rail.is-dragging{cursor:grabbing;}
+.rail.is-dragging .rail__track{scroll-snap-type:none;scroll-behavior:auto;}
+.rail__item{flex:0 0 clamp(240px,22vw,340px);scroll-snap-align:start;}
+.rail__arrow--prev{left:16px;}
+.rail__arrow--next{right:16px;}
+
+@media (max-width:749px){
+  .rail__item{flex:0 0 66vw;}
+  .rail__arrow{display:none;}
 }
