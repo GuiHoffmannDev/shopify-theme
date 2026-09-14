@@ -564,3 +564,48 @@ button{font-family:inherit;}
   font-family:var(--font-sans);font-size:10px;letter-spacing:0.08em;
   color:var(--text-muted);margin-left:2px;
 }
+
+/* ---------- Hero carrossel ---------- */
+.hero-carousel{position:relative;}
+.hero-carousel__track{
+  display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+  scrollbar-width:none;-ms-overflow-style:none;
+}
+.hero-carousel__track::-webkit-scrollbar{display:none;}
+.hero-carousel__slide{
+  position:relative;flex:0 0 100%;scroll-snap-align:start;
+  height:min(100svh,860px);overflow:hidden;background:var(--stone-200);
+}
+.hero-carousel__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.hero-carousel__slide .ph{position:absolute;inset:0;height:100%;border:0;}
+/* Degradê só na base: a copy vive embaixo, e escurecer a foto inteira mataria a
+   cena. Sem ele o texto creme reprova sobre as fotos claras. */
+.hero-carousel__scrim{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(20,31,68,0) 38%,rgba(20,31,68,0.58) 100%);
+}
+.hero-carousel__copy{
+  position:absolute;left:var(--page-pad);right:var(--page-pad);bottom:96px;
+  max-width:46ch;color:var(--paper-100);
+}
+.hero-carousel__title{
+  font-family:var(--font-display);font-weight:var(--weight-display);
+  font-size:clamp(38px,5.4vw,68px);line-height:1.02;
+  letter-spacing:var(--tracking-headline);text-transform:uppercase;
+}
+.hero-carousel__lead{font-family:var(--font-body);font-size:17px;line-height:1.55;margin-top:14px;max-width:46ch;}
+.hero-carousel__dots{
+  position:absolute;left:0;right:0;bottom:32px;
+  display:flex;justify-content:center;gap:12px;
+}
+.hero-carousel__dot{
+  width:7px;height:7px;border-radius:999px;display:block;
+  border:1px solid var(--paper-100);background:transparent;
+}
+.hero-carousel__dot[aria-current="true"]{background:var(--paper-100);}
+
+@media (max-width:749px){
+  .hero-carousel__slide{height:min(84svh,680px);}
+  .hero-carousel__copy{bottom:72px;}
+  .hero-carousel__lead{font-size:15px;}
+}
