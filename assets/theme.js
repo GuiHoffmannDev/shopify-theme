@@ -195,4 +195,17 @@
       if (Math.abs(moved) > 4) { e.preventDefault(); e.stopPropagation(); moved = 0; }
     }, true);
   });
+
+  // Acordeão do rodapé: aberto no desktop, fechado no mobile. Em JS porque CSS não
+  // controla o atributo `open`. Sem JS tudo fica aberto, que é o lado seguro.
+  var footerCols = document.querySelectorAll('.site-footer__col');
+  if (footerCols.length && window.matchMedia) {
+    var narrowFooter = window.matchMedia('(max-width: 749px)');
+    var syncFooterCols = function () {
+      footerCols.forEach(function (col) { col.open = !narrowFooter.matches; });
+    };
+    syncFooterCols();
+    if (narrowFooter.addEventListener) narrowFooter.addEventListener('change', syncFooterCols);
+    else if (narrowFooter.addListener) narrowFooter.addListener(syncFooterCols);
+  }
 })();

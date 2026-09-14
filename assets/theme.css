@@ -155,13 +155,52 @@ button{font-family:inherit;}
 
 /* ---------- Footer ---------- */
 .site-footer{background:var(--surface-inverse);color:var(--text-inverse);}
-.site-footer .wrap{padding-top:72px;padding-bottom:48px;text-align:center;}
-.site-footer__crest{width:148px;height:auto;margin:0 auto;}
-.site-footer__links{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;font-family:var(--font-sans);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;}
-.site-footer__links a{color:var(--paper-100);}
-.site-footer__links a:hover{color:var(--lemon-300);}
-.site-footer__tagline{font-family:var(--font-body);font-style:italic;font-size:16px;margin-top:36px;opacity:0.75;}
-.site-footer__fine{font-family:var(--font-sans);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;margin-top:20px;opacity:0.5;}
+.site-footer__grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) 1.6fr;
+  gap:var(--space-7);padding-top:var(--space-8);padding-bottom:var(--space-7);
+  align-items:start;
+}
+/* No desktop o acordeão não tem função: marcador escondido, conteúdo aberto. */
+.site-footer__col-title{
+  font-family:var(--font-sans);font-size:11px;font-weight:var(--weight-label);
+  letter-spacing:var(--tracking-label);text-transform:uppercase;
+  color:var(--paper-100);list-style:none;cursor:default;
+}
+.site-footer__col-title::-webkit-details-marker{display:none;}
+.site-footer__col-list{list-style:none;margin:var(--space-4) 0 0;padding:0;display:grid;gap:10px;}
+.site-footer__col-list a{font-size:14px;color:var(--paper-100);opacity:0.75;}
+.site-footer__col-list a:hover{color:var(--lemon-300);opacity:1;}
+.site-footer__news-body{font-size:14px;opacity:0.75;margin-top:var(--space-4);max-width:42ch;}
+.site-footer__form{display:flex;flex-wrap:wrap;margin-top:var(--space-5);max-width:440px;}
+.site-footer__input{
+  flex:1;min-width:0;background:transparent;color:var(--paper-100);
+  border:1px solid var(--border-hairline-inverse);border-right:0;
+  padding:13px 16px;font-family:var(--font-body);font-size:14px;border-radius:0;
+}
+.site-footer__input::placeholder{color:var(--paper-100);opacity:0.5;}
+.site-footer__news-ok{flex-basis:100%;font-size:13px;margin-top:12px;color:var(--lemon-300);}
+.site-footer__social{display:flex;gap:var(--space-4);margin-top:var(--space-5);}
+.site-footer__social a{color:var(--paper-100);display:inline-flex;}
+.site-footer__social a:hover{color:var(--lemon-300);}
+.site-footer__social svg{width:22px;height:22px;}
+.site-footer__base{
+  display:flex;justify-content:space-between;gap:var(--space-5);flex-wrap:wrap;
+  border-top:1px solid var(--border-hairline-inverse);
+  padding-top:var(--space-5);padding-bottom:var(--space-6);
+}
+.site-footer__fine{font-family:var(--font-sans);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.5;}
+.site-footer__sign{font-family:var(--font-body);font-size:13px;opacity:0.75;}
+
+@media (max-width:989px){
+  .site-footer__grid{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:749px){
+  .site-footer__grid{grid-template-columns:1fr;gap:var(--space-5);}
+  /* No mobile o acordeão volta a valer: título clicável. */
+  .site-footer__col{border-bottom:1px solid var(--border-hairline-inverse);padding-bottom:var(--space-4);}
+  .site-footer__col-title{cursor:pointer;}
+  .site-footer__form{max-width:none;}
+}
 
 /* ---------- Hero ---------- */
 .hero{position:relative;height:620px;overflow:hidden;}
