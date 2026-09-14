@@ -40,6 +40,9 @@
         <input id="footer-email" type="email" name="contact[email]" required autocomplete="email"
                placeholder="{{ section.settings.news_placeholder }}" class="site-footer__input">
         <button type="submit" class="btn btn--inverse btn--sm">{{ section.settings.news_button }}</button>
+        {%- if form.errors -%}
+          <p class="site-footer__news-err" role="alert">Confira o e-mail e tente outra vez.</p>
+        {%- endif -%}
         {%- if form.posted_successfully? -%}
           <p class="site-footer__news-ok" role="status">{{ section.settings.news_success }}</p>
         {%- endif -%}

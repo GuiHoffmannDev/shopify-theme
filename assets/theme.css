@@ -171,6 +171,8 @@ button{font-family:inherit;}
 .site-footer__col-list a{font-size:14px;color:var(--paper-100);opacity:0.75;}
 .site-footer__col-list a:hover{color:var(--lemon-300);opacity:1;}
 .site-footer__news-body{font-size:14px;opacity:0.75;margin-top:var(--space-4);max-width:42ch;}
+/* A newsletter fica sempre na última trilha, mesmo com colunas de menu ausentes. */
+.site-footer__news{grid-column:-2 / -1;}
 .site-footer__form{display:flex;flex-wrap:wrap;margin-top:var(--space-5);max-width:440px;}
 .site-footer__input{
   flex:1;min-width:0;background:transparent;color:var(--paper-100);
@@ -179,6 +181,7 @@ button{font-family:inherit;}
 }
 .site-footer__input::placeholder{color:var(--paper-100);opacity:0.5;}
 .site-footer__news-ok{flex-basis:100%;font-size:13px;margin-top:12px;color:var(--lemon-300);}
+.site-footer__news-err{flex-basis:100%;font-size:13px;margin-top:12px;color:var(--paper-100);opacity:0.85;}
 .site-footer__social{display:flex;gap:var(--space-4);margin-top:var(--space-5);}
 .site-footer__social a{color:var(--paper-100);display:inline-flex;}
 .site-footer__social a:hover{color:var(--lemon-300);}
@@ -193,6 +196,7 @@ button{font-family:inherit;}
 
 @media (max-width:989px){
   .site-footer__grid{grid-template-columns:1fr 1fr;}
+  .site-footer__news{grid-column:auto;}
 }
 @media (max-width:749px){
   .site-footer__grid{grid-template-columns:1fr;gap:var(--space-5);}
@@ -200,6 +204,9 @@ button{font-family:inherit;}
   .site-footer__col{border-bottom:1px solid var(--border-hairline-inverse);padding-bottom:var(--space-4);}
   .site-footer__col-title{cursor:pointer;}
   .site-footer__form{max-width:none;}
+  .site-footer__col > summary{display:flex;justify-content:space-between;align-items:center;}
+  .site-footer__col > summary::after{content:"+";font-size:16px;letter-spacing:0;line-height:1;}
+  .site-footer__col[open] > summary::after{content:"\2212";}
 }
 
 /* ---------- Hero ---------- */
@@ -471,20 +478,21 @@ button{font-family:inherit;}
 /* ---------- Salas ---------- */
 /* Dupla: dois quadros de altura cheia, encostados, sem calha — o par full-bleed da
    Malbon. Colunas iguais: com dois quadros não há o que hierarquizar. */
-.mosaic--duo{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:min(88svh,900px);}
+.mosaic--duo{display:grid;grid-template-columns:1fr 1fr;gap:0;grid-template-rows:min(88svh,900px);}
 /* Três quadros: grade com calha, dentro da margem da página. */
 .mosaic-section--grid3{padding:var(--space-8) 0;}
 .mosaic--grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 var(--page-pad);}
 .mosaic--grid3 .mosaic__tile{aspect-ratio:4/5;}
 .mosaic__tile{position:relative;overflow:hidden;display:block;background:var(--stone-200);}
-.mosaic__tile img{width:100%;height:100%;object-fit:cover;transition:transform var(--duration-slow) var(--ease-standard);}
+.mosaic__tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform var(--duration-slow) var(--ease-standard);}
 .mosaic__tile:hover img{transform:scale(1.03);}
-.mosaic__tile .ph{height:100%;border:0;}
+.mosaic__tile--static:hover img{transform:none;}
+.mosaic__tile .ph{position:absolute;inset:0;height:100%;border:0;}
 /* Texto creme direto sobre a foto, como na Malbon — quem o sustenta é este degradê.
    Sem ele o contraste cai para ~2.6:1 nas fotos claras. */
 .mosaic__scrim{
   position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(20,31,68,0.28) 0%,rgba(20,31,68,0.16) 45%,rgba(20,31,68,0.46) 100%);
+  background:linear-gradient(180deg,rgba(20,31,68,0.30) 0%,rgba(20,31,68,0.50) 50%,rgba(20,31,68,0.62) 100%);
 }
 .mosaic__body{
   position:absolute;inset:0;padding:0 var(--space-5);
@@ -495,6 +503,7 @@ button{font-family:inherit;}
   font-family:var(--font-display);font-weight:var(--weight-display);
   font-size:clamp(26px,3.4vw,46px);line-height:1.05;
   letter-spacing:var(--tracking-headline);text-transform:uppercase;
+  text-shadow:0 1px 18px rgba(20,31,68,0.45);
 }
 /* Chapa creme, como o "Shop" da Malbon. Não é <button>: o tile inteiro já é o link,
    isto é só a affordance. */
@@ -509,7 +518,7 @@ button{font-family:inherit;}
 .mosaic__tile:hover .mosaic__btn{background:transparent;color:var(--paper-100);}
 
 @media (max-width:749px){
-  .mosaic--duo{grid-template-columns:1fr;min-height:0;}
+  .mosaic--duo{grid-template-columns:1fr;grid-template-rows:none;}
   .mosaic--duo .mosaic__tile{aspect-ratio:4/5;}
   .mosaic--grid3{grid-template-columns:1fr;}
 }
@@ -595,6 +604,7 @@ button{font-family:inherit;}
 .gallery__arrow svg,.rail__arrow svg{width:20px;height:20px;}
 .gallery__arrow--prev{left:16px;}
 .gallery__arrow--next{right:16px;}
+.gallery__arrow[hidden],.rail__arrow[hidden]{display:none;}
 
 @media (prefers-reduced-motion: no-preference){
   .gallery__track{scroll-behavior:smooth;}
@@ -626,7 +636,7 @@ button{font-family:inherit;}
 .hero-carousel__track::-webkit-scrollbar{display:none;}
 .hero-carousel__slide{
   position:relative;flex:0 0 100%;scroll-snap-align:start;
-  height:min(100svh,860px);overflow:hidden;background:var(--stone-200);
+  height:min(calc(100svh - 80px),860px);overflow:hidden;background:var(--stone-200);
 }
 .hero-carousel__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .hero-carousel__slide .ph{position:absolute;inset:0;height:100%;border:0;}
@@ -634,7 +644,7 @@ button{font-family:inherit;}
    cena. Sem ele o texto creme reprova sobre as fotos claras. */
 .hero-carousel__scrim{
   position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(20,31,68,0) 38%,rgba(20,31,68,0.58) 100%);
+  background:linear-gradient(180deg,rgba(20,31,68,0) 30%,rgba(20,31,68,0.45) 62%,rgba(20,31,68,0.72) 100%);
 }
 .hero-carousel__copy{
   position:absolute;left:var(--page-pad);right:var(--page-pad);bottom:96px;
@@ -646,6 +656,7 @@ button{font-family:inherit;}
   letter-spacing:var(--tracking-headline);text-transform:uppercase;
 }
 .hero-carousel__lead{font-family:var(--font-body);font-size:17px;line-height:1.55;margin-top:14px;max-width:46ch;}
+.hero-carousel__title,.hero-carousel__lead{text-shadow:0 1px 18px rgba(20,31,68,0.45);}
 .hero-carousel__dots{
   position:absolute;left:0;right:0;bottom:32px;
   display:flex;justify-content:center;gap:12px;
@@ -657,7 +668,7 @@ button{font-family:inherit;}
 .hero-carousel__dot[aria-current="true"]{background:var(--paper-100);}
 
 @media (max-width:749px){
-  .hero-carousel__slide{height:min(84svh,680px);}
+  .hero-carousel__slide{height:min(calc(100svh - 80px),680px);}
   .hero-carousel__copy{bottom:72px;}
   .hero-carousel__lead{font-size:15px;}
 }
@@ -711,3 +722,9 @@ button{font-family:inherit;}
   background-size:4px 4px,4px 4px;background-repeat:no-repeat;
 }
 .site-header__select:hover{color:var(--olive-700);}
+
+/* ---------- Foco sobre fundos escuros ---------- */
+/* O anel global é navy translúcido: some no rodapé navy e sobre fotos com scrim. */
+.site-footer :focus-visible,
+.hero-carousel :focus-visible,
+.mosaic__tile:focus-visible{outline-color:var(--lemon-300);}

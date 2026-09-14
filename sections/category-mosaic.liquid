@@ -13,11 +13,26 @@
     </div>
   {%- endif -%}
 
+  {%- if layout == 'grid3' -%}
+    {%- assign tile_sizes = '(max-width: 749px) 100vw, 33vw' -%}
+  {%- else -%}
+    {%- assign tile_sizes = '(max-width: 749px) 100vw, 50vw' -%}
+  {%- endif -%}
   <div class="mosaic mosaic--{{ layout }}" data-reveal>
     {%- for block in section.blocks -%}
-      <a href="{{ block.settings.link | default: routes.all_products_collection_url }}" class="mosaic__tile" {{ block.shopify_attributes }}>
+      {%- if block.settings.link != blank -%}
+        {%- assign tile_tag = 'a' -%}
+      {%- else -%}
+        {%- assign tile_tag = 'div' -%}
+      {%- endif -%}
+      <{{ tile_tag }}{% if tile_tag == 'a' %} href="{{ block.settings.link }}"{% endif %} class="mosaic__tile{% if tile_tag == 'div' %} mosaic__tile--static{% endif %}" {{ block.shopify_attributes }}>
         {%- if block.settings.image != blank -%}
-          <img src="{{ block.settings.image | image_url: width: 1600 }}" alt="" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="lazy">
+          {{ block.settings.image | image_url: width: 1600 | image_tag:
+            widths: '600, 900, 1200, 1600',
+            sizes: tile_sizes,
+            alt: '',
+            loading: 'lazy'
+          }}
         {%- elsif block.settings.asset != blank -%}
           <img src="{{ block.settings.asset | asset_url }}" alt="" width="928" height="1152" loading="lazy">
         {%- else -%}
@@ -26,11 +41,11 @@
         <span class="mosaic__scrim" aria-hidden="true"></span>
         <span class="mosaic__body">
           <span class="mosaic__label">{{ block.settings.label }}</span>
-          {%- if block.settings.button_label != blank -%}
+          {%- if tile_tag == 'a' and block.settings.button_label != blank -%}
             <span class="mosaic__btn">{{ block.settings.button_label }}</span>
           {%- endif -%}
         </span>
-      </a>
+      </{{ tile_tag }}>
     {%- endfor -%}
   </div>
 </section>
@@ -58,7 +73,7 @@
       "name": "Sala",
       "settings": [
         { "type": "text", "id": "label", "label": "Nome da sala", "default": "O VESTIÁRIO" },
-        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "url", "id": "link", "label": "Link", "info": "Sem link, a sala aparece sem botão e sem clique até a página existir." },
         { "type": "text", "id": "button_label", "label": "Botão", "default": "Entrar" },
         { "type": "image_picker", "id": "image", "label": "Imagem" },
         { "type": "text", "id": "asset", "label": "Arquivo embutido (assets)", "info": "Usado quando não há imagem escolhida acima.", "default": "photo-club-elevator.jpg" },

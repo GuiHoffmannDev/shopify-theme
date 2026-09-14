@@ -14,7 +14,14 @@
       {%- endif -%}
       <article class="hero-carousel__slide" id="hero-{{ sid }}-{{ forloop.index }}" data-carousel-slide {{ block.shopify_attributes }}>
         {%- if block.settings.image != blank -%}
-          <img class="hero-carousel__img" src="{{ block.settings.image | image_url: width: 2400 }}" alt="{{ block.settings.image.alt | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="{{ slide_loading }}"{% if forloop.first %} fetchpriority="high"{% endif %}>
+          {%- if forloop.first -%}{%- assign slide_priority = 'high' -%}{%- else -%}{%- assign slide_priority = 'auto' -%}{%- endif -%}
+          {{ block.settings.image | image_url: width: 2400 | image_tag:
+            widths: '750, 1100, 1500, 1800, 2400',
+            sizes: '100vw',
+            class: 'hero-carousel__img',
+            loading: slide_loading,
+            fetchpriority: slide_priority
+          }}
         {%- elsif block.settings.asset != blank -%}
           <img class="hero-carousel__img" src="{{ block.settings.asset | asset_url }}" alt="" width="928" height="1152" loading="{{ slide_loading }}"{% if forloop.first %} fetchpriority="high"{% endif %}>
         {%- else -%}
@@ -32,8 +39,8 @@
           {%- if block.settings.text != blank -%}
             <p class="hero-carousel__lead">{{ block.settings.text }}</p>
           {%- endif -%}
-          {%- if block.settings.button_label != blank -%}
-            <div class="mt-5"><a href="{{ block.settings.button_link | default: routes.all_products_collection_url }}" class="btn btn--inverse">{{ block.settings.button_label }}</a></div>
+          {%- if block.settings.button_label != blank and block.settings.button_link != blank -%}
+            <div class="mt-5"><a href="{{ block.settings.button_link }}" class="btn btn--inverse">{{ block.settings.button_label }}</a></div>
           {%- endif -%}
         </div>
       </article>
@@ -78,7 +85,7 @@
     "blocks": [
       { "type": "slide", "settings": { "asset": "photo-lemons-towel.png", "heading": "CHARTER SS2026 01", "text": "Cinco bolsas. A raquete de um lado, o resto do seu dia do outro.", "button_label": "Ver a coleção" } },
       { "type": "slide", "settings": { "asset": "photo-editorial-wall.jpg", "heading": "THE CLUBHOUSE", "text": "Compartimento forrado para a raquete, separado de chaves e celular.", "button_label": "Ver a bolsa" } },
-      { "type": "slide", "settings": { "asset": "photo-interlude-chair.jpg", "heading": "O CLUBE", "text": "Sem lista de espera, sem indicação, sem mensalidade.", "button_label": "Conhecer o clube" } }
+      { "type": "slide", "settings": { "asset": "photo-arrival-card.jpg", "heading": "O CLUBE", "text": "Sem lista de espera, sem indicação, sem mensalidade.", "button_label": "Conhecer o clube" } }
     ]
   }]
 }

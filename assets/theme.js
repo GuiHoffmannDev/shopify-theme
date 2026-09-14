@@ -165,6 +165,16 @@
     if (prev) prev.addEventListener('click', function () { nudge(-1); });
     if (next) next.addEventListener('click', function () { nudge(1); });
 
+    // Setas só aparecem quando há o que rolar (ex.: uma prateleira com um produto só).
+    function syncArrows() {
+      var hide = track.scrollWidth <= track.clientWidth + 1;
+      if (prev) prev.hidden = hide;
+      if (next) next.hidden = hide;
+    }
+    syncArrows();
+    window.addEventListener('resize', syncArrows);
+    window.addEventListener('load', syncArrows);
+
     // Arrastar-para-rolar (só mouse).
     var down = false, startX = 0, startLeft = 0, moved = 0;
     track.addEventListener('pointerdown', function (e) {

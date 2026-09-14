@@ -35,7 +35,7 @@
               <option value="{{ country.iso_code }}"{% if country.iso_code == localization.country.iso_code %} selected{% endif %}>{{ country.currency.iso_code }}</option>
             {%- endfor -%}
           </select>
-          <noscript><button type="submit" class="site-header__link">OK</button></noscript>
+          <noscript><button type="submit" class="site-header__link">{{ 'general.update' | t }}</button></noscript>
         {%- endform -%}
       {%- endif -%}
 
