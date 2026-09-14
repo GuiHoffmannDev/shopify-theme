@@ -45,100 +45,6 @@
       },
       "block_order": ["s1", "s2", "s3"]
     },
-    "showcase": {
-      "type": "showcase",
-      "blocks": {
-        "v1": {
-          "type": "slide",
-          "settings": {
-            "product": "",
-            "asset": "photo-editorial-wall.jpg",
-            "placeholder_label": "foto · a bolsa fora da quadra",
-            "tag": "Novo",
-            "shot_label": "packshot · fundo liso",
-            "ph_name": "A Diária",
-            "ph_price": "R$ 590",
-            "button_label": "Ver a bolsa",
-            "button_link": "/collections/charter-ss2026-01"
-          }
-        },
-        "v2": {
-          "type": "slide",
-          "settings": {
-            "product": "",
-            "image": "shopify://shop_images/hf_20260713_211613_4c8c38bf-0bd8-4b74-bf68-823a8b857742.png",
-            "asset": "photo-lemons-towel.png",
-            "placeholder_label": "foto · a bolsa na feira",
-            "tag": "CHARTER — SS2026 01",
-            "shot_label": "packshot · fundo liso",
-            "ph_name": "A de Duas Raquetes",
-            "ph_price": "R$ 720",
-            "button_label": "Ver a bolsa",
-            "button_link": "/collections/charter-ss2026-01"
-          }
-        }
-      },
-      "block_order": [
-        "v1",
-        "v2"
-      ],
-      "settings": {
-        "eyebrow": "Em destaque",
-        "heading": "A bolsa do primeiro drop."
-      }
-    },
-    "club": {
-      "type": "club-editorial",
-      "blocks": {
-        "c1": {
-          "type": "photo",
-          "settings": {
-            "image": "shopify://shop_images/hf_20260710_045250_db3fc595-751d-42c5-ac48-0bb6ebca28c7.png",
-            "asset": "photo-club-bench.jpg",
-            "caption": "O vestiário · antes do primeiro saque"
-          }
-        },
-        "c2": {
-          "type": "video",
-          "settings": {
-            "asset": "video-club-pool.mp4",
-            "poster_asset": "photo-club-pool-poster.jpg",
-            "caption": "A piscina · fora do expediente"
-          }
-        },
-        "c3": {
-          "type": "photo",
-          "settings": {
-            "image": "shopify://shop_images/hf_20260713_210923_68963acc-4482-4c38-8fe8-6c56dc39e77a.png",
-            "asset": "photo-club-elevator.jpg",
-            "caption": "O elevador · depois do último game"
-          }
-        }
-      },
-      "block_order": [
-        "c1",
-        "c2",
-        "c3"
-      ],
-      "settings": {
-        "eyebrow": "O Clube",
-        "heading": "Toda a elegância do country club. Nenhuma das portas."
-      }
-    },
-    "positioning": {
-      "type": "positioning",
-      "settings": {
-        "eyebrow": "O produto",
-        "heading": "A forma da raquete não foi impressa na bolsa. Ela é a bolsa.",
-        "body": "<p>A linha frontal no formato da raquete é o próprio compartimento dela — forrado, separado de chaves, celular e roupa. Você guarda a raquete de um lado; o resto do dia fica do outro.</p><p>Nada de estampas nem logo grande. Ela vai do clube ao café sem parecer equipamento esportivo.</p>",
-        "button_label": "Ver como foi feita",
-        "button_link": "",
-        "image": "shopify://shop_images/hf_20260713_184716_a6e22619-0efc-4ce5-b7fb-f5561775c167.png",
-        "asset": "photo-positioning-navy.jpg",
-        "placeholder_label": "foto de produto · a bolsa, de lado",
-        "show_seal": true
-      }
-    },
     "rail_drop": {
       "type": "featured-collection",
       "settings": {
@@ -163,8 +69,9 @@
         "m1": {
           "type": "tile",
           "settings": {
-            "label": "O Vestiário",
+            "label": "O VESTIÁRIO",
             "link": "/collections/charter-ss2026-01",
+            "button_label": "Entrar",
             "asset": "photo-club-elevator.jpg",
             "placeholder_label": "foto · as bolsas"
           }
@@ -172,34 +79,54 @@
         "m2": {
           "type": "tile",
           "settings": {
-            "label": "Acessórios",
+            "label": "O SALÃO",
             "link": "/collections/acessorios",
+            "button_label": "Entrar",
             "asset": "photo-interlude-gravel.jpg",
             "placeholder_label": "foto · os acessórios"
           }
         }
       },
-      "block_order": [
-        "m1",
-        "m2"
-      ],
-      "settings": {
-        "eyebrow": "As salas",
-        "heading": "Por onde você quer entrar."
-      }
+      "block_order": ["m1", "m2"],
+      "settings": { "layout": "duo" }
     },
-    "invite": {
-      "type": "newsletter",
-      "settings": {
-        "eyebrow": "Correspondência do clube",
-        "heading": "O clube escreve primeiro.",
-        "body": "Uma carta por mês: o próximo drop, datas de reposição e o que estamos testando em quadra. Nenhum cupom no assunto.",
-        "placeholder": "Seu e-mail",
-        "button_label": "Deixar meu nome",
-        "success": "Recebido. A próxima carta chega antes do próximo drop.",
-        "fine": "Uma por mês · Sair leva um clique"
-      }
+    "salas": {
+      "type": "category-mosaic",
+      "blocks": {
+        "t1": {
+          "type": "tile",
+          "settings": {
+            "label": "A COLEÇÃO",
+            "link": "/collections/charter-ss2026-01",
+            "button_label": "Ver a coleção",
+            "asset": "photo-editorial-wall.jpg",
+            "placeholder_label": "foto · a coleção"
+          }
+        },
+        "t2": {
+          "type": "tile",
+          "settings": {
+            "label": "COMO É FEITA",
+            "link": "",
+            "button_label": "Ver de perto",
+            "asset": "photo-positioning-navy.jpg",
+            "placeholder_label": "foto · a bolsa de lado"
+          }
+        },
+        "t3": {
+          "type": "tile",
+          "settings": {
+            "label": "O CLUBE",
+            "link": "",
+            "button_label": "Conhecer",
+            "asset": "photo-club-bench.jpg",
+            "placeholder_label": "foto · o clube"
+          }
+        }
+      },
+      "block_order": ["t1", "t2", "t3"],
+      "settings": { "layout": "grid3", "heading": "AS SALAS" }
     }
   },
-  "order": ["hero", "rail_drop", "mosaic", "rail_salao", "showcase", "club", "positioning", "invite"]
+  "order": ["hero", "rail_drop", "mosaic", "rail_salao", "salas"]
 }

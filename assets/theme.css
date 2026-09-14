@@ -429,34 +429,51 @@ button{font-family:inherit;}
 }
 .showcase__dot[aria-current="true"]{background:var(--border-strong);}
 
-/* ---------- Mosaico de salas ---------- */
-.mosaic{display:grid;grid-template-columns:1.55fr 1fr;grid-template-rows:1fr 1fr;gap:12px;min-height:620px;}
+/* ---------- Salas ---------- */
+/* Dupla: dois quadros de altura cheia, encostados, sem calha — o par full-bleed da
+   Malbon. Colunas iguais: com dois quadros não há o que hierarquizar. */
+.mosaic--duo{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:min(88svh,900px);}
+/* Três quadros: grade com calha, dentro da margem da página. */
+.mosaic-section--grid3{padding:var(--space-8) 0;}
+.mosaic--grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 var(--page-pad);}
+.mosaic--grid3 .mosaic__tile{aspect-ratio:4/5;}
 .mosaic__tile{position:relative;overflow:hidden;display:block;background:var(--stone-200);}
-.mosaic__tile--lead{grid-row:span 2;}
-/* Dupla: sem o terceiro quadro não há o que empilhar à direita, então a grade vira
-   uma linha só e os dois tiles ficam lado a lado, de altura cheia. Colunas iguais —
-   com dois quadros a assimetria 1.55/1 não tem o que hierarquizar, e a emenda
-   cai fora do centro. Três quadros voltam a usar o 1.55fr da regra base. */
-.mosaic--pair{grid-template-columns:1fr 1fr;grid-template-rows:1fr;}
-.mosaic--pair .mosaic__tile--lead{grid-row:auto;}
 .mosaic__tile img{width:100%;height:100%;object-fit:cover;transition:transform var(--duration-slow) var(--ease-standard);}
 .mosaic__tile:hover img{transform:scale(1.03);}
 .mosaic__tile .ph{height:100%;border:0;}
+/* Texto creme direto sobre a foto, como na Malbon — quem o sustenta é este degradê.
+   Sem ele o contraste cai para ~2.6:1 nas fotos claras. */
 .mosaic__scrim{
   position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(20,31,68,0.14) 0%,rgba(20,31,68,0.06) 45%,rgba(20,31,68,0.24) 100%);
+  background:linear-gradient(180deg,rgba(20,31,68,0.28) 0%,rgba(20,31,68,0.16) 45%,rgba(20,31,68,0.46) 100%);
 }
-/* Placa de porta: creme sobre a foto. Texto claro direto na imagem não passa de
-   ~2.6:1 nas fotos mais claras, então o label vira chip — mesmo padrão de .coll-band__label. */
+.mosaic__body{
+  position:absolute;inset:0;padding:0 var(--space-5);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
+}
 .mosaic__label{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  background:var(--paper-100);color:var(--navy-700);border:1px solid var(--border-hairline);
-  padding:11px 22px;text-align:center;white-space:nowrap;
-  font-family:var(--font-sans);font-size:11px;font-weight:var(--weight-label);letter-spacing:var(--tracking-label);
-  text-transform:uppercase;
+  color:var(--paper-100);text-align:center;
+  font-family:var(--font-display);font-weight:var(--weight-display);
+  font-size:clamp(26px,3.4vw,46px);line-height:1.05;
+  letter-spacing:var(--tracking-headline);text-transform:uppercase;
+}
+/* Chapa creme, como o "Shop" da Malbon. Não é <button>: o tile inteiro já é o link,
+   isto é só a affordance. */
+.mosaic__btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--paper-100);color:var(--navy-700);
+  padding:11px 26px;border:1px solid var(--paper-100);
+  font-family:var(--font-sans);font-size:11px;font-weight:var(--weight-label);
+  letter-spacing:var(--tracking-label);text-transform:uppercase;
   transition:background var(--duration-fast) var(--ease-standard),color var(--duration-fast) var(--ease-standard);
 }
-.mosaic__tile:hover .mosaic__label{background:var(--navy-700);color:var(--paper-100);border-color:var(--navy-700);}
+.mosaic__tile:hover .mosaic__btn{background:transparent;color:var(--paper-100);}
+
+@media (max-width:749px){
+  .mosaic--duo{grid-template-columns:1fr;min-height:0;}
+  .mosaic--duo .mosaic__tile{aspect-ratio:4/5;}
+  .mosaic--grid3{grid-template-columns:1fr;}
+}
 
 /* Grade de 4 (coleção em destaque) */
 .product-grid--4{grid-template-columns:repeat(4,1fr);}
@@ -473,10 +490,6 @@ button{font-family:inherit;}
   .showcase__media{aspect-ratio:4/5;}
   .showcase__panel{padding:0;}
   .showcase__arrow{display:none;}
-  .mosaic,
-  .mosaic--pair{grid-template-columns:1fr;grid-template-rows:none;min-height:0;}
-  .mosaic__tile{height:320px;}
-  .mosaic__tile--lead{grid-row:auto;height:420px;}
   .product-grid--4{grid-template-columns:1fr 1fr;}
 }
 @media (max-width:560px){
