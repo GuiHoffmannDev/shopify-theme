@@ -29,6 +29,33 @@
     {%- if cat != blank -%}<p class="pcard__cat">{{ cat }}</p>{%- endif -%}
     <div class="pcard__name">{{ product.title }}</div>
     <div class="pcard__price">{{ product.price | money_without_trailing_zeros }}</div>
+    {%- comment -%}
+      Swatches em cascata: hex do swatch → imagem do swatch → nada.
+      O Shopify só entrega `swatch` quando a opção está tipada como Color no admin;
+      em opção não tipada, `value.swatch` fica vazio e a fileira não sai — sem
+      buraco no layout. Nunca um mapa de nomes-para-hex, que apodrece a cada cor
+      nova do catálogo.
+    {%- endcomment -%}
+    {%- assign swatch_option = blank -%}
+    {%- for option in product.options_with_values -%}
+      {%- if swatch_option == blank and option.values.first.swatch != blank -%}
+        {%- assign swatch_option = option -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if swatch_option != blank -%}
+      <div class="pcard__swatches">
+        {%- for value in swatch_option.values limit: 6 -%}
+          {%- if value.swatch.color != blank -%}
+            <span class="pcard__swatch" style="background:{{ value.swatch.color }};" title="{{ value | escape }}"></span>
+          {%- elsif value.swatch.image != blank -%}
+            <span class="pcard__swatch" style="background-image:url({{ value.swatch.image | image_url: width: 48 }});" title="{{ value | escape }}"></span>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if swatch_option.values.size > 6 -%}
+          <span class="pcard__swatch-more">+{{ swatch_option.values.size | minus: 6 }}</span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
   </a>
 {%- else -%}
   <a href="{{ ph_url | default: '#' }}" class="pcard">
