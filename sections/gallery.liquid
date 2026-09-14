@@ -1,9 +1,9 @@
-<section class="gallery" data-screen-label="Galeria" data-gallery>
-  <div class="gallery__track" data-gallery-track>
+<section class="gallery" data-screen-label="Galeria" data-rail>
+  <div class="gallery__track" data-rail-track>
     {%- for block in section.blocks -%}
       {%- comment -%} 1º quadro é o topo da página (LCP): carrega eager e com prioridade. {%- endcomment -%}
       {%- if forloop.first -%}{%- assign frame_loading = 'eager' -%}{%- else -%}{%- assign frame_loading = 'lazy' -%}{%- endif -%}
-      <article class="gallery__frame" {{ block.shopify_attributes }}>
+      <article class="gallery__frame" data-rail-item {{ block.shopify_attributes }}>
         <div class="gallery__media">
           {%- if block.settings.image != blank -%}
             <img src="{{ block.settings.image | image_url: width: 1200 }}" alt="{{ block.settings.image.alt | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="{{ frame_loading }}"{% if forloop.first %} fetchpriority="high"{% endif %}>
@@ -30,10 +30,10 @@
   </div>
 
   {%- if section.blocks.size > 1 -%}
-    <button type="button" class="gallery__arrow gallery__arrow--prev" data-gallery-prev aria-label="{{ 'general.a11y.previous_photo' | t }}">
+    <button type="button" class="gallery__arrow gallery__arrow--prev" data-rail-prev aria-label="{{ 'general.a11y.previous_photo' | t }}">
       <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 4 7 12l8 8" fill="none" stroke="currentColor" stroke-width="1.25"/></svg>
     </button>
-    <button type="button" class="gallery__arrow gallery__arrow--next" data-gallery-next aria-label="{{ 'general.a11y.next_photo' | t }}">
+    <button type="button" class="gallery__arrow gallery__arrow--next" data-rail-next aria-label="{{ 'general.a11y.next_photo' | t }}">
       <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="1.25"/></svg>
     </button>
   {%- endif -%}

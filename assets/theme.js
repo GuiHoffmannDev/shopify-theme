@@ -91,15 +91,16 @@
     videos.forEach(function (v) { vio.observe(v); });
   }
 
-  // Vitrine: setas e dots são âncoras, então a seção navega sem JS. Aqui só evitamos
-  // o pulo vertical do #hash e marcamos qual peça está à vista.
-  document.querySelectorAll('[data-showcase]').forEach(function (root) {
-    var track = root.querySelector('[data-showcase-track]');
+  // Carrossel: um slide por vez, com dots. Setas e dots são âncoras, então a seção
+  // navega sem JS. Aqui só evitamos o pulo vertical do #hash e marcamos qual slide
+  // está à vista. Usado pela Vitrine e pelo Hero.
+  document.querySelectorAll('[data-carousel]').forEach(function (root) {
+    var track = root.querySelector('[data-carousel-track]');
     if (!track) return;
-    var slides = Array.prototype.slice.call(track.querySelectorAll('.showcase__slide'));
-    var dots = Array.prototype.slice.call(root.querySelectorAll('[data-showcase-dot]'));
-    var prev = root.querySelector('[data-showcase-prev]');
-    var next = root.querySelector('[data-showcase-next]');
+    var slides = Array.prototype.slice.call(track.querySelectorAll('[data-carousel-slide]'));
+    var dots = Array.prototype.slice.call(root.querySelectorAll('[data-carousel-dot]'));
+    var prev = root.querySelector('[data-carousel-prev]');
+    var next = root.querySelector('[data-carousel-next]');
     if (slides.length < 2) return;
     var index = 0;
 
@@ -112,7 +113,7 @@
     }
 
     root.addEventListener('click', function (e) {
-      var hit = e.target.closest('[data-showcase-dot],[data-showcase-prev],[data-showcase-next]');
+      var hit = e.target.closest('[data-carousel-dot],[data-carousel-prev],[data-carousel-next]');
       if (!hit) return;
       e.preventDefault();
       if (hit === prev) go(index - 1);
@@ -135,19 +136,20 @@
     }
   });
 
-  // Galeria: faixa de rolagem nativa. As setas rolam ~um quadro; arrastar rola no
-  // desktop. No toque, deixamos a rolagem nativa com inércia.
-  document.querySelectorAll('[data-gallery]').forEach(function (root) {
-    var track = root.querySelector('[data-gallery-track]');
+  // Prateleira: faixa de rolagem nativa. As setas rolam ~um item; arrastar rola no
+  // desktop. No toque, deixamos a rolagem nativa com inércia. Usada pela Galeria e
+  // pelas prateleiras de produto.
+  document.querySelectorAll('[data-rail]').forEach(function (root) {
+    var track = root.querySelector('[data-rail-track]');
     if (!track) return;
-    var prev = root.querySelector('[data-gallery-prev]');
-    var next = root.querySelector('[data-gallery-next]');
+    var prev = root.querySelector('[data-rail-prev]');
+    var next = root.querySelector('[data-rail-next]');
 
     function step() {
-      var frame = track.querySelector('.gallery__frame');
+      var item = track.querySelector('[data-rail-item]');
       var cs = getComputedStyle(track);
       var gap = parseFloat(cs.columnGap || cs.gap) || 0;
-      return frame ? frame.getBoundingClientRect().width + gap : track.clientWidth * 0.8;
+      return item ? item.getBoundingClientRect().width + gap : track.clientWidth * 0.8;
     }
     function nudge(dir) {
       track.scrollBy({ left: dir * step(), behavior: reduceMotion ? 'auto' : 'smooth' });
@@ -180,7 +182,7 @@
     }
     track.addEventListener('pointerup', endDrag);
     track.addEventListener('pointercancel', endDrag);
-    // Evita que o arrasto vire clique no botão sob o cursor.
+    // Evita que o arrasto vire clique no link sob o cursor.
     track.addEventListener('click', function (e) {
       if (Math.abs(moved) > 4) { e.preventDefault(); e.stopPropagation(); moved = 0; }
     }, true);

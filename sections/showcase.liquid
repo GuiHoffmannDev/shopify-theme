@@ -8,11 +8,11 @@
       </div>
     {%- endif -%}
 
-    <div class="showcase" data-showcase data-reveal>
-      <div class="showcase__track" data-showcase-track>
+    <div class="showcase" data-carousel data-reveal>
+      <div class="showcase__track" data-carousel-track>
         {%- for block in section.blocks -%}
           {%- assign product = block.settings.product -%}
-          <article class="showcase__slide" id="slide-{{ sid }}-{{ forloop.index }}" {{ block.shopify_attributes }}>
+          <article class="showcase__slide" id="slide-{{ sid }}-{{ forloop.index }}" data-carousel-slide {{ block.shopify_attributes }}>
 
             <div class="showcase__media">
               {%- if block.settings.image != blank -%}
@@ -54,16 +54,16 @@
 
       {%- if section.blocks.size > 1 -%}
         {%- assign last = section.blocks.size -%}
-        <a class="showcase__arrow showcase__arrow--prev" href="#slide-{{ sid }}-{{ last }}" data-showcase-prev aria-label="{{ 'general.a11y.previous' | t }}">
+        <a class="showcase__arrow showcase__arrow--prev" href="#slide-{{ sid }}-{{ last }}" data-carousel-prev aria-label="{{ 'general.a11y.previous' | t }}">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 4 7 12l8 8" fill="none" stroke="currentColor" stroke-width="1.25"/></svg>
         </a>
-        <a class="showcase__arrow showcase__arrow--next" href="#slide-{{ sid }}-2" data-showcase-next aria-label="{{ 'general.a11y.next' | t }}">
+        <a class="showcase__arrow showcase__arrow--next" href="#slide-{{ sid }}-2" data-carousel-next aria-label="{{ 'general.a11y.next' | t }}">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="1.25"/></svg>
         </a>
 
-        <div class="showcase__dots" data-showcase-dots>
+        <div class="showcase__dots" data-carousel-dots>
           {%- for block in section.blocks -%}
-            <a class="showcase__dot" href="#slide-{{ sid }}-{{ forloop.index }}" data-showcase-dot{% if forloop.first %} aria-current="true"{% endif %}>
+            <a class="showcase__dot" href="#slide-{{ sid }}-{{ forloop.index }}" data-carousel-dot{% if forloop.first %} aria-current="true"{% endif %}>
               <span class="visually-hidden">{{ 'general.a11y.go_to_slide' | t: index: forloop.index }}</span>
             </a>
           {%- endfor -%}
