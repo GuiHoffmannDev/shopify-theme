@@ -36,7 +36,7 @@
                 {%- assign band = forloop.index0 | divided_by: 4 -%}
                 {%- assign flip = band | modulo: 2 -%}
                 <div class="coll-band{% if flip == 1 %} coll-band--flip{% endif %}">
-                  <div class="coll-band__products">
+                  <div class="coll-band__products" data-reveal data-reveal-stagger>
               {%- endif -%}
               {% render 'product-card', product: product %}
               {%- if slot == 3 or forloop.last -%}
@@ -60,7 +60,7 @@
             {%- endfor -%}
           </div>
         {%- else -%}
-          <div class="product-grid" data-reveal>
+          <div class="product-grid" data-reveal data-reveal-stagger>
             {%- for product in collection.products -%}
               {% render 'product-card', product: product %}
             {%- endfor -%}

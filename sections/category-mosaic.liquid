@@ -18,7 +18,7 @@
   {%- else -%}
     {%- assign tile_sizes = '(max-width: 749px) 100vw, 50vw' -%}
   {%- endif -%}
-  <div class="mosaic mosaic--{{ layout }}" data-reveal>
+  <div class="mosaic mosaic--{{ layout }}" data-reveal data-reveal-stagger>
     {%- for block in section.blocks -%}
       {%- if block.settings.link != blank -%}
         {%- assign tile_tag = 'a' -%}

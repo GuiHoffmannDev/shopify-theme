@@ -18,7 +18,7 @@
     {%- endif -%}
   </div>
 
-  <div class="rail" data-rail data-reveal>
+  <div class="rail" data-rail data-reveal data-reveal-stagger="[data-rail-item]">
     <div class="rail__track" data-rail-track>
       {%- if coll != blank and coll.products_count > 0 -%}
         {%- for product in coll.products limit: section.settings.limit -%}

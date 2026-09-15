@@ -7,7 +7,7 @@
         <hr class="rule rule--left mt-5">
         <div class="mt-5">{{ section.settings.body }}</div>
         {%- if section.settings.button_label != blank -%}
-          <div class="mt-6"><a href="{{ section.settings.button_link }}" class="btn btn--ghost">{{ section.settings.button_label }} →</a></div>
+          <div class="mt-6"><a href="{{ section.settings.button_link }}" class="btn btn--ghost">{{ section.settings.button_label }} <span class="btn__arrow" aria-hidden="true">→</span></a></div>
         {%- endif -%}
       </div>
       <div class="split__media" data-reveal>

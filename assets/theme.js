@@ -131,20 +131,64 @@
     refresh();
   });
 
-  // Reveal on scroll — hidden state only applied when JS runs, so no-JS keeps content visible
+  // Header: a linha de base aparece quando a página sai do topo.
+  var siteHeader = document.querySelector('.site-header');
+  if (siteHeader) {
+    var headerTicking = false;
+    var syncHeader = function () {
+      headerTicking = false;
+      siteHeader.classList.toggle('is-scrolled', window.scrollY > 4);
+    };
+    window.addEventListener('scroll', function () {
+      if (!headerTicking) { headerTicking = true; requestAnimationFrame(syncHeader); }
+    }, { passive: true });
+    syncHeader();
+  }
+
+  // Reveal on scroll — hidden state only applied when JS runs, so no-JS keeps content visible.
+  // O que chega junto na tela entra em cascata. Com data-reveal-stagger, quem entra são os
+  // filhos do elemento (ou os itens do seletor dado no atributo) — card a card.
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var revealEls = document.querySelectorAll('[data-reveal]');
   if ('IntersectionObserver' in window && !reduceMotion && revealEls.length) {
+    var STAGGER_MS = 90;
+    var STAGGER_MAX = 6;
+    var staggerItems = function (el) {
+      var sel = el.getAttribute('data-reveal-stagger');
+      return Array.prototype.slice.call(sel ? el.querySelectorAll(sel) : el.children);
+    };
+    var reveal = function (el, order) {
+      el.style.transitionDelay = Math.min(order, STAGGER_MAX) * STAGGER_MS + 'ms';
+      el.classList.add('is-in');
+      // Terminada a entrada, o elemento volta às próprias transições (hover etc.).
+      el.addEventListener('transitionend', function done(e) {
+        if (e.target !== el) return;
+        el.removeEventListener('transitionend', done);
+        el.classList.remove('reveal-pending', 'is-in');
+        el.style.transitionDelay = '';
+      });
+    };
     var io = new IntersectionObserver(function (entries) {
+      var order = 0;
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-in');
-          io.unobserve(entry.target);
-        }
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        io.unobserve(el);
+        if (!el.hasAttribute('data-reveal-stagger')) { reveal(el, order++); return; }
+        // Itens abaixo da dobra esperam a própria vez; os da linha à vista — inclusive
+        // os cortados na lateral de uma prateleira — entram juntos, em cascata.
+        staggerItems(el).forEach(function (item) {
+          if (item.getBoundingClientRect().top < window.innerHeight) reveal(item, order++);
+          else io.observe(item);
+        });
       });
     }, { rootMargin: '0px 0px -10% 0px' });
     revealEls.forEach(function (el) {
-      el.classList.add('reveal-pending');
+      if (el.hasAttribute('data-reveal-stagger')) {
+        staggerItems(el).forEach(function (item) { item.classList.add('reveal-pending'); });
+      } else {
+        el.classList.add('reveal-pending');
+      }
       io.observe(el);
     });
   }
@@ -195,9 +239,15 @@
     });
 
     if ('IntersectionObserver' in window) {
+      // .is-active anima a copy do slide que chega; o 1º já nasce ativo para não piscar.
+      slides[0].classList.add('is-active');
+      root.classList.add('is-ready');
       var sio = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
+          // Ao cruzar o limiar para baixo o slide ainda "intersecta"; só conta quem passou dele.
+          var shown = entry.isIntersecting && entry.intersectionRatio >= 0.6;
+          entry.target.classList.toggle('is-active', shown);
+          if (!shown) return;
           index = slides.indexOf(entry.target);
           dots.forEach(function (dot, i) {
             if (i === index) dot.setAttribute('aria-current', 'true');
