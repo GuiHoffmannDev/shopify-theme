@@ -22,7 +22,7 @@
       {%- endif -%}
 
       {%- if section.settings.show_search -%}
-        <a href="{{ routes.search_url }}" class="site-header__icon" aria-label="{{ 'general.a11y.search' | t }}">
+        <a href="{{ routes.search_url }}" class="site-header__icon" aria-label="{{ 'general.a11y.search' | t }}" data-search-toggle aria-controls="header-search">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M16 16l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.25"/></svg>
         </a>
       {%- endif -%}
@@ -67,6 +67,19 @@
       <a href="{{ routes.cart_url }}">{{ 'general.cart' | t }} ({{ cart.item_count }})</a>
     </div>
   </div>
+
+  {%- if section.settings.show_search -%}
+    <div class="header-search" id="header-search" data-search-panel data-predictive-url="{{ routes.predictive_search_url }}" hidden>
+      <div class="wrap">
+        <form action="{{ routes.search_url }}" method="get" role="search" class="header-search__form">
+          <label class="visually-hidden" for="header-search-input">{{ 'general.a11y.search' | t }}</label>
+          <input type="search" id="header-search-input" name="q" placeholder="{{ 'general.search.placeholder' | t }}" autocomplete="off" data-search-input>
+          <button type="button" class="header-search__close" data-search-close>{{ 'general.search.close' | t }}</button>
+        </form>
+        <div class="header-search__results" data-search-results aria-live="polite"></div>
+      </div>
+    </div>
+  {%- endif -%}
 </header>
 
 {% schema %}

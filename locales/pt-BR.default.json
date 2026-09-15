@@ -16,6 +16,11 @@
     "account": "Conta",
     "update": "Atualizar",
     "items": "itens",
+    "search": {
+      "placeholder": "O que você procura?",
+      "close": "Fechar",
+      "empty": "Nada encontrado. Tente outra palavra."
+    },
     "meta": {
       "tags": "Marcado com \"{{ tags }}\"",
       "page": "Página {{ page }}"

@@ -723,6 +723,33 @@ button{font-family:inherit;}
 }
 .site-header__select:hover{color:var(--olive-700);}
 
+/* Barra de busca: desce sobre a página a partir do header sticky, sem empurrar o conteúdo. */
+.header-search{
+  position:absolute;left:0;right:0;top:100%;padding-block:24px 32px;
+  background:var(--paper-100);border-top:1px solid var(--border-hairline);border-bottom:1px solid var(--border-hairline);
+}
+.header-search__form{display:flex;align-items:center;gap:24px;margin:0;}
+.header-search__form input{
+  flex:1;min-width:0;font-family:var(--font-body);font-size:15px;padding:10px 2px;background:transparent;border:0;
+  border-bottom:1px solid var(--border-hairline);color:var(--text-primary);border-radius:0;
+}
+.header-search__form input:focus{outline:0;border-bottom-color:var(--olive-700);}
+.header-search__close{
+  background:none;border:0;padding:0;cursor:pointer;font-family:var(--font-sans);font-size:11px;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--navy-700);
+}
+.header-search__close:hover{color:var(--olive-700);}
+.header-search__list{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 32px;}
+.header-search__item{display:flex;align-items:center;gap:16px;color:var(--text-primary);}
+.header-search__item img,.header-search__ph{width:64px;height:80px;object-fit:cover;background:var(--stone-200);flex:none;}
+.header-search__name{display:block;font-family:var(--font-display);font-weight:var(--weight-display);font-size:15px;line-height:1.2;letter-spacing:var(--tracking-headline);}
+.header-search__item:hover .header-search__name{color:var(--olive-700);}
+.header-search__price{display:block;font-size:13px;color:var(--text-muted);margin-top:4px;}
+.header-search__empty{margin:24px 0 0;font-style:italic;color:var(--text-muted);}
+@media (max-width:900px){
+  .header-search__list{grid-template-columns:1fr;}
+}
+
 /* ---------- Foco sobre fundos escuros ---------- */
 /* O anel global é navy translúcido: some no rodapé navy e sobre fotos com scrim. */
 .site-footer :focus-visible,

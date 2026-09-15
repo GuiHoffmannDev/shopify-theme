@@ -1,0 +1,28 @@
+{%- comment -%}
+  Resultados da barra de busca do header. Não entra no editor: é pedida pelo
+  theme.js via /search/suggest?section_id=predictive-search e injetada na barra.
+{%- endcomment -%}
+{%- if predictive_search.performed -%}
+  {%- assign products = predictive_search.resources.products -%}
+  {%- if products.size > 0 -%}
+    <ul class="header-search__list">
+      {%- for product in products -%}
+        <li>
+          <a href="{{ product.url }}" class="header-search__item">
+            {%- if product.featured_image -%}
+              <img src="{{ product.featured_image | image_url: width: 160 }}" alt="" width="64" height="80" loading="lazy">
+            {%- else -%}
+              <span class="header-search__ph" aria-hidden="true"></span>
+            {%- endif -%}
+            <span>
+              <span class="header-search__name">{{ product.title }}</span>
+              <span class="header-search__price">{{ product.price | money_without_trailing_zeros }}</span>
+            </span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- else -%}
+    <p class="header-search__empty">{{ 'general.search.empty' | t }}</p>
+  {%- endif -%}
+{%- endif -%}

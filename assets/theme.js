@@ -22,6 +22,71 @@
     });
   });
 
+  // Busca do header: a lupa abre uma barra sob o cabeçalho e os resultados chegam
+  // ali mesmo, sem trocar de página. Sem JS, a lupa segue sendo link para /search.
+  var searchPanel = document.querySelector('[data-search-panel]');
+  if (searchPanel) {
+    var searchToggle = document.querySelector('[data-search-toggle]');
+    var searchForm = searchPanel.querySelector('form');
+    var searchInput = searchPanel.querySelector('[data-search-input]');
+    var searchResults = searchPanel.querySelector('[data-search-results]');
+    var searchTimer;
+    var searchRequest = 0;
+
+    if (searchToggle) searchToggle.setAttribute('aria-expanded', 'false');
+
+    var setSearch = function (open, returnFocus) {
+      searchPanel.hidden = !open;
+      if (searchToggle) searchToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (open) searchInput.focus();
+      else if (returnFocus && searchToggle) searchToggle.focus();
+    };
+
+    var runSearch = function () {
+      clearTimeout(searchTimer);
+      var q = searchInput.value.trim();
+      var id = ++searchRequest;
+      if (!q) { searchResults.innerHTML = ''; return; }
+      var url = searchPanel.dataset.predictiveUrl + '?q=' + encodeURIComponent(q) +
+        '&resources[type]=product&resources[limit]=6&section_id=predictive-search';
+      fetch(url)
+        .then(function (res) { if (!res.ok) throw new Error(res.status); return res.text(); })
+        .then(function (html) {
+          if (id !== searchRequest) return;
+          var doc = new DOMParser().parseFromString(html, 'text/html');
+          var section = doc.getElementById('shopify-section-predictive-search');
+          searchResults.innerHTML = section ? section.innerHTML : '';
+        })
+        .catch(function () { if (id === searchRequest) searchResults.innerHTML = ''; });
+    };
+
+    if (searchToggle) {
+      searchToggle.addEventListener('click', function (e) {
+        e.preventDefault();
+        setSearch(searchPanel.hidden, false);
+      });
+    }
+    searchPanel.querySelector('[data-search-close]').addEventListener('click', function () {
+      setSearch(false, true);
+    });
+    searchInput.addEventListener('input', function () {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(runSearch, 250);
+    });
+    searchForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      runSearch();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !searchPanel.hidden) setSearch(false, true);
+    });
+    document.addEventListener('click', function (e) {
+      if (searchPanel.hidden || searchPanel.contains(e.target)) return;
+      if (searchToggle && searchToggle.contains(e.target)) return;
+      setSearch(false, false);
+    });
+  }
+
   // Product: variant swatches -> hidden id input + price + button state
   document.querySelectorAll('[data-product-form]').forEach(function (form) {
     var data = form.querySelector('[data-variants-json]');
